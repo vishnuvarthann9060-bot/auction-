@@ -416,6 +416,73 @@ export function Lobby({ onOpenCustomPlayer }) {
             </form>
           )}
         </motion.div>
+
+        {/* SEO Rich Features & FAQ Section for Google Ranking */}
+        <div className="w-full max-w-2xl mt-8 space-y-6 text-slate-300">
+          
+          {/* Why Play With Us Card */}
+          <div className="glass-panel p-6 rounded-3xl border border-white/5 space-y-3">
+            <h2 className="text-lg font-black text-white flex items-center gap-2">
+              🏏 The Premier Free Online IPL Auction Simulator
+            </h2>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Experience the thrilling strategy of an official IPL Mega Auction right inside your browser. Pick from Chennai Super Kings, Mumbai Indians, Royal Challengers Bengaluru, Kolkata Knight Riders, and all 10 franchises. Manage your ₹100 Crore purse, follow overseas player quota rules, outbid rivals, and celebrate winning bids with authentic hammer sounds and confetti!
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 text-xs">
+              <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5">
+                <strong className="text-amber-400 block font-bold">100% Free</strong>
+                <span className="text-[11px] text-slate-400">No login, signup or paywalls</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5">
+                <strong className="text-emerald-400 block font-bold">⚡ Quick Match</strong>
+                <span className="text-[11px] text-slate-400">Instant play with online fans</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-slate-900/80 border border-white/5">
+                <strong className="text-blue-400 block font-bold">🤖 Smart AI Bots</strong>
+                <span className="text-[11px] text-slate-400">Auto-fills empty franchises</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Frequently Asked Questions (FAQ) */}
+          <div className="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
+            <h3 className="text-base font-extrabold text-white uppercase tracking-wider">
+              Frequently Asked Questions (FAQ)
+            </h3>
+
+            <div className="space-y-3 text-xs">
+              <div className="p-3 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <h4 className="font-bold text-amber-400">Is this IPL auction game completely free to play?</h4>
+                <p className="text-slate-400 mt-1">
+                  Yes, IPL Auction Game is 100% free with unlimited rooms and no in-app purchases. You can create or join public and private rooms with friends anytime.
+                </p>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <h4 className="font-bold text-amber-400">How do I invite my friends to a private auction?</h4>
+                <p className="text-slate-400 mt-1">
+                  Click "Create New Arena", set it to Private, and copy your unique 8-character Room PIN or click "Copy Invite Link" to send directly on WhatsApp, Telegram, or Discord.
+                </p>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <h4 className="font-bold text-amber-400">Can I play solo or with less than 10 people?</h4>
+                <p className="text-slate-400 mt-1">
+                  Absolutely! Toggle "Auto-Fill with AI" in the lobby to let smart AI bots manage the remaining franchises. They actively place realistic bids based on player ratings and budget constraints.
+                </p>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <h4 className="font-bold text-amber-400">How does the bidding timer and budget work?</h4>
+                <p className="text-slate-400 mt-1">
+                  Each lot starts with a customizable timer (e.g. 15 seconds). Every new bid resets the timer to give everyone time to react. The engine automatically enforces minimum reserve purse limits to ensure teams don't run out of money before completing their required squad size.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     );
   }
