@@ -602,6 +602,49 @@ export class RoomManager {
     }
   }
 
+  sendChatMessage(socket, roomId, text) {
+    const room = this.rooms.get(roomId);
+    if (!room || !text || !text.trim()) return;
+
+    const user = room.users.get(socket.id);
+    const userTeam = room.teams.find((t) => t.ownerId === socket.id);
+
+    const chatMessage = {
+      id: `${Date.now()}-${Math.random()}`,
+      userId: socket.id,
+      sender: user ? user.name : "Cricket Fan",
+      teamShortName: userTeam ? userTeam.shortName : null,
+      teamColor: userTeam ? userTeam.color : null,
+      text: text.trim().slice(0, 200),
+      timestamp: Date.now()
+    };
+
+    if (!room.chats) room.chats = [];
+    room.chats.push(chatMessage);
+    if (room.chats.length > 50) room.chats.shift();
+
+    this.io.to(roomId).emit("chat_message", chatMessage);
+    this.broadcastRoomState(roomId);
+  }
+
+  sendReaction(socket, roomId, emoji) {
+    const room = this.rooms.get(roomId);
+    if (!room || !emoji) return;
+
+    const user = room.users.get(socket.id);
+    const userTeam = room.teams.find((t) => t.ownerId === socket.id);
+
+    const reactionPayload = {
+      emoji: emoji.slice(0, 4),
+      sender: user ? user.name : "Cricket Fan",
+      teamShortName: userTeam ? userTeam.shortName : null,
+      teamColor: userTeam ? userTeam.color : "#F59E0B",
+      timestamp: Date.now()
+    };
+
+    this.io.to(roomId).emit("reaction_burst", reactionPayload);
+  }
+
   getPublicRoomState(room) {
     return {
       id: room.id,
