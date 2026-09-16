@@ -156,13 +156,7 @@ async function runTests() {
       setTimeout(resolve, 300);
     });
 
-    // Enable AI Bots to fill remaining 7 teams
-    await new Promise((resolve) => {
-      clientHost.emit("toggle_ai_bots", { roomId: createdRoomId, enabled: true });
-      setTimeout(resolve, 300);
-    });
-
-    assert(true, "Assigned CSK to Dhoni, MI to Rohit, RCB to Virat & activated AI franchise bots");
+    assert(true, "Assigned CSK to Dhoni, MI to Rohit, RCB to Virat for real human multiplayer auction");
 
     // -------------------------------------------------------------
     // PHASE 5: LIVE CHAT & FLOATING REACTION BURSTS

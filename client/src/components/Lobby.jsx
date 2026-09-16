@@ -5,7 +5,7 @@ import { formatCurrency } from "../utils/formatters";
 import { 
   Users, Play, Settings, PlusCircle, Sparkles, Shield, 
   Clock, DollarSign, Globe, Award, ChevronRight, CheckCircle2,
-  Zap, Lock, Radio, Bot, Copy, Check, RefreshCw
+  Zap, Lock, Radio, Copy, Check, RefreshCw
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -18,7 +18,6 @@ export function Lobby({ onOpenCustomPlayer }) {
     joinRoom, 
     quickMatch,
     selectTeam, 
-    toggleAIBots,
     myTeam, 
     isHost, 
     startAuction, 
@@ -212,8 +211,8 @@ export function Lobby({ onOpenCustomPlayer }) {
             {/* Platform Highlights */}
             <div className="flex flex-wrap items-center gap-2.5 pt-1 text-xs sm:text-sm">
               <span className="px-3 py-1.5 rounded-xl bg-[#121212] border border-[#27272a] text-[#9ca3af] font-medium">🇮🇳 Built for India</span>
-              <span className="px-3 py-1.5 rounded-xl bg-[#121212] border border-[#27272a] text-[#9ca3af] font-medium">⚡ 100+ Star Players</span>
-              <span className="px-3 py-1.5 rounded-xl bg-[#121212] border border-[#27272a] text-[#9ca3af] font-medium">🤖 Smart AI Bots</span>
+              <span className="px-3 py-1.5 rounded-xl bg-[#121212] border border-[#27272a] text-[#9ca3af] font-medium">⚡ 80+ Real T20 Stars</span>
+              <span className="px-3 py-1.5 rounded-xl bg-[#121212] border border-[#27272a] text-[#9ca3af] font-medium">👥 100% Real Players</span>
               <span className="px-3 py-1.5 rounded-xl bg-[#121212] border border-[#27272a] text-[#9ca3af] font-medium">📲 WhatsApp Invites</span>
             </div>
           </motion.div>
@@ -327,11 +326,9 @@ export function Lobby({ onOpenCustomPlayer }) {
                             <span className="text-[10px] sm:text-xs uppercase font-semibold px-2 py-0.5 rounded-full bg-[#1e1e1e] text-[#9ca3af] border border-[#27272a]">
                               {room.auctionMode} Auction
                             </span>
-                            {room.aiBotsEnabled && (
-                              <span className="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-[#6366f1]/15 text-[#818cf8] font-semibold border border-[#6366f1]/30">
-                                🤖 AI Bots
-                              </span>
-                            )}
+                            <span className="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-semibold border border-emerald-500/30">
+                              👥 Live Players
+                            </span>
                           </div>
                           <div className="text-xs sm:text-sm text-[#9ca3af] mt-1.5">
                             Host: <strong className="text-white">{room.hostName}</strong> • {room.claimedTeamsCount}/{room.totalTeams} Franchises Claimed
@@ -529,9 +526,9 @@ export function Lobby({ onOpenCustomPlayer }) {
             </div>
 
             <div className="p-4 sm:p-5 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
-              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">Can I play solo or with less than 10 people?</h4>
+              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">Can I play with multiple friends?</h4>
               <p className="text-xs sm:text-sm text-[#9ca3af] mt-2 leading-relaxed">
-                Yes! Toggle "Auto-Fill with AI" in the lobby to let smart AI bots manage the remaining franchises. They actively place realistic bids based on player ratings and budget constraints.
+                Absolutely! Up to 10 managers can join a room to command all 10 IPL franchises simultaneously in real-time multiplayer bidding battles.
               </p>
             </div>
 
@@ -573,7 +570,7 @@ export function Lobby({ onOpenCustomPlayer }) {
             Auction Strategy War Room
           </h2>
           <p className="text-xs sm:text-sm text-[#9ca3af] mt-1">
-            Select an available franchise. Invite friends or enable AI bots to auto-fill unoccupied teams!
+            Select an available franchise. Invite friends across India to battle in real-time multiplayer auctions!
           </p>
         </div>
 
@@ -598,19 +595,6 @@ export function Lobby({ onOpenCustomPlayer }) {
 
           {isHost && (
             <>
-              {/* Toggle AI Bots button */}
-              <button
-                onClick={() => toggleAIBots(!roomState.aiBotsEnabled)}
-                className={`flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition cursor-pointer ${
-                  roomState.aiBotsEnabled
-                    ? "bg-[#6366f1] border-[#6366f1] text-white shadow-sm"
-                    : "bg-[#121212] hover:bg-[#1e1e1e] text-[#9ca3af] border-[#27272a]"
-                }`}
-              >
-                <Bot className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span>{roomState.aiBotsEnabled ? "AI Bots Active" : "Auto-Fill AI"}</span>
-              </button>
-
               <button
                 onClick={onOpenCustomPlayer}
                 className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-xs sm:text-sm font-semibold text-[#f3f4f6] transition cursor-pointer"
@@ -688,7 +672,7 @@ export function Lobby({ onOpenCustomPlayer }) {
             <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-[#818cf8]" /> Choose Your Franchise
           </h3>
           <span className="text-xs sm:text-sm text-[#9ca3af]">
-            {roomState.teams.filter(t => t.ownerId || t.isBot).length} of 10 Franchises Assigned
+            {roomState.teams.filter(t => t.ownerId).length} of 10 Franchises Assigned
           </span>
         </div>
 
@@ -696,8 +680,7 @@ export function Lobby({ onOpenCustomPlayer }) {
           {roomState.teams.map((team) => {
             const meta = TEAMS_DATA[team.id];
             const isSelectedByMe = myTeam?.id === team.id;
-            const isClaimedByHuman = team.ownerId && team.ownerId !== myTeam?.ownerId && !team.isBot;
-            const isBotManaged = team.isBot;
+            const isClaimedByHuman = team.ownerId && team.ownerId !== myTeam?.ownerId;
 
             return (
               <motion.div
@@ -711,8 +694,6 @@ export function Lobby({ onOpenCustomPlayer }) {
                     ? `border-2 ${meta?.borderClass || 'border-[#6366f1]'} bg-[#121212] shadow-lg shadow-[#6366f1]/15`
                     : isClaimedByHuman
                     ? "border-[#27272a]/50 bg-[#0a0a0a]/50 opacity-50 cursor-not-allowed"
-                    : isBotManaged
-                    ? "border-blue-500/40 bg-blue-950/20 hover:border-blue-500"
                     : "border-[#27272a] bg-[#121212] hover:border-[#3f3f46]"
                 }`}
               >
@@ -740,9 +721,9 @@ export function Lobby({ onOpenCustomPlayer }) {
                       Claimed
                     </span>
                   )}
-                  {isBotManaged && !isSelectedByMe && (
-                    <span className="text-[10px] sm:text-xs text-[#818cf8] bg-[#6366f1]/15 px-2 py-0.5 rounded-full border border-[#6366f1]/30 font-semibold">
-                      🤖 AI Bot
+                  {!team.ownerId && !isSelectedByMe && (
+                    <span className="text-[10px] sm:text-xs text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 font-medium">
+                      Available
                     </span>
                   )}
                 </div>
