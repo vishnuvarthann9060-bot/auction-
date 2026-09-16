@@ -40,7 +40,7 @@ export function SoldCelebration() {
 
               <div>
                 <span className="text-[10px] uppercase tracking-[0.15em] font-bold gold-shimmer-text bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-500/30">
-                  OFFICIALLY SOLD
+                  PLAYER SOLD!
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-white mt-2 tracking-[-0.03em]">
                   {auction.player.name}
@@ -48,7 +48,7 @@ export function SoldCelebration() {
               </div>
 
               <div className="py-2">
-                <div className="text-xs text-[#9ca3af]">Winning Franchise:</div>
+                <div className="text-xs text-[#9ca3af]">Bought by:</div>
                 <div className="flex items-center justify-center gap-2 mt-1">
                   <span className="text-2xl">{meta?.logoEmoji || "🏏"}</span>
                   <span className={`text-xl font-heading font-bold ${meta?.textClass || 'text-white'}`}>
@@ -56,19 +56,19 @@ export function SoldCelebration() {
                   </span>
                 </div>
                 <div className="text-xs text-[#9ca3af] mt-0.5">
-                  Secured by <strong className="text-white">{auction.highestBidderName}</strong>
+                  Won by <strong className="text-white">{auction.highestBidderName}</strong>
                 </div>
               </div>
 
               <div className="p-3.5 rounded-2xl bg-[#050505] border border-[#27272a]">
-                <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Final Winning Bid</div>
+                <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Final Price</div>
                 <div className="text-3xl font-teko font-bold text-amber-400 tracking-wider">
                   {formatCurrency(auction.currentBid)}
                 </div>
               </div>
 
               <p className="text-[11px] text-[#71717a] italic animate-pulse">
-                Next player appearing on stage in a few seconds...
+                Next player coming up in a few seconds...
               </p>
             </div>
           ) : (
@@ -79,7 +79,7 @@ export function SoldCelebration() {
 
               <div>
                 <span className="text-[10px] uppercase tracking-[0.1em] font-semibold text-[#9ca3af] bg-[#1e1e1e] px-3 py-1 rounded-full border border-[#27272a]">
-                  PASSED
+                  UNSOLD
                 </span>
                 <h2 className="text-3xl font-heading font-bold text-white mt-2.5 tracking-[-0.03em]">
                   {auction.player.name}
@@ -87,11 +87,11 @@ export function SoldCelebration() {
               </div>
 
               <p className="text-sm text-[#9ca3af] leading-relaxed">
-                No bids were placed at base price ({formatCurrency(auction.player.basePrice)}). Player goes to the unsold pool.
+                No bids were placed at {formatCurrency(auction.player.basePrice)}. Player remains unsold for now.
               </p>
 
               <p className="text-[11px] text-[#71717a] italic animate-pulse">
-                Next player appearing in a few seconds...
+                Next player coming up in a few seconds...
               </p>
             </div>
           )}

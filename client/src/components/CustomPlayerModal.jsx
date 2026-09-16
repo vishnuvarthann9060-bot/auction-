@@ -68,8 +68,8 @@ export function CustomPlayerModal({ isOpen, onClose }) {
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-heading font-bold text-white tracking-[-0.03em]">Add Custom Player to Pool</h3>
-                <p className="text-xs text-[#9ca3af]">Inject custom players, friends, or legendary stars</p>
+                <h3 className="text-lg font-heading font-bold text-white tracking-[-0.03em]">Add a Custom Player</h3>
+                <p className="text-xs text-[#9ca3af]">Add yourself, friends, or cricket stars to the auction</p>
               </div>
             </div>
 

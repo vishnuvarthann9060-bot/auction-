@@ -107,15 +107,15 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
               <div className="text-sm sm:text-base font-heading font-bold text-amber-400 font-mono">{formatCurrency(totalSpent)}</div>
             </div>
             <div className="glass-card p-2.5 sm:p-3 rounded-2xl text-center border border-[#27272a] bg-[#121212]">
-              <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Purse Remaining</div>
+              <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Money Left</div>
               <div className="text-sm sm:text-base font-heading font-bold text-emerald-400 font-mono">{formatCurrency(currentTeam.purse)}</div>
             </div>
             <div className="glass-card p-2.5 sm:p-3 rounded-2xl text-center border border-[#27272a] bg-[#121212]">
-              <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Squad Size</div>
+              <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Total Players</div>
               <div className="text-sm sm:text-base font-heading font-bold text-white">{squad.length} / {roomState.rules.maxSquadSize}</div>
             </div>
             <div className="glass-card p-2.5 sm:p-3 rounded-2xl text-center border border-[#27272a] bg-[#121212]">
-              <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Overseas Quota</div>
+              <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Foreign Players</div>
               <div className="text-sm sm:text-base font-heading font-bold text-[#818cf8]">{overseasCount} / {roomState.rules.maxOverseas}</div>
             </div>
           </div>
@@ -129,7 +129,7 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                   viewMode === "list" ? "bg-[#6366f1] text-white shadow" : "text-[#9ca3af] hover:text-white"
                 }`}
               >
-                <span>📋 Squad List ({squad.length})</span>
+                <span>📋 All Players ({squad.length})</span>
               </button>
               <button
                 onClick={() => setViewMode("pitch")}
@@ -137,7 +137,7 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                   viewMode === "pitch" ? "bg-[#6366f1] text-white shadow" : "text-[#9ca3af] hover:text-white"
                 }`}
               >
-                <span>🏏 Tactical Pitch XI ({Math.min(squad.length, 11)}/11)</span>
+                <span>🏏 Playing 11 Pitch ({Math.min(squad.length, 11)}/11)</span>
               </button>
             </div>
 

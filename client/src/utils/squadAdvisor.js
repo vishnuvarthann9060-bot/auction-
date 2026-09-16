@@ -64,43 +64,43 @@ export function analyzeSquad(myTeam, currentPlayer, rules = {}) {
     if (isOver && overseasFull) {
       lotAdvice = {
         type: "DANGER",
-        badge: "Quota Exceeded",
-        text: `Overseas quota full (${maxOverseas}/${maxOverseas}) - Cannot acquire`,
+        badge: "Foreign Full",
+        text: `Foreign player limit reached (${maxOverseas}/${maxOverseas}) - Cannot buy`,
         color: "text-rose-400 border-rose-500/30 bg-rose-500/10"
       };
     } else if (isWk && needsWicketkeeper) {
       lotAdvice = {
         type: "PRIORITY",
-        badge: "High Priority",
-        text: `Critical Target: You have 0 wicketkeepers signed!`,
+        badge: "Needed",
+        text: `Important: You need at least 1 wicketkeeper!`,
         color: "text-amber-300 border-amber-400/40 bg-amber-500/15"
       };
     } else if (isOver && overseasSlotsLeft === 1) {
       lotAdvice = {
         type: "CAUTION",
-        badge: "Final Slot",
-        text: `Consumes your 8th and final overseas slot`,
+        badge: "Last Spot",
+        text: `This will take your last foreign player spot`,
         color: "text-amber-400 border-amber-500/30 bg-amber-500/10"
       };
     } else if (isBowl && needsBowlers) {
       lotAdvice = {
         type: "RECOMMENDED",
-        badge: "Recommended",
-        text: `Strengthen bowling: Currently have only ${bowlers} frontline bowlers`,
+        badge: "Good Pick",
+        text: `Good choice: You need more bowlers (you have ${bowlers})`,
         color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10"
       };
     } else if (isBat && needsBatters) {
       lotAdvice = {
         type: "RECOMMENDED",
-        badge: "Recommended",
-        text: `Build batting depth: Currently have ${batters} specialist batters`,
+        badge: "Good Pick",
+        text: `Good choice: You need more batsmen (you have ${batters})`,
         color: "text-blue-400 border-blue-500/30 bg-blue-500/10"
       };
     } else {
       lotAdvice = {
         type: "NEUTRAL",
-        badge: "Tactical Pick",
-        text: `${currentPlayer.rating || 90} OVR ${currentPlayer.role} • Fits overall squad balance`,
+        badge: "Option",
+        text: `${currentPlayer.rating || 90} Rated ${currentPlayer.role} • Good addition to your team`,
         color: "text-[#818cf8] border-[#6366f1]/30 bg-[#6366f1]/10"
       };
     }

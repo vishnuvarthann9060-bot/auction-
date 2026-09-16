@@ -20,8 +20,8 @@ export function AuctionStage() {
         <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#6366f1]/15 text-[#818cf8] flex items-center justify-center mx-auto mb-4 animate-bounce">
           <Clock className="w-7 h-7 sm:w-8 sm:h-8" />
         </div>
-        <h3 className="text-lg sm:text-xl font-heading font-bold text-white tracking-[-0.03em]">Preparing Next Lot...</h3>
-        <p className="text-xs text-[#9ca3af] mt-1">The auctioneer is bringing up the next marquee star to the podium.</p>
+        <h3 className="text-lg sm:text-xl font-heading font-bold text-white tracking-[-0.03em]">Getting Next Player Ready...</h3>
+        <p className="text-xs text-[#9ca3af] mt-1">The next player is coming up for bidding.</p>
       </div>
     );
   }
@@ -49,10 +49,10 @@ export function AuctionStage() {
     <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-[#27272a] flex flex-col bg-[#121212]">
       <div className="flex items-center justify-between mb-2.5">
         <span className="text-xs font-bold uppercase tracking-[0.08em] text-[#9ca3af] flex items-center gap-1.5">
-          <Flame className="w-4 h-4 text-amber-500" /> Live Bid Ticker
+          <Flame className="w-4 h-4 text-amber-500" /> Recent Bids
         </span>
         <span className="text-xs text-[#71717a] font-medium">
-          {auction.bidHistory?.length || 0} Bids Logged
+          {auction.bidHistory?.length || 0} Bids Placed
         </span>
       </div>
 
@@ -82,7 +82,7 @@ export function AuctionStage() {
             ))
           ) : (
             <div className="text-center py-4 text-xs sm:text-sm text-[#71717a]">
-              No bids recorded for this player yet.
+              No bids placed yet.
             </div>
           )}
         </AnimatePresence>
@@ -100,7 +100,7 @@ export function AuctionStage() {
             {player.set || "Marquee Set"}
           </span>
           <span className="font-medium text-xs sm:text-sm text-[#9ca3af]">
-            Lot {roomState.currentPlayerIndex + 1} of {roomState.totalPlayersCount}
+            Player {roomState.currentPlayerIndex + 1} of {roomState.totalPlayersCount}
           </span>
         </div>
 
@@ -109,7 +109,7 @@ export function AuctionStage() {
           {isSniperActive ? (
             <span className="px-2.5 py-1 rounded-full bg-red-500/15 border border-red-500/35 text-red-400 font-bold text-xs flex items-center gap-1.5">
               <Crosshair className="w-3.5 h-3.5" />
-              <span>Sniper Bid</span>
+              <span>Last-Second Bid</span>
             </span>
           ) : isBiddingWar ? (
             <span className="px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/35 text-amber-400 font-bold text-xs flex items-center gap-1.5">
@@ -118,7 +118,7 @@ export function AuctionStage() {
             </span>
           ) : null}
 
-          <span className="text-xs uppercase tracking-[0.08em] text-[#71717a] font-semibold">Stage:</span>
+          <span className="text-xs uppercase tracking-[0.08em] text-[#71717a] font-semibold">Status:</span>
           <span className={`font-heading font-bold uppercase tracking-[0.05em] text-xs sm:text-sm ${
             auction.status === "GOING_TWICE" ? "text-red-400" :
             auction.status === "GOING_ONCE" ? "text-amber-400" :
@@ -185,7 +185,7 @@ export function AuctionStage() {
             {/* Player Cricket Career Stats Grid */}
             <div className="p-4 sm:p-5 bg-[#0a0a0a]/70 border-t border-[#27272a] mt-auto">
               <div className="text-xs font-bold uppercase tracking-[0.08em] text-[#9ca3af] mb-2.5">
-                Career IPL / T20 Statistics
+                Career Stats
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                 <div className="glass-card p-2.5 rounded-2xl text-center border border-[#27272a]">
@@ -302,9 +302,9 @@ export function AuctionStage() {
                   </span>
                 </div>
                 <div>
-                  <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Countdown</div>
+                  <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Timer</div>
                   <div className={`text-xs sm:text-sm font-bold ${isUrgent ? "text-red-400" : "text-[#f3f4f6]"}`}>
-                    {timer <= 2 ? "Final Call!" : timer <= 5 ? "Closing Soon" : "Active Bidding"}
+                    {timer <= 2 ? "Final Call!" : timer <= 5 ? "Closing Soon" : "Time Left"}
                   </div>
                 </div>
               </div>
@@ -321,19 +321,19 @@ export function AuctionStage() {
               <p className="text-xs sm:text-sm text-[#9ca3af] leading-relaxed">
                 <span className="text-[#818cf8] font-bold">Auctioneer: </span>
                 {currentBid === 0
-                  ? `Opening bid called at base price of ${formatCurrency(player.basePrice)}. Any franchise?`
+                  ? `Starting price is ${formatCurrency(player.basePrice)}. Who wants to bid?`
                   : auction.status === "GOING_TWICE"
-                  ? `Going twice at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name}! Last chance to raise!`
+                  ? `Going twice at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name}! Any more bids?`
                   : auction.status === "GOING_ONCE"
                   ? `Going once at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name}!`
-                  : `We have ${formatCurrency(currentBid)} from ${highestBidderTeam?.name}! Any advance on ${formatCurrency(currentBid)}?`}
+                  : `Current bid is ${formatCurrency(currentBid)} by ${highestBidderTeam?.name}! Anyone want to bid higher?`}
               </p>
             </div>
 
             {/* Middle Section: Giant Current Bid Display */}
             <div className="my-2.5 sm:my-4 text-center">
               <div className="text-[10px] sm:text-xs uppercase tracking-[0.1em] font-semibold text-[#9ca3af] mb-1">
-                Current Highest Bid
+                Highest Bid
               </div>
               <motion.div 
                 key={currentBid}
@@ -345,7 +345,7 @@ export function AuctionStage() {
               </motion.div>
               {currentBid === 0 && (
                 <div className="text-xs text-[#71717a] mt-1">
-                  Waiting for opening bid at base price ({formatCurrency(player.basePrice)})
+                  Waiting for first bid at {formatCurrency(player.basePrice)}
                 </div>
               )}
             </div>
@@ -380,7 +380,7 @@ export function AuctionStage() {
               </motion.div>
             ) : (
               <div className="p-3 rounded-2xl border border-dashed border-[#27272a] text-center text-xs text-[#71717a]">
-                Tap a bid button below to open the bidding!
+                Click a bid button below to make the first bid!
               </div>
             )}
           </div>

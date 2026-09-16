@@ -83,7 +83,7 @@ export function LiveChat() {
           className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-semibold text-xs shadow-xl shadow-[#6366f1]/25 transition cursor-pointer"
         >
           <MessageSquare className="w-4 h-4 fill-white" />
-          <span>Live Banter ({chats.length})</span>
+          <span>Chat ({chats.length})</span>
           {isOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
         </button>
 
@@ -101,7 +101,7 @@ export function LiveChat() {
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className="text-xs font-heading font-bold uppercase tracking-[0.08em] text-white">
-                    Auction War Room Chat
+                    Room Chat
                   </span>
                 </div>
                 <button
@@ -117,8 +117,8 @@ export function LiveChat() {
                 {chats.length === 0 ? (
                   <div className="h-full flex flex-col items-center justify-center text-center text-[#71717a] p-4">
                     <Sparkles className="w-8 h-8 mb-2 opacity-30 text-[#818cf8]" />
-                    <p className="font-semibold text-[#9ca3af]">No banter yet!</p>
-                    <p className="text-[11px] text-[#71717a]">Send a message or react to celebrate a bid.</p>
+                    <p className="font-semibold text-[#9ca3af]">No messages yet!</p>
+                    <p className="text-[11px] text-[#71717a]">Send a message or react with emojis.</p>
                   </div>
                 ) : (
                   chats.map((c) => (

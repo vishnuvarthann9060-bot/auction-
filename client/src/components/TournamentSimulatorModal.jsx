@@ -65,14 +65,14 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="text-lg sm:text-2xl font-heading font-black text-white tracking-[-0.03em]">
-                    IPL Tournament Simulator
+                    Tournament Match Simulator
                   </h2>
                   <span className="text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30 uppercase">
-                    Playoff Arena
+                    Playoffs
                   </span>
                 </div>
                 <p className="text-xs text-[#9ca3af]">
-                  Simulates match battles, ball-by-ball outcomes and crowns the IPL Champion based on auction squads.
+                  Plays matches between your auction squads to crown the IPL Champion!
                 </p>
               </div>
             </div>
@@ -84,7 +84,7 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                 className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#1e1e1e] hover:bg-[#27272a] border border-[#27272a] text-xs font-bold text-white transition cursor-pointer"
               >
                 <RefreshCw className="w-3.5 h-3.5 text-amber-400" />
-                <span className="hidden sm:inline">Simulate Again</span>
+                <span className="hidden sm:inline">Play Again</span>
               </button>
 
               <button
@@ -106,7 +106,7 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                   : "text-[#9ca3af] border-transparent hover:text-white"
               }`}
             >
-              🏆 Playoff Bracket & Winner
+              🏆 Playoffs & Champion
             </button>
             <button
               onClick={() => setActiveTab("rankings")}
@@ -116,7 +116,7 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                   : "text-[#9ca3af] border-transparent hover:text-white"
               }`}
             >
-              📊 Franchise Power Index
+              📊 Team Strength Rankings
             </button>
             <button
               onClick={() => setActiveTab("scorecards")}
@@ -126,7 +126,7 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                   : "text-[#9ca3af] border-transparent hover:text-white"
               }`}
             >
-              📋 Match Scorecards
+              📋 Match Scores
             </button>
           </div>
 

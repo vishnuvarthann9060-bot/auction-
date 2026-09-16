@@ -17,10 +17,10 @@ export function TeamsOverview({ onSelectTeamDetail }) {
         <div className="flex items-center gap-2">
           <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-[#818cf8]" />
           <h3 className="text-sm sm:text-base font-heading font-bold uppercase tracking-[-0.01em] text-white">
-            Franchise Standings & Purses
+            All Teams & Budgets
           </h3>
         </div>
-        <span className="text-xs sm:text-sm text-[#9ca3af]">Click any franchise to inspect roster</span>
+        <span className="text-xs sm:text-sm text-[#9ca3af]">Click any team to see their players</span>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-10 gap-2.5 sm:gap-3.5">
@@ -57,7 +57,7 @@ export function TeamsOverview({ onSelectTeamDetail }) {
                       )}
                     </div>
                     <div className="text-[11px] sm:text-xs text-[#9ca3af] truncate max-w-[80px] sm:max-w-[100px]">
-                      {team.ownerName || "Unclaimed"}
+                      {team.ownerName || "Available"}
                     </div>
                   </div>
                 </div>
@@ -66,7 +66,7 @@ export function TeamsOverview({ onSelectTeamDetail }) {
                   <div className="text-xs sm:text-sm font-mono font-bold text-emerald-400">
                     {formatCurrency(team.purse)}
                   </div>
-                  <div className="text-[10px] text-[#71717a]">Purse Left</div>
+                  <div className="text-[10px] text-[#71717a]">Budget Left</div>
                 </div>
               </div>
 
@@ -84,7 +84,7 @@ export function TeamsOverview({ onSelectTeamDetail }) {
               {/* Squad & Overseas Tally */}
               <div className="mt-2.5 pt-2 border-t border-[#27272a] flex items-center justify-between text-[10px] sm:text-xs text-[#9ca3af] pl-1">
                 <span>Squad: <strong className="text-white">{team.squad.length}</strong>/{roomState.rules?.maxSquadSize || 25}</span>
-                <span>Overseas: <strong className="text-white">{overseasCount}</strong>/{roomState.rules?.maxOverseas || 8}</span>
+                <span>Foreign: <strong className="text-white">{overseasCount}</strong>/{roomState.rules?.maxOverseas || 8}</span>
               </div>
             </div>
           );

@@ -23,7 +23,7 @@ export function SmartPurseAdvisor({ myTeam, currentPlayer, rules }) {
       <div className="flex items-center justify-between text-xs">
         <div className="flex items-center gap-1.5 font-heading font-bold text-[#818cf8]">
           <ShieldCheck className="w-4 h-4 text-[#818cf8]" />
-          <span className="uppercase tracking-[0.06em]">Purse & Squad Advisor</span>
+          <span className="uppercase tracking-[0.06em]">Smart Team Tips</span>
         </div>
 
         <button 
@@ -45,19 +45,19 @@ export function SmartPurseAdvisor({ myTeam, currentPlayer, rules }) {
             </div>
           </div>
           <span className="text-[10px] text-[#71717a]" title="Purse minus reserve needed for remaining slots">
-            Cap
+            Limit
           </span>
         </div>
 
         <div className="p-2 rounded-xl bg-[#141416] border border-[#27272a]/70 flex items-center justify-between">
           <div>
-            <div className="text-[10px] uppercase font-medium text-[#71717a]">Avg / Rem. Slot</div>
+            <div className="text-[10px] uppercase font-medium text-[#71717a]">Avg / Empty Spot</div>
             <div className="text-sm font-teko font-bold text-emerald-400">
               {formatCurrency(avgBudgetPerSlot)}
             </div>
           </div>
           <span className="text-[10px] text-[#71717a]">
-            {minSlotsNeeded > 0 ? `${minSlotsNeeded} req` : "Full"}
+            {minSlotsNeeded > 0 ? `${minSlotsNeeded} left` : "Full"}
           </span>
         </div>
       </div>
@@ -98,7 +98,7 @@ export function SmartPurseAdvisor({ myTeam, currentPlayer, rules }) {
 
         <span className="text-[#27272a]">•</span>
 
-        <div className="flex items-center gap-1 text-[#f3f4f6]" title="Overseas Players">
+        <div className="flex items-center gap-1 text-[#f3f4f6]" title="Foreign Players">
           <span>✈️</span>
           <span className={roles.overseas >= (rules?.maxOverseas || 8) ? "text-rose-400 font-bold" : "text-[#9ca3af]"}>
             {roles.overseas}/{rules?.maxOverseas || 8}
@@ -123,21 +123,21 @@ export function SmartPurseAdvisor({ myTeam, currentPlayer, rules }) {
       {isExpanded && (
         <div className="pt-2 border-t border-[#1f1f23] text-xs space-y-1.5 text-[#9ca3af]">
           <div className="flex justify-between">
-            <span>Minimum Squad Goal:</span>
+            <span>Minimum Players Needed:</span>
             <strong className="text-white">{analysis.minSquad} players</strong>
           </div>
           <div className="flex justify-between">
-            <span>Mandatory Reserve Fund:</span>
+            <span>Money Kept in Reserve:</span>
             <strong className="text-amber-300">{formatCurrency(analysis.mandatoryReserve)}</strong>
           </div>
           <div className="flex justify-between">
-            <span>Wicketkeeper Requirement:</span>
+            <span>Wicketkeeper Status:</span>
             <strong className={needs.needsWicketkeeper ? "text-rose-400" : "text-emerald-400"}>
-              {needs.needsWicketkeeper ? "0 (Urgent Need)" : `${roles.wicketkeepers} Secured`}
+              {needs.needsWicketkeeper ? "0 (Need 1 Keeper)" : `${roles.wicketkeepers} Ready`}
             </strong>
           </div>
           <p className="text-[10px] text-[#71717a] pt-1 leading-relaxed">
-            *Safe Max Bid ensures you retain at least ₹20 Lakhs per required slot to satisfy official IPL roster rules.
+            *Safe Max Bid saves ₹20 Lakhs for each remaining spot so you can fill your squad.
           </p>
         </div>
       )}

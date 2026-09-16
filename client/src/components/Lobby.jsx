@@ -162,16 +162,16 @@ export function Lobby({ onOpenCustomPlayer }) {
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#6366f1]/15 border border-[#6366f1]/35 text-[#a5b4fc] text-xs sm:text-sm font-bold tracking-[0.1em] uppercase mb-3.5 sm:mb-4">
                 <Sparkles className="w-4 h-4 text-[#818cf8]" />
-                100% Free Online Cricket Auction Platform • India
+                100% Free Online Cricket Auction • Play With Friends
               </div>
               <h1 className="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-heading font-extrabold text-white tracking-[-0.03em] leading-[1.12]">
-                LEAD YOUR FRANCHISE.<br />
+                BUILD YOUR DREAM TEAM.<br />
                 <span className="bg-gradient-to-r from-[#6366f1] via-[#818cf8] to-[#c084fc] bg-clip-text text-transparent">
-                  COMMAND THE MEGA AUCTION.
+                  WIN THE IPL AUCTION.
                 </span>
               </h1>
               <p className="text-sm sm:text-base lg:text-lg text-[#9ca3af] mt-3.5 sm:mt-4 max-w-xl leading-relaxed">
-                Experience the authentic thrill of a live IPL Mega Auction arena. Outbid cricket managers across India with official ₹100 Crore budgets, dynamic countdown timers, overseas player limits, and tactical XI pitches.
+                Feel the real excitement of an IPL auction. Bid against your friends with a ₹100 Crore budget, live countdown clock, foreign player limits, and pick your best Playing 11.
               </p>
             </div>
 
@@ -180,9 +180,9 @@ export function Lobby({ onOpenCustomPlayer }) {
               <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-[#27272a] bg-[#121212] flex flex-col justify-between">
                 <div>
                   <span className="step-indicator text-2xl sm:text-3xl font-extrabold block mb-1.5">01</span>
-                  <h3 className="font-heading font-bold text-white text-base sm:text-lg tracking-[-0.02em]">Official Franchises</h3>
+                  <h3 className="font-heading font-bold text-white text-base sm:text-lg tracking-[-0.02em]">Choose Your Team</h3>
                   <p className="text-xs sm:text-sm text-[#9ca3af] mt-1.5 leading-relaxed">
-                    CSK, MI, RCB, KKR, and all 10 franchises with real ₹100 Cr purse caps.
+                    Play as CSK, MI, RCB, KKR, or any of the 10 teams with a full ₹100 Crore budget.
                   </p>
                 </div>
               </div>
@@ -190,9 +190,9 @@ export function Lobby({ onOpenCustomPlayer }) {
               <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-[#27272a] bg-[#121212] flex flex-col justify-between">
                 <div>
                   <span className="step-indicator text-2xl sm:text-3xl font-extrabold block mb-1.5">02</span>
-                  <h3 className="font-heading font-bold text-white text-base sm:text-lg tracking-[-0.02em]">Live Bidding Engine</h3>
+                  <h3 className="font-heading font-bold text-white text-base sm:text-lg tracking-[-0.02em]">Live Bidding</h3>
                   <p className="text-xs sm:text-sm text-[#9ca3af] mt-1.5 leading-relaxed">
-                    Sub-50ms synchronized bids, dynamic countdown resets & gavel strikes.
+                    Fast real-time bids, instant timer resets, and sold hammer drops when time runs out.
                   </p>
                 </div>
               </div>
@@ -200,9 +200,9 @@ export function Lobby({ onOpenCustomPlayer }) {
               <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-[#27272a] bg-[#121212] flex flex-col justify-between">
                 <div>
                   <span className="step-indicator text-2xl sm:text-3xl font-extrabold block mb-1.5">03</span>
-                  <h3 className="font-heading font-bold text-white text-base sm:text-lg tracking-[-0.02em]">Tactical Dream XI</h3>
+                  <h3 className="font-heading font-bold text-white text-base sm:text-lg tracking-[-0.02em]">Set Playing 11</h3>
                   <p className="text-xs sm:text-sm text-[#9ca3af] mt-1.5 leading-relaxed">
-                    Enforce overseas quotas, arrange Playing XI on turf & inspect rosters.
+                    Check foreign player limits, arrange your best 11 on the pitch, and see your full team.
                   </p>
                 </div>
               </div>
@@ -226,12 +226,12 @@ export function Lobby({ onOpenCustomPlayer }) {
             {/* Quick Nickname Input */}
             <div className="mb-4 sm:mb-5 p-4 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
               <label className="block text-xs sm:text-sm font-bold text-[#9ca3af] uppercase tracking-[0.1em] mb-1.5">
-                Franchise Manager Nickname
+                Your Name / Nickname
               </label>
               <input
                 type="text"
                 required
-                placeholder="e.g. Captain Cool / King Kohli"
+                placeholder="e.g. Dhoni / Virat / Your Name"
                 value={nameInput}
                 onChange={(e) => setNameInput(e.target.value)}
                 className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#050505] border border-[#27272a] text-white placeholder-[#71717a] text-sm sm:text-base focus:outline-none focus:border-[#6366f1] transition"
@@ -249,7 +249,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                 }`}
               >
                 <Radio className="w-4 h-4 shrink-0 hidden xs:inline" />
-                <span>Public ({publicRooms.length})</span>
+                <span>Open Rooms ({publicRooms.length})</span>
               </button>
               <button
                 onClick={() => setActiveTab("create")}
@@ -269,7 +269,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                     : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
                 }`}
               >
-                <span>🔑 Enter PIN</span>
+                <span>🔑 Enter Code</span>
               </button>
             </div>
 
@@ -287,10 +287,10 @@ export function Lobby({ onOpenCustomPlayer }) {
                 <div>
                   <div className="flex items-center gap-2">
                     <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-[#818cf8] fill-[#818cf8]" />
-                    <span className="text-base sm:text-lg font-heading font-bold text-white tracking-[-0.02em]">Instant Quick Match</span>
+                    <span className="text-base sm:text-lg font-heading font-bold text-white tracking-[-0.02em]">Quick Play</span>
                   </div>
                   <p className="text-xs sm:text-sm text-[#9ca3af] mt-1.5 leading-relaxed">
-                    Instantly connect to an active lobby waiting for franchise managers across India.
+                    Join an open room right away to play with waiting cricket fans.
                   </p>
                 </div>
                 <button
@@ -298,21 +298,21 @@ export function Lobby({ onOpenCustomPlayer }) {
                   disabled={isSubmitting}
                   className="w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-bold text-xs sm:text-sm uppercase tracking-[0.05em] shadow-lg shadow-[#6366f1]/25 transition cursor-pointer shrink-0"
                 >
-                  {isSubmitting ? "Matching..." : "⚡ Quick Match"}
+                  {isSubmitting ? "Finding Room..." : "⚡ Quick Play"}
                 </button>
               </div>
 
               {/* Public Rooms List */}
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-[#9ca3af] px-1">
-                  <span className="uppercase tracking-[0.08em] text-xs">Open Public Arenas</span>
-                  <span className="text-xs text-[#71717a]">{publicRooms.length} Arenas Active</span>
+                  <span className="uppercase tracking-[0.08em] text-xs">Available Rooms</span>
+                  <span className="text-xs text-[#71717a]">{publicRooms.length} Rooms Active</span>
                 </div>
 
                 <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
                   {publicRooms.length === 0 ? (
                     <div className="p-8 rounded-2xl bg-[#121212]/50 border border-dashed border-[#27272a] text-center text-xs sm:text-sm text-[#71717a]">
-                      No public rooms currently waiting. Be the first to create one!
+                      No open rooms right now. Click "Create" to start your own room!
                     </div>
                   ) : (
                     publicRooms.map((room) => (
@@ -331,7 +331,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                             </span>
                           </div>
                           <div className="text-xs sm:text-sm text-[#9ca3af] mt-1.5">
-                            Host: <strong className="text-white">{room.hostName}</strong> • {room.claimedTeamsCount}/{room.totalTeams} Franchises Claimed
+                            Host: <strong className="text-white">{room.hostName}</strong> • {room.claimedTeamsCount}/{room.totalTeams} Teams Taken
                           </div>
                         </div>
 
@@ -339,7 +339,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                           onClick={() => handleJoinSpecificPublicRoom(room.id)}
                           className="px-4 py-2.5 rounded-xl bg-[#1e1e1e] hover:bg-[#27272a] border border-[#27272a] text-[#818cf8] font-heading font-bold text-xs sm:text-sm transition cursor-pointer shrink-0"
                         >
-                          Join Arena →
+                          Join Room →
                         </button>
                       </div>
                     ))
@@ -364,9 +364,9 @@ export function Lobby({ onOpenCustomPlayer }) {
                 >
                   <div className="flex items-center gap-2 text-xs sm:text-sm font-heading font-bold">
                     <Globe className="w-4 h-4 text-[#818cf8]" />
-                    <span>Public Arena</span>
+                    <span>Public Room</span>
                   </div>
-                  <p className="text-xs text-[#9ca3af] mt-1">Listed for all online players</p>
+                  <p className="text-xs text-[#9ca3af] mt-1">Anyone online can see and join</p>
                 </div>
 
                 <div 
@@ -379,15 +379,15 @@ export function Lobby({ onOpenCustomPlayer }) {
                 >
                   <div className="flex items-center gap-2 text-xs sm:text-sm font-heading font-bold">
                     <Lock className="w-4 h-4 text-[#818cf8]" />
-                    <span>Private Arena</span>
+                    <span>Private Room</span>
                   </div>
-                  <p className="text-xs text-[#9ca3af] mt-1">Invite PIN / Link only</p>
+                  <p className="text-xs text-[#9ca3af] mt-1">Only friends with code or link</p>
                 </div>
               </div>
 
               {/* Auction Mode */}
               <div className="p-3.5 sm:p-4 rounded-2xl bg-[#121212] border border-[#27272a] flex items-center justify-between text-xs sm:text-sm">
-                <span className="font-heading font-bold text-white">Auction Pool Mode</span>
+                <span className="font-heading font-bold text-white">Auction Type</span>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -396,7 +396,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                       auctionMode === "MEGA" ? "bg-[#6366f1] text-white" : "bg-[#1e1e1e] text-[#9ca3af]"
                     }`}
                   >
-                    Mega Auction (Full Pool)
+                    Mega Auction (All Players)
                   </button>
                 </div>
               </div>
@@ -405,7 +405,7 @@ export function Lobby({ onOpenCustomPlayer }) {
               <div className="p-4 sm:p-5 rounded-2xl bg-[#121212] border border-[#27272a] space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs sm:text-sm text-[#9ca3af] block font-medium">Team Purse (Crores)</label>
+                    <label className="text-xs sm:text-sm text-[#9ca3af] block font-medium">Team Budget (Crores)</label>
                     <div className="flex items-center gap-2 mt-1.5">
                       <input
                         type="range"
@@ -421,7 +421,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                   </div>
 
                   <div>
-                    <label className="text-xs sm:text-sm text-[#9ca3af] block font-medium">Bid Timer (Seconds)</label>
+                    <label className="text-xs sm:text-sm text-[#9ca3af] block font-medium">Timer Per Bid (Seconds)</label>
                     <div className="flex items-center gap-2 mt-1.5">
                       <input
                         type="range"
@@ -443,7 +443,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                 disabled={isSubmitting}
                 className="w-full py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-bold text-sm sm:text-base tracking-tight shadow-lg shadow-[#6366f1]/25 transition cursor-pointer"
               >
-                {isSubmitting ? "Launching Arena..." : "Launch Auction Room 🚀"}
+                {isSubmitting ? "Creating Room..." : "Create Room 🚀"}
               </button>
             </form>
           )}
@@ -453,7 +453,7 @@ export function Lobby({ onOpenCustomPlayer }) {
             <form onSubmit={handleJoinRoom} className="space-y-4">
               <div>
                 <label className="block text-xs sm:text-sm font-bold text-[#9ca3af] uppercase tracking-[0.1em] mb-1.5">
-                  Room PIN Code
+                  Room Code
                 </label>
                 <input
                   type="text"
@@ -470,7 +470,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                 disabled={isSubmitting}
                 className="w-full py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-bold text-sm sm:text-base tracking-tight shadow-lg shadow-[#6366f1]/25 transition cursor-pointer"
               >
-                {isSubmitting ? "Entering Arena..." : "Enter Auction Room 🏏"}
+                {isSubmitting ? "Joining Room..." : "Join Room 🏏"}
               </button>
             </form>
           )}
@@ -483,10 +483,10 @@ export function Lobby({ onOpenCustomPlayer }) {
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-[#818cf8]" />
               <h3 className="text-sm sm:text-base font-heading font-bold uppercase tracking-[-0.01em] text-white">
-                All 10 Official IPL Franchises Available
+                All 10 IPL Teams Ready to Play
               </h3>
             </div>
-            <span className="text-xs sm:text-sm text-[#9ca3af] hidden sm:inline">Pick any franchise upon entering arena</span>
+            <span className="text-xs sm:text-sm text-[#9ca3af] hidden sm:inline">Pick your team when you enter</span>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2.5">
@@ -505,37 +505,37 @@ export function Lobby({ onOpenCustomPlayer }) {
 
         {/* Frequently Asked Questions (FAQ) */}
         <div className="glass-panel p-6 sm:p-9 rounded-3xl border border-[#27272a] space-y-5 bg-[#121212]">
-          <div className="badge-tag text-xs tracking-[0.1em] text-[#818cf8] font-bold">KNOWLEDGE BASE</div>
+          <div className="badge-tag text-xs tracking-[0.1em] text-[#818cf8] font-bold">HELP & FAQS</div>
           <h3 className="text-xl sm:text-2xl font-heading font-bold text-white tracking-[-0.03em]">
-            Frequently Asked Questions
+            Common Questions
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
             <div className="p-5 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
-              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">Is this IPL auction game completely free to play?</h4>
+              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">Is this game completely free?</h4>
               <p className="text-xs sm:text-sm text-[#9ca3af] mt-2 leading-relaxed">
-                Yes, IPL Auction Game is 100% free with unlimited rooms and no in-app purchases. You can create or join public and private rooms with friends anytime.
+                Yes! It is 100% free with unlimited rooms and no payment needed. You can create or join rooms with your friends anytime.
               </p>
             </div>
 
             <div className="p-4 sm:p-5 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
-              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">How do I invite friends across India?</h4>
+              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">How do I invite my friends?</h4>
               <p className="text-xs sm:text-sm text-[#9ca3af] mt-2 leading-relaxed">
-                Click "Create Arena", choose Private or Public, and copy your unique 8-character Room PIN or click "WhatsApp Invite" to send it straight to your cricket group chat.
+                Click "Create Room", choose Private or Public, and copy your Room Code or tap "WhatsApp Invite" to send the link directly to your friends.
               </p>
             </div>
 
             <div className="p-4 sm:p-5 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
-              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">Can I play with multiple friends?</h4>
+              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">How many friends can play together?</h4>
               <p className="text-xs sm:text-sm text-[#9ca3af] mt-2 leading-relaxed">
-                Absolutely! Up to 10 managers can join a room to command all 10 IPL franchises simultaneously in real-time multiplayer bidding battles.
+                Up to 10 friends can join one room, with each person managing their own IPL team in real-time.
               </p>
             </div>
 
             <div className="p-4 sm:p-5 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
-              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">How does the bidding timer and budget work?</h4>
+              <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-[-0.02em]">How does bidding and budget work?</h4>
               <p className="text-xs sm:text-sm text-[#9ca3af] mt-2 leading-relaxed">
-                Each lot starts with a customizable timer (e.g. 15 seconds). Every new bid resets the countdown. The engine automatically enforces reserve purse limits.
+                Each player comes up with a countdown timer (e.g. 15 seconds). Every new bid resets the clock. The game makes sure you don't spend more money than your budget allows.
               </p>
             </div>
           </div>
@@ -549,28 +549,28 @@ export function Lobby({ onOpenCustomPlayer }) {
   return (
     <div className="max-w-[1600px] w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
       
-      {/* Top Banner with Room PIN, Share Link, & Host Controls */}
+      {/* Top Banner with Room Code, Share Link, & Host Controls */}
       <div className="glass-panel p-6 sm:p-7 rounded-3xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-[#27272a]">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap">
             <span className="px-3 py-1 rounded-full bg-[#6366f1]/15 border border-[#6366f1]/30 text-[#818cf8] text-xs sm:text-sm font-bold tracking-[0.05em]">
-              ROOM: {roomState.id}
+              ROOM CODE: {roomState.id}
             </span>
             <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.08em] ${
               roomState.isPublic ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30" : "bg-[#1e1e1e] text-[#9ca3af] border border-[#27272a]"
             }`}>
-              {roomState.isPublic ? "🌐 Public Arena" : "🔒 Private Arena"}
+              {roomState.isPublic ? "🌐 Public Room" : "🔒 Private Room"}
             </span>
             <span className="text-xs sm:text-sm text-[#9ca3af] font-medium">
-              {roomState.users.length} {roomState.users.length === 1 ? 'Manager' : 'Managers'} Joined
+              {roomState.users.length} {roomState.users.length === 1 ? 'Player' : 'Players'} Joined
             </span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-extrabold text-white tracking-[-0.03em] mt-2">
-            Auction Strategy War Room
+            Auction Waiting Room
           </h2>
           <p className="text-xs sm:text-sm text-[#9ca3af] mt-1">
-            Select an available franchise. Invite friends across India to battle in real-time multiplayer auctions!
+            Pick your team below. Share the room code or WhatsApp link to invite your friends!
           </p>
         </div>
 
@@ -600,7 +600,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                 className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-xs sm:text-sm font-semibold text-[#f3f4f6] transition cursor-pointer"
               >
                 <PlusCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#818cf8]" />
-                <span>Add Star</span>
+                <span>Add Player</span>
               </button>
 
               <button
@@ -629,7 +629,7 @@ export function Lobby({ onOpenCustomPlayer }) {
             <DollarSign className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Purse Budget</div>
+            <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Total Budget</div>
             <div className="text-sm sm:text-base font-heading font-bold text-white">{formatCurrency(roomState.rules.totalPurse)}</div>
           </div>
         </div>
@@ -639,7 +639,7 @@ export function Lobby({ onOpenCustomPlayer }) {
             <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Bid Countdown</div>
+            <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Bid Timer</div>
             <div className="text-sm sm:text-base font-heading font-bold text-white">{roomState.rules.timerSeconds} Seconds</div>
           </div>
         </div>
@@ -649,7 +649,7 @@ export function Lobby({ onOpenCustomPlayer }) {
             <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           <div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Overseas Cap</div>
+            <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Foreign Players</div>
             <div className="text-sm sm:text-base font-heading font-bold text-white">Max {roomState.rules.maxOverseas} Players</div>
           </div>
         </div>
@@ -669,10 +669,10 @@ export function Lobby({ onOpenCustomPlayer }) {
       <div>
         <div className="flex items-center justify-between mb-3.5">
           <h3 className="text-base sm:text-lg font-heading font-bold text-white tracking-[-0.02em] flex items-center gap-2">
-            <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-[#818cf8]" /> Choose Your Franchise
+            <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-[#818cf8]" /> Choose Your Team
           </h3>
           <span className="text-xs sm:text-sm text-[#9ca3af]">
-            {roomState.teams.filter(t => t.ownerId).length} of 10 Franchises Assigned
+            {roomState.teams.filter(t => t.ownerId).length} of 10 Teams Taken
           </span>
         </div>
 
@@ -718,7 +718,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                   )}
                   {isClaimedByHuman && (
                     <span className="text-[10px] sm:text-xs text-[#9ca3af] bg-[#1e1e1e] px-2 py-0.5 rounded-full border border-[#27272a] font-medium">
-                      Claimed
+                      Taken
                     </span>
                   )}
                   {!team.ownerId && !isSelectedByMe && (
@@ -742,9 +742,9 @@ export function Lobby({ onOpenCustomPlayer }) {
                 </div>
 
                 <div className="mt-3 pt-2 border-t border-[#27272a] flex items-center justify-between text-xs sm:text-sm">
-                  <span className="text-[#9ca3af]">Manager:</span>
+                  <span className="text-[#9ca3af]">Owner:</span>
                   <span className="font-semibold text-white truncate max-w-[90px] sm:max-w-[130px]">
-                    {team.ownerName || "Unassigned"}
+                    {team.ownerName || "Available"}
                   </span>
                 </div>
               </motion.div>

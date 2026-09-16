@@ -44,7 +44,7 @@ export function Navbar({ onOpenSquads, onOpenTournament }) {
                 FREE
               </span>
             </div>
-            <p className="text-xs text-[#9ca3af] font-normal hidden md:block">Real-Time Cricket Auction Arena</p>
+            <p className="text-xs text-[#9ca3af] font-normal hidden md:block">Live Cricket Auction Game</p>
           </div>
         </div>
 
@@ -56,7 +56,7 @@ export function Navbar({ onOpenSquads, onOpenTournament }) {
               title="Click to copy full invite link"
               className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] transition group cursor-pointer text-xs sm:text-sm"
             >
-              <span className="text-[10px] sm:text-xs text-[#9ca3af] uppercase tracking-[0.08em] font-semibold hidden xs:inline">PIN:</span>
+              <span className="text-[10px] sm:text-xs text-[#9ca3af] uppercase tracking-[0.08em] font-semibold hidden xs:inline">CODE:</span>
               <span className="font-mono font-bold text-amber-400 tracking-wider text-xs sm:text-base">{roomState.id}</span>
               {copiedLink ? (
                 <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0" />
@@ -101,18 +101,18 @@ export function Navbar({ onOpenSquads, onOpenTournament }) {
               </div>
             </div>
           ) : (
-            <span className="text-xs sm:text-sm text-[#9ca3af] italic hidden md:block">Spectator</span>
+            <span className="text-xs sm:text-sm text-[#9ca3af] italic hidden md:block">Guest</span>
           )}
 
           {/* Tournament Simulator Button */}
           {roomState && (
             <button
               onClick={onOpenTournament}
-              title="Simulate IPL Tournament & Playoffs"
+              title="Play tournament matches between teams"
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/35 text-amber-300 text-xs sm:text-sm font-semibold transition cursor-pointer"
             >
               <Trophy className="w-4 h-4 text-amber-400" />
-              <span className="hidden md:inline">Simulate IPL</span>
+              <span className="hidden md:inline">Match Simulator</span>
             </button>
           )}
 
@@ -120,11 +120,11 @@ export function Navbar({ onOpenSquads, onOpenTournament }) {
           {roomState && (
             <button
               onClick={onOpenSquads}
-              title="Inspect Squad Rosters"
+              title="View all team rosters"
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-[#f3f4f6] text-xs sm:text-sm font-semibold transition cursor-pointer"
             >
               <Users className="w-4 h-4 text-[#818cf8]" />
-              <span className="hidden sm:inline">Rosters</span>
+              <span className="hidden sm:inline">View Teams</span>
             </button>
           )}
 

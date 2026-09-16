@@ -30,7 +30,7 @@ export function BiddingControls() {
       <div className="glass-panel p-5 rounded-2xl border border-[#27272a] text-center bg-[#121212]">
         <div className="text-xs sm:text-sm text-[#818cf8] font-medium flex items-center justify-center gap-2">
           <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5" />
-          You are currently in spectator mode. To bid, select an available franchise in the Lobby.
+          You are watching as a guest. Pick a team in the lobby to start bidding.
         </div>
       </div>
     );
@@ -54,13 +54,13 @@ export function BiddingControls() {
             </div>
             <div className="text-xs text-[#9ca3af] flex items-center gap-3 mt-0.5">
               <span>Squad: <strong className="text-white">{myTeam.squad.length}</strong>/{roomState.rules.maxSquadSize}</span>
-              <span>Overseas: <strong className="text-white">{currentOverseasCount}</strong>/{roomState.rules.maxOverseas}</span>
+              <span>Foreign: <strong className="text-white">{currentOverseasCount}</strong>/{roomState.rules.maxOverseas}</span>
             </div>
           </div>
         </div>
 
         <div className="text-right">
-          <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Available Purse</div>
+          <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Money Left</div>
           <div className="text-lg sm:text-2xl font-heading font-bold text-emerald-400">
             {formatCurrency(myTeam.purse)}
           </div>
@@ -78,14 +78,14 @@ export function BiddingControls() {
       {isOverseasMaxed && (
         <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs sm:text-sm flex items-center gap-2">
           <AlertCircle className="w-4 h-4 shrink-0" />
-          <span>Cannot bid: Overseas limit of {roomState.rules.maxOverseas} reached for {myTeam.shortName}.</span>
+          <span>Cannot bid: Foreign player limit of {roomState.rules.maxOverseas} reached.</span>
         </div>
       )}
 
       {isSquadFull && (
         <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs sm:text-sm flex items-center gap-2">
           <AlertCircle className="w-4 h-4 shrink-0" />
-          <span>Cannot bid: Squad limit of {roomState.rules.maxSquadSize} reached.</span>
+          <span>Cannot bid: Your squad is full ({roomState.rules.maxSquadSize} players).</span>
         </div>
       )}
 
@@ -101,7 +101,7 @@ export function BiddingControls() {
           <div className="flex items-center justify-between w-full">
             <span className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 shrink-0 text-emerald-400" />
-              <span>You Hold Leading Bid</span>
+              <span>You Have Highest Bid!</span>
             </span>
             <span className="font-mono text-emerald-400 font-bold">{formatCurrency(auction.currentBid)}</span>
           </div>
@@ -109,13 +109,13 @@ export function BiddingControls() {
           <div className="flex items-center justify-between w-full">
             <span className="flex items-center gap-2 text-red-400">
               <AlertCircle className="w-4 h-4 shrink-0" />
-              <span>Outbid! Counter-bid to lead</span>
+              <span>Outbid! Bid again to take the lead</span>
             </span>
             <span className="text-[10px] uppercase font-mono bg-red-500/20 px-2 py-0.5 rounded text-red-300">Action</span>
           </div>
         ) : (
           <div className="flex items-center justify-between w-full text-xs text-[#71717a]">
-            <span>Ready for your bid on {player.name}</span>
+            <span>Click a bid button for {player.name}</span>
             <span className="font-mono text-amber-400/80">{auction.currentBid > 0 ? `Current: ${formatCurrency(auction.currentBid)}` : `Base: ${formatCurrency(player.basePrice)}`}</span>
           </div>
         )}
@@ -125,9 +125,9 @@ export function BiddingControls() {
       <div className="space-y-3">
         <div className="text-xs font-bold uppercase tracking-[0.08em] text-[#9ca3af] flex items-center justify-between">
           <span className="flex items-center gap-1.5">
-            <Gavel className="w-4 h-4 text-amber-400" /> Standard Bids
+            <Gavel className="w-4 h-4 text-amber-400" /> Bid Amount
           </span>
-          <span className="text-[#71717a] text-xs font-medium hidden xs:inline">Instant Raise</span>
+          <span className="text-[#71717a] text-xs font-medium hidden xs:inline">Quick Bids</span>
         </div>
 
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
@@ -162,15 +162,15 @@ export function BiddingControls() {
                 }`}
               >
                 <div className={`text-[9px] sm:text-[10px] uppercase font-bold tracking-wider opacity-85 text-center leading-tight ${isPrimary ? "text-amber-950 font-black" : "text-[#9ca3af]"}`}>
-                  {idx === 0 ? "Next Bid" : idx === 1 ? "Jump (+2x)" : "Aggressive (+4x)"}
+                  {idx === 0 ? "Standard Bid" : idx === 1 ? "Jump Bid" : "Big Bid"}
                 </div>
                 <div className="text-base sm:text-2xl font-teko font-bold tracking-wide mt-0.5 truncate max-w-full">
                   {formatCurrency(amount)}
                 </div>
                 {!isAffordable ? (
-                  <span className="text-[9px] text-red-400 font-semibold">Purse Limit</span>
+                  <span className="text-[9px] text-red-400 font-semibold">Not Enough Money</span>
                 ) : isRisky ? (
-                  <span className="text-[9px] text-amber-300 font-semibold" title="Leaves less than ₹20L per remaining slot">Reserve Alert</span>
+                  <span className="text-[9px] text-amber-300 font-semibold" title="Leaves less than ₹20L per remaining slot">Budget Warning</span>
                 ) : null}
               </motion.button>
             );
@@ -181,7 +181,7 @@ export function BiddingControls() {
         {auction.currentBid > 0 && (
           <div className="pt-1.5">
             <div className="text-[10px] sm:text-xs uppercase tracking-[0.08em] font-bold text-[#9ca3af] mb-1.5 flex items-center gap-1.5">
-              <Zap className="w-3.5 h-3.5 text-[#818cf8]" /> Rapid Chips:
+              <Zap className="w-3.5 h-3.5 text-[#818cf8]" /> Quick Add:
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[2000000, 5000000, 10000000, 20000000].map((inc) => {
