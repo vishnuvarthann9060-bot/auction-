@@ -157,7 +157,7 @@ function AuctionApp() {
       <LiveChat />
 
       {/* Footer */}
-      <footer className="w-full py-5 text-center text-xs text-[#71717a] border-t border-[#27272a] relative z-10 bg-[#050505]">
+      <footer className="w-full py-6 sm:py-8 text-center text-xs sm:text-sm text-[#9ca3af] border-t border-[#27272a] relative z-10 bg-[#050505]">
         100% Free Open Platform • IPL Mega Auction Live Arena • Built for Indian Cricket Fans
       </footer>
 
