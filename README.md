@@ -27,7 +27,7 @@ You do **NOT** need two platforms (no Vercel + Render split needed). The applica
 
 1. Sign up for free at [**Render.com**](https://render.com).
 2. Click **New +** -> **Web Service**.
-3. Connect your GitHub repository: `https://github.com/Vishnu9060/ipl-auction-`.
+3. Connect your GitHub repository: `https://github.com/vishnuvarthann9060-bot/auction-`.
 4. Configure these simple settings:
    - **Name**: `ipl-auction` (or any name you choose)
    - **Region**: Closest to you (e.g., Singapore, Frankfurt, Oregon)
