@@ -170,6 +170,17 @@ io.on("connection", (socket) => {
 const clientDistPath = path.resolve(__dirname, "../../client/dist");
 app.use(express.static(clientDistPath));
 
+// Explicit SEO endpoints for Googlebot
+app.get("/sitemap.xml", (req, res) => {
+  res.header("Content-Type", "application/xml");
+  res.sendFile(path.join(clientDistPath, "sitemap.xml"));
+});
+
+app.get("/robots.txt", (req, res) => {
+  res.header("Content-Type", "text/plain");
+  res.sendFile(path.join(clientDistPath, "robots.txt"));
+});
+
 // For SPA client routing, return index.html for all remaining routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(clientDistPath, "index.html"), (err) => {
