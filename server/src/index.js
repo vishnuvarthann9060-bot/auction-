@@ -2,7 +2,12 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { RoomManager } from "./roomManager.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
@@ -158,6 +163,19 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log(`[Socket Disconnected] ID: ${socket.id}`);
     roomManager.handleDisconnect(socket);
+  });
+});
+
+// Serve static frontend in production
+const clientDistPath = path.resolve(__dirname, "../../client/dist");
+app.use(express.static(clientDistPath));
+
+// For SPA client routing, return index.html for all remaining routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(clientDistPath, "index.html"), (err) => {
+    if (err) {
+      res.status(200).send("IPL Auction Server is running! Run 'npm run build' to generate the client UI.");
+    }
   });
 });
 

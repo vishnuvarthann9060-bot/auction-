@@ -24,9 +24,11 @@ export function SocketProvider({ children }) {
 
   // Initialize socket
   useEffect(() => {
-    const serverUrl = window.location.hostname === "localhost" 
-      ? "http://localhost:4000" 
-      : `http://${window.location.hostname}:4000`;
+    // In local Vite dev (port 5173), point to backend port 4000.
+    // In production single-platform deployment, connect to the exact same origin!
+    const serverUrl = window.location.port === "5173"
+      ? (window.location.hostname === "localhost" ? "http://localhost:4000" : `http://${window.location.hostname}:4000`)
+      : window.location.origin;
 
     const newSocket = io(serverUrl, {
       transports: ["websocket", "polling"],
@@ -154,7 +156,6 @@ export function SocketProvider({ children }) {
       socket.emit("create_room", { hostName: name, rules: customRules }, (response) => {
         if (response.success) {
           setRoomState(response.roomState);
-          // update URL with room code
           window.history.pushState({}, "", `?room=${response.roomId}`);
           resolve(response.roomId);
         } else {
