@@ -14,12 +14,12 @@ export function AuctionStage() {
 
   if (!auction || !auction.player) {
     return (
-      <div className="glass-panel p-12 rounded-3xl text-center max-w-lg mx-auto my-12">
-        <div className="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto mb-4 animate-bounce">
+      <div className="glass-panel p-12 rounded-3xl text-center max-w-lg mx-auto my-12 border border-[#27272a]">
+        <div className="w-16 h-16 rounded-full bg-[#6366f1]/15 text-[#818cf8] flex items-center justify-center mx-auto mb-4 animate-bounce">
           <Clock className="w-8 h-8" />
         </div>
-        <h3 className="text-xl font-bold text-white">Preparing Next Lot...</h3>
-        <p className="text-xs text-slate-400 mt-1">The auctioneer is setting up the next marquee cricket star.</p>
+        <h3 className="text-xl font-heading font-bold text-white tracking-[-0.03em]">Preparing Next Lot...</h3>
+        <p className="text-xs text-[#9ca3af] mt-1">The auctioneer is bringing up the next marquee star to the podium.</p>
       </div>
     );
   }
@@ -40,21 +40,21 @@ export function AuctionStage() {
     <div className="w-full space-y-4">
       
       {/* Set & Lot Progress Tracker */}
-      <div className="flex items-center justify-between text-xs text-slate-400 px-1">
+      <div className="flex items-center justify-between text-xs text-[#9ca3af] px-1">
         <div className="flex items-center gap-2">
-          <span className="px-2.5 py-0.5 rounded-full bg-slate-800 border border-slate-700 font-bold text-amber-400 uppercase">
+          <span className="px-2.5 py-0.5 rounded-full bg-[#121212] border border-[#27272a] font-semibold text-[#818cf8] uppercase tracking-[0.08em] text-[10px]">
             {player.set || "Marquee Set"}
           </span>
-          <span className="font-medium">
+          <span className="font-normal text-xs text-[#9ca3af]">
             Player {roomState.currentPlayerIndex + 1} of {roomState.totalPlayersCount}
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Stage:</span>
-          <span className={`font-bold uppercase tracking-wider ${
+          <span className="text-[10px] uppercase tracking-[0.08em] text-[#71717a] font-semibold">Stage:</span>
+          <span className={`font-heading font-semibold uppercase tracking-[0.05em] text-xs ${
             auction.status === "GOING_TWICE" ? "text-red-400 animate-pulse" :
             auction.status === "GOING_ONCE" ? "text-amber-400" :
-            auction.status === "SOLD" ? "text-emerald-400" : "text-blue-400"
+            auction.status === "SOLD" ? "text-emerald-400" : "text-[#818cf8]"
           }`}>
             {auction.status === "GOING_TWICE" ? "⚠️ Going Twice!" :
              auction.status === "GOING_ONCE" ? "⚡ Going Once!" :
@@ -67,38 +67,38 @@ export function AuctionStage() {
       {/* Main Center Stage Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         
-        {/* LEFT / CENTER: The 3D High-Def Player Card (7 cols on lg) */}
+        {/* LEFT / CENTER: The High-Def Player Card (7 cols on lg) */}
         <motion.div 
           key={player.id}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
           style={{ 
-            boxShadow: bidderMeta ? `0 0 35px ${bidderMeta.glowHex}25` : undefined 
+            boxShadow: bidderMeta ? `0 0 35px ${bidderMeta.glowHex}20` : undefined 
           }}
-          className="lg:col-span-7 glass-panel rounded-3xl overflow-hidden border border-white/10 relative shadow-2xl flex flex-col transition-shadow duration-500"
+          className="lg:col-span-7 glass-panel rounded-3xl overflow-hidden border border-[#27272a] relative shadow-2xl flex flex-col transition-shadow duration-500 bg-[#121212]"
         >
           {/* Card Top Header */}
           <div className="p-5 pb-0 flex items-start justify-between relative z-10">
             <div className="flex items-center gap-2">
-              <span className={`px-3 py-1 rounded-full text-xs font-extrabold border ${getRoleBadgeClass(player.role)}`}>
+              <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getRoleBadgeClass(player.role)}`}>
                 {player.role}
               </span>
-              <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-800/80 border border-slate-700/80 text-slate-300 flex items-center gap-1.5">
-                <Globe className="w-3 h-3 text-slate-400" />
+              <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-[#1e1e1e] border border-[#27272a] text-[#f3f4f6] flex items-center gap-1.5">
+                <Globe className="w-3 h-3 text-[#9ca3af]" />
                 {player.country} {player.isOverseas ? "✈️ (Overseas)" : "🇮🇳 (Indian)"}
               </span>
             </div>
 
-            <div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-500/40 px-2.5 py-1 rounded-full text-amber-300 font-bold text-xs">
-              <Zap className="w-3.5 h-3.5 fill-amber-400" />
+            <div className="flex items-center gap-1.5 bg-[#6366f1]/15 border border-[#6366f1]/30 px-3 py-1 rounded-full text-[#818cf8] font-heading font-semibold text-xs">
+              <Zap className="w-3.5 h-3.5 fill-[#818cf8]" />
               <span>{player.rating} OVR</span>
             </div>
           </div>
 
           {/* Player Media & Headline */}
           <div className="p-5 flex flex-col sm:flex-row items-center sm:items-end gap-5 relative">
-            <div className="relative w-36 h-44 sm:w-40 sm:h-48 rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 bg-slate-900 shrink-0">
+            <div className="relative w-36 h-44 sm:w-40 sm:h-48 rounded-2xl overflow-hidden shadow-2xl border border-[#27272a] bg-[#050505] shrink-0">
               <img
                 src={player.image}
                 alt={player.name}
@@ -114,12 +114,12 @@ export function AuctionStage() {
             </div>
 
             <div className="space-y-2 text-center sm:text-left flex-1">
-              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white tracking-[-0.03em]">
                 {player.name}
               </h2>
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                <div className="text-xs text-slate-400 font-medium">Base Price:</div>
-                <div className="text-sm font-extrabold text-amber-400 px-2.5 py-0.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                <div className="text-xs text-[#9ca3af] font-medium">Base Price:</div>
+                <div className="text-sm font-heading font-bold text-amber-400 px-3 py-0.5 rounded-lg bg-amber-500/10 border border-amber-500/30">
                   {formatCurrency(player.basePrice)}
                 </div>
               </div>
@@ -127,64 +127,64 @@ export function AuctionStage() {
           </div>
 
           {/* Player Cricket Career Stats Grid */}
-          <div className="p-5 bg-slate-950/50 border-t border-white/5 mt-auto">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+          <div className="p-5 bg-[#0a0a0a]/70 border-t border-[#27272a] mt-auto">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#9ca3af] mb-2.5">
               Career IPL / T20 Statistics
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              <div className="glass-card p-2.5 rounded-xl text-center">
-                <div className="text-[10px] text-slate-400 font-bold uppercase">Matches</div>
-                <div className="text-base font-extrabold text-white">{player.stats?.matches || "-"}</div>
+              <div className="glass-card p-2.5 rounded-xl text-center border border-[#27272a]">
+                <div className="text-[10px] text-[#9ca3af] uppercase font-semibold">Matches</div>
+                <div className="text-base font-heading font-bold text-white">{player.stats?.matches || "-"}</div>
               </div>
 
               {player.stats?.runs !== undefined && (
-                <div className="glass-card p-2.5 rounded-xl text-center">
-                  <div className="text-[10px] text-slate-400 font-bold uppercase">Runs / Avg</div>
-                  <div className="text-base font-extrabold text-white">
-                    {player.stats.runs} <span className="text-xs font-normal text-slate-400">({player.stats.avg})</span>
+                <div className="glass-card p-2.5 rounded-xl text-center border border-[#27272a]">
+                  <div className="text-[10px] text-[#9ca3af] uppercase font-semibold">Runs / Avg</div>
+                  <div className="text-base font-heading font-bold text-white">
+                    {player.stats.runs} <span className="text-xs font-normal text-[#9ca3af]">({player.stats.avg})</span>
                   </div>
                 </div>
               )}
 
               {player.stats?.sr !== undefined && (
-                <div className="glass-card p-2.5 rounded-xl text-center">
-                  <div className="text-[10px] text-slate-400 font-bold uppercase">Strike Rate</div>
-                  <div className="text-base font-extrabold text-amber-400">{player.stats.sr}</div>
+                <div className="glass-card p-2.5 rounded-xl text-center border border-[#27272a]">
+                  <div className="text-[10px] text-[#9ca3af] uppercase font-semibold">Strike Rate</div>
+                  <div className="text-base font-heading font-bold text-amber-400">{player.stats.sr}</div>
                 </div>
               )}
 
               {player.stats?.wickets !== undefined && (
-                <div className="glass-card p-2.5 rounded-xl text-center">
-                  <div className="text-[10px] text-slate-400 font-bold uppercase">Wickets</div>
-                  <div className="text-base font-extrabold text-emerald-400">{player.stats.wickets}</div>
+                <div className="glass-card p-2.5 rounded-xl text-center border border-[#27272a]">
+                  <div className="text-[10px] text-[#9ca3af] uppercase font-semibold">Wickets</div>
+                  <div className="text-base font-heading font-bold text-emerald-400">{player.stats.wickets}</div>
                 </div>
               )}
 
               {player.stats?.econ !== undefined && (
-                <div className="glass-card p-2.5 rounded-xl text-center">
-                  <div className="text-[10px] text-slate-400 font-bold uppercase">Economy</div>
-                  <div className="text-base font-extrabold text-emerald-300">{player.stats.econ}</div>
+                <div className="glass-card p-2.5 rounded-xl text-center border border-[#27272a]">
+                  <div className="text-[10px] text-[#9ca3af] uppercase font-semibold">Economy</div>
+                  <div className="text-base font-heading font-bold text-emerald-300">{player.stats.econ}</div>
                 </div>
               )}
 
               {player.stats?.dismissals !== undefined && (
-                <div className="glass-card p-2.5 rounded-xl text-center">
-                  <div className="text-[10px] text-slate-400 font-bold uppercase">Dismissals</div>
-                  <div className="text-base font-extrabold text-cyan-300">{player.stats.dismissals}</div>
+                <div className="glass-card p-2.5 rounded-xl text-center border border-[#27272a]">
+                  <div className="text-[10px] text-[#9ca3af] uppercase font-semibold">Dismissals</div>
+                  <div className="text-base font-heading font-bold text-cyan-300">{player.stats.dismissals}</div>
                 </div>
               )}
 
               {player.stats?.hs !== undefined && (
-                <div className="glass-card p-2.5 rounded-xl text-center">
-                  <div className="text-[10px] text-slate-400 font-bold uppercase">High Score</div>
-                  <div className="text-base font-extrabold text-white">{player.stats.hs}</div>
+                <div className="glass-card p-2.5 rounded-xl text-center border border-[#27272a]">
+                  <div className="text-[10px] text-[#9ca3af] uppercase font-semibold">High Score</div>
+                  <div className="text-base font-heading font-bold text-white">{player.stats.hs}</div>
                 </div>
               )}
 
               {player.stats?.bb !== undefined && (
-                <div className="glass-card p-2.5 rounded-xl text-center">
-                  <div className="text-[10px] text-slate-400 font-bold uppercase">Best Bowling</div>
-                  <div className="text-base font-extrabold text-white">{player.stats.bb}</div>
+                <div className="glass-card p-2.5 rounded-xl text-center border border-[#27272a]">
+                  <div className="text-[10px] text-[#9ca3af] uppercase font-semibold">Best Bowling</div>
+                  <div className="text-base font-heading font-bold text-white">{player.stats.bb}</div>
                 </div>
               )}
             </div>
@@ -197,10 +197,10 @@ export function AuctionStage() {
           {/* Current Bid & Gavel Arena */}
           <div 
             style={{ 
-              boxShadow: bidderMeta ? `0 0 45px ${bidderMeta.glowHex}33` : undefined,
-              borderColor: bidderMeta ? `${bidderMeta.glowHex}55` : undefined
+              boxShadow: bidderMeta ? `0 0 45px ${bidderMeta.glowHex}25` : undefined,
+              borderColor: bidderMeta ? `${bidderMeta.glowHex}40` : '#27272a'
             }}
-            className="glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden flex flex-col justify-between transition-all duration-500"
+            className="glass-panel p-6 rounded-3xl border relative overflow-hidden flex flex-col justify-between transition-all duration-500 bg-[#121212]"
           >
             {/* Top Row: Timer Ring and Auctioneer Gavel */}
             <div className="flex items-center justify-between">
@@ -214,8 +214,8 @@ export function AuctionStage() {
                       cy="32"
                       r="28"
                       stroke="currentColor"
-                      strokeWidth="5"
-                      className="text-slate-800"
+                      strokeWidth="4"
+                      className="text-[#1e1e1e]"
                       fill="transparent"
                     />
                     <circle
@@ -223,25 +223,25 @@ export function AuctionStage() {
                       cy="32"
                       r="28"
                       stroke="currentColor"
-                      strokeWidth="5"
+                      strokeWidth="4"
                       strokeDasharray={175.9}
                       strokeDashoffset={175.9 - (175.9 * timerProgress) / 100}
                       strokeLinecap="round"
                       className={`transition-all duration-500 ${
-                        isUrgent ? "text-red-500" : "text-amber-400"
+                        isUrgent ? "text-red-500" : "text-[#6366f1]"
                       }`}
                       fill="transparent"
                     />
                   </svg>
-                  <span className={`absolute font-black text-xl font-mono ${
+                  <span className={`absolute font-heading font-bold text-xl ${
                     isUrgent ? "text-red-400 animate-ping" : "text-white"
                   }`}>
                     {timer}
                   </span>
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase font-bold text-slate-400">Countdown</div>
-                  <div className={`text-xs font-bold ${isUrgent ? "text-red-400" : "text-slate-200"}`}>
+                  <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Countdown</div>
+                  <div className={`text-xs font-semibold ${isUrgent ? "text-red-400" : "text-[#f3f4f6]"}`}>
                     {timer <= 2 ? "Final Call!" : timer <= 5 ? "Closing Soon" : "Active Bidding"}
                   </div>
                 </div>
@@ -251,17 +251,17 @@ export function AuctionStage() {
               <motion.div 
                 animate={isUrgent ? { rotate: [-20, 15, 0], scale: [1, 1.15, 1] } : {}}
                 transition={{ repeat: Infinity, duration: 1 }}
-                className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shadow-inner"
+                className="w-14 h-14 rounded-2xl bg-[#6366f1]/10 border border-[#6366f1]/20 flex items-center justify-center text-[#818cf8] shadow-inner"
               >
                 <Gavel className="w-7 h-7 transform -rotate-45" />
               </motion.div>
             </div>
 
             {/* Live Auctioneer Broadcast Voice Bubble */}
-            <div className="my-3 p-2.5 rounded-xl bg-slate-950/80 border border-amber-500/20 flex items-center gap-2.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping shrink-0" />
-              <p className="text-xs font-semibold text-slate-300 leading-snug">
-                <span className="text-amber-400 font-bold">Auctioneer: </span>
+            <div className="my-3 p-3 rounded-xl bg-[#050505] border border-[#27272a] flex items-center gap-2.5">
+              <div className="w-2 h-2 rounded-full bg-red-500 animate-ping shrink-0" />
+              <p className="text-xs text-[#9ca3af] leading-relaxed">
+                <span className="text-[#818cf8] font-semibold">Auctioneer: </span>
                 {currentBid === 0
                   ? `Opening bid called at base price of ${formatCurrency(player.basePrice)}. Any franchise?`
                   : auction.status === "GOING_TWICE"
@@ -274,19 +274,19 @@ export function AuctionStage() {
 
             {/* Middle Section: Giant Current Bid Display */}
             <div className="my-4 text-center">
-              <div className="text-xs uppercase tracking-widest font-extrabold text-slate-400 mb-1">
+              <div className="text-[10px] uppercase tracking-[0.1em] font-semibold text-[#9ca3af] mb-1">
                 Current Highest Bid
               </div>
               <motion.div 
                 key={currentBid}
                 initial={{ scale: 1.15, opacity: 0.8 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-500 tracking-tight font-teko"
+                className="text-4xl sm:text-5xl font-teko font-bold text-amber-400 tracking-wide"
               >
                 {currentBid > 0 ? formatCurrency(currentBid) : "No Bids Yet"}
               </motion.div>
               {currentBid === 0 && (
-                <div className="text-xs text-slate-500 mt-1">
+                <div className="text-xs text-[#71717a] mt-1">
                   Waiting for opening bid at base price ({formatCurrency(player.basePrice)})
                 </div>
               )}
@@ -297,43 +297,43 @@ export function AuctionStage() {
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`p-3.5 rounded-2xl border ${bidderMeta?.borderClass || 'border-amber-500'} bg-slate-900/90 flex items-center justify-between shadow-lg`}
+                className={`p-3.5 rounded-2xl border ${bidderMeta?.borderClass || 'border-[#27272a]'} bg-[#0a0a0a] flex items-center justify-between shadow-lg`}
               >
                 <div className="flex items-center gap-3">
                   <div className="text-2xl">{bidderMeta?.logoEmoji || "🏏"}</div>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-black text-white">{highestBidderTeam.name}</span>
+                      <span className="text-xs font-heading font-bold text-white">{highestBidderTeam.name}</span>
                       <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-400">
                         {highestBidderTeam.shortName}
                       </span>
                     </div>
-                    <div className="text-[11px] text-slate-400 font-medium flex items-center gap-1">
+                    <div className="text-[11px] text-[#9ca3af] font-medium flex items-center gap-1">
                       <UserCheck className="w-3 h-3 text-emerald-400" />
                       Bid by: {auction.highestBidderName}
                     </div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
                     <CheckCircle2 className="w-3 h-3" /> Leading
                   </span>
                 </div>
               </motion.div>
             ) : (
-              <div className="p-3.5 rounded-2xl border border-dashed border-slate-800 text-center text-xs text-slate-500">
+              <div className="p-3.5 rounded-2xl border border-dashed border-[#27272a] text-center text-xs text-[#71717a]">
                 Click a bid button below to open the bidding!
               </div>
             )}
           </div>
 
           {/* Real-Time Bid Activity Ticker */}
-          <div className="glass-panel p-4 rounded-2xl border border-white/10 flex-1 flex flex-col">
+          <div className="glass-panel p-4 rounded-2xl border border-[#27272a] flex-1 flex flex-col bg-[#121212]">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#9ca3af] flex items-center gap-1.5">
                 <Flame className="w-3.5 h-3.5 text-amber-500" /> Live Bid Ticker
               </span>
-              <span className="text-[10px] text-slate-500">
+              <span className="text-[10px] text-[#71717a]">
                 {auction.bidHistory?.length || 0} Bids Logged
               </span>
             </div>
@@ -347,15 +347,15 @@ export function AuctionStage() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0 }}
-                      className="flex items-center justify-between p-2 rounded-xl bg-slate-900/60 border border-white/5 text-xs"
+                      className="flex items-center justify-between p-2 rounded-xl bg-[#0a0a0a] border border-[#27272a] text-xs"
                     >
                       <div className="flex items-center gap-2">
                         <span 
                           className="w-2.5 h-2.5 rounded-full" 
                           style={{ backgroundColor: b.teamColor || '#F59E0B' }} 
                         />
-                        <span className="font-extrabold text-white">{b.teamShortName}</span>
-                        <span className="text-[11px] text-slate-400">({b.bidderName})</span>
+                        <span className="font-heading font-semibold text-white">{b.teamShortName}</span>
+                        <span className="text-[11px] text-[#9ca3af]">({b.bidderName})</span>
                       </div>
                       <div className="font-mono font-bold text-amber-400">
                         {formatCurrency(b.amount)}
@@ -363,7 +363,7 @@ export function AuctionStage() {
                     </motion.div>
                   ))
                 ) : (
-                  <div className="text-center py-4 text-xs text-slate-600">
+                  <div className="text-center py-4 text-xs text-[#71717a]">
                     No bids recorded for this player yet.
                   </div>
                 )}

@@ -60,22 +60,22 @@ export function CustomPlayerModal({ isOpen, onClose }) {
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="w-full max-w-lg glass-panel p-6 rounded-3xl border border-white/10 shadow-2xl relative z-10"
+          className="w-full max-w-lg glass-panel p-6 rounded-3xl border border-[#27272a] shadow-2xl relative z-10 bg-[#121212]"
         >
-          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+          <div className="flex items-center justify-between pb-3 border-b border-[#27272a]">
             <div className="flex items-center gap-2">
-              <div className="p-2 rounded-xl bg-amber-500/20 text-amber-400">
+              <div className="p-2 rounded-xl bg-[#6366f1]/15 text-[#818cf8]">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-black text-white">Add Custom Player to Pool</h3>
-                <p className="text-xs text-slate-400">Inject yourself, your friends, or iconic stars into the auction</p>
+                <h3 className="text-lg font-heading font-bold text-white tracking-[-0.03em]">Add Custom Player to Pool</h3>
+                <p className="text-xs text-[#9ca3af]">Inject custom players, friends, or legendary stars</p>
               </div>
             </div>
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer"
+              className="p-1.5 rounded-lg bg-[#1e1e1e] text-[#9ca3af] hover:text-white border border-[#27272a] transition cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -83,7 +83,7 @@ export function CustomPlayerModal({ isOpen, onClose }) {
 
           <form onSubmit={handleSubmit} className="space-y-4 mt-4 text-xs">
             <div>
-              <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-semibold text-[#9ca3af] uppercase tracking-[0.08em] mb-1">
                 Player Full Name
               </label>
               <input
@@ -92,19 +92,19 @@ export function CustomPlayerModal({ isOpen, onClose }) {
                 placeholder="e.g. Rahul Dravid / Your Friend's Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 text-sm"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#050505] border border-[#27272a] text-white placeholder-[#71717a] focus:outline-none focus:border-[#6366f1] text-sm"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-semibold text-[#9ca3af] uppercase tracking-[0.08em] mb-1">
                   Playing Role
                 </label>
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3 py-2.5 rounded-xl bg-[#050505] border border-[#27272a] text-white focus:outline-none focus:border-[#6366f1]"
                 >
                   <option value="Batter">Batter</option>
                   <option value="Bowler">Bowler</option>
@@ -114,13 +114,13 @@ export function CustomPlayerModal({ isOpen, onClose }) {
               </div>
 
               <div>
-                <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-semibold text-[#9ca3af] uppercase tracking-[0.08em] mb-1">
                   Base Price (Crores)
                 </label>
                 <select
                   value={basePriceCr}
                   onChange={(e) => setBasePriceCr(e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-amber-400 font-bold focus:outline-none focus:border-amber-500"
+                  className="w-full px-3 py-2.5 rounded-xl bg-[#050505] border border-[#27272a] text-amber-400 font-bold focus:outline-none focus:border-[#6366f1]"
                 >
                   <option value="0.2">₹20 Lakhs (0.2 Cr)</option>
                   <option value="0.5">₹50 Lakhs (0.5 Cr)</option>
@@ -133,7 +133,7 @@ export function CustomPlayerModal({ isOpen, onClose }) {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-semibold text-[#9ca3af] uppercase tracking-[0.08em] mb-1">
                   Country
                 </label>
                 <input
@@ -141,12 +141,12 @@ export function CustomPlayerModal({ isOpen, onClose }) {
                   placeholder="e.g. India / Australia"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3 py-2 rounded-xl bg-[#050505] border border-[#27272a] text-white focus:outline-none focus:border-[#6366f1]"
                 />
               </div>
 
               <div>
-                <label className="block font-bold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-semibold text-[#9ca3af] uppercase tracking-[0.08em] mb-1">
                   Overall Rating (OVR)
                 </label>
                 <input
@@ -155,7 +155,7 @@ export function CustomPlayerModal({ isOpen, onClose }) {
                   max="99"
                   value={rating}
                   onChange={(e) => setRating(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3 py-2 rounded-xl bg-[#050505] border border-[#27272a] text-white focus:outline-none focus:border-[#6366f1]"
                 />
               </div>
             </div>
@@ -166,59 +166,59 @@ export function CustomPlayerModal({ isOpen, onClose }) {
                 id="isOverseas"
                 checked={isOverseas}
                 onChange={(e) => setIsOverseas(e.target.checked)}
-                className="w-4 h-4 rounded accent-amber-500"
+                className="w-4 h-4 rounded accent-[#6366f1]"
               />
-              <label htmlFor="isOverseas" className="text-slate-300 font-medium">
+              <label htmlFor="isOverseas" className="text-[#9ca3af] font-medium">
                 Counts as an Overseas (Foreign) Player
               </label>
             </div>
 
             <div className="grid grid-cols-3 gap-2">
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Matches</label>
+                <label className="block font-semibold text-[#9ca3af] mb-1">Matches</label>
                 <input
                   type="number"
                   value={matches}
                   onChange={(e) => setMatches(e.target.value)}
-                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-white"
+                  className="w-full px-2 py-1.5 rounded-lg bg-[#050505] border border-[#27272a] text-white"
                 />
               </div>
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Runs</label>
+                <label className="block font-semibold text-[#9ca3af] mb-1">Runs</label>
                 <input
                   type="number"
                   value={runs}
                   onChange={(e) => setRuns(e.target.value)}
-                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-white"
+                  className="w-full px-2 py-1.5 rounded-lg bg-[#050505] border border-[#27272a] text-white"
                 />
               </div>
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Wickets</label>
+                <label className="block font-semibold text-[#9ca3af] mb-1">Wickets</label>
                 <input
                   type="number"
                   value={wickets}
                   onChange={(e) => setWickets(e.target.value)}
-                  className="w-full px-2 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-white"
+                  className="w-full px-2 py-1.5 rounded-lg bg-[#050505] border border-[#27272a] text-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block font-bold text-slate-400 mb-1">
+              <label className="block font-semibold text-[#9ca3af] mb-1">
                 Custom Photo URL (Optional)
               </label>
               <input
                 type="url"
-                placeholder="https://... (leave empty for default player silhouette)"
+                placeholder="https://... (leave empty for default player image)"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs"
+                className="w-full px-3 py-2 rounded-xl bg-[#050505] border border-[#27272a] text-white text-xs"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold text-sm uppercase tracking-wider shadow-lg shadow-amber-500/20 transition cursor-pointer"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-bold text-sm tracking-tight shadow-lg shadow-[#6366f1]/25 transition cursor-pointer"
             >
               Add to Auction Roster ✨
             </button>

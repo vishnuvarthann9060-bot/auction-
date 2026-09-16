@@ -25,8 +25,8 @@ export function BiddingControls() {
 
   if (!myTeam) {
     return (
-      <div className="glass-panel p-4 rounded-2xl border border-amber-500/20 text-center">
-        <div className="text-xs text-amber-400 font-semibold flex items-center justify-center gap-2">
+      <div className="glass-panel p-4 rounded-2xl border border-[#27272a] text-center bg-[#121212]">
+        <div className="text-xs text-[#818cf8] font-medium flex items-center justify-center gap-2">
           <AlertCircle className="w-4 h-4" />
           You are currently in spectator mode. To bid, select an available franchise in the Lobby.
         </div>
@@ -35,22 +35,22 @@ export function BiddingControls() {
   }
 
   return (
-    <div className="glass-panel p-5 rounded-3xl border border-white/10 space-y-4 shadow-2xl">
+    <div className="glass-panel p-5 rounded-3xl border border-[#27272a] space-y-4 shadow-2xl bg-[#121212]">
       
       {/* Top Status Bar: My Franchise Health */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#27272a]">
         <div className="flex items-center gap-3">
           <div className="text-2xl">{teamMeta?.logoEmoji || "🏏"}</div>
           <div>
             <div className="flex items-center gap-2">
-              <span className={`text-sm font-extrabold ${teamMeta?.textClass || 'text-white'}`}>
+              <span className={`text-sm font-heading font-bold ${teamMeta?.textClass || 'text-white'}`}>
                 {myTeam.name}
               </span>
-              <span className="text-xs font-mono font-bold bg-slate-800 px-2 py-0.5 rounded text-slate-300">
+              <span className="text-[11px] font-mono font-semibold bg-[#1e1e1e] border border-[#27272a] px-2 py-0.5 rounded text-[#9ca3af]">
                 {myTeam.shortName}
               </span>
             </div>
-            <div className="text-xs text-slate-400 flex items-center gap-3 mt-0.5">
+            <div className="text-xs text-[#9ca3af] flex items-center gap-3 mt-0.5">
               <span>Squad: <strong className="text-white">{myTeam.squad.length}</strong>/{roomState.rules.maxSquadSize}</span>
               <span>Overseas: <strong className="text-white">{currentOverseasCount}</strong>/{roomState.rules.maxOverseas}</span>
             </div>
@@ -58,8 +58,8 @@ export function BiddingControls() {
         </div>
 
         <div className="text-right">
-          <div className="text-[10px] uppercase font-bold text-slate-400">Available Purse</div>
-          <div className="text-xl font-extrabold font-mono text-emerald-400">
+          <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Available Purse</div>
+          <div className="text-xl font-heading font-bold text-emerald-400">
             {formatCurrency(myTeam.purse)}
           </div>
         </div>
@@ -67,32 +67,32 @@ export function BiddingControls() {
 
       {/* Warnings if quota reached */}
       {isOverseasMaxed && (
-        <div className="p-3 rounded-xl bg-red-500/15 border border-red-500/30 text-red-300 text-xs flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+        <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 shrink-0" />
           <span>Cannot bid: Overseas limit of {roomState.rules.maxOverseas} players already reached for {myTeam.shortName}.</span>
         </div>
       )}
 
       {isSquadFull && (
-        <div className="p-3 rounded-xl bg-red-500/15 border border-red-500/30 text-red-300 text-xs flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+        <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 shrink-0" />
           <span>Cannot bid: Squad limit of {roomState.rules.maxSquadSize} players reached.</span>
         </div>
       )}
 
       {isHoldingHighestBid && (
-        <div className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold flex items-center justify-between">
+        <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-400" />
+            <CheckCircle className="w-4 h-4" />
             Your franchise currently holds the winning bid!
           </span>
-          <span className="text-emerald-400 font-mono">{formatCurrency(auction.currentBid)}</span>
+          <span className="font-mono font-bold">{formatCurrency(auction.currentBid)}</span>
         </div>
       )}
 
       {/* Reaction Cheer Bar */}
-      <div className="flex items-center justify-between gap-2 p-2 rounded-2xl bg-slate-950/60 border border-white/5">
-        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider hidden sm:inline">
+      <div className="flex items-center justify-between gap-2 p-2 rounded-2xl bg-[#050505] border border-[#27272a]">
+        <span className="text-[10px] font-semibold text-[#9ca3af] uppercase tracking-[0.08em] pl-1 hidden sm:inline">
           Live Reactions:
         </span>
         <div className="flex items-center gap-1.5 flex-1 justify-around sm:justify-start">
@@ -100,7 +100,7 @@ export function BiddingControls() {
             <button
               key={emoji}
               onClick={() => sendReaction(emoji)}
-              className="px-2.5 py-1 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-white/5 text-lg hover:scale-125 active:scale-95 transition transform cursor-pointer"
+              className="px-2.5 py-1 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-lg hover:scale-125 active:scale-95 transition transform cursor-pointer"
             >
               {emoji}
             </button>
@@ -110,11 +110,11 @@ export function BiddingControls() {
 
       {/* Dynamic Bidding Buttons */}
       <div className="space-y-3">
-        <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+        <div className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#9ca3af] flex items-center justify-between">
           <span className="flex items-center gap-1.5">
-            <Gavel className="w-3.5 h-3.5 text-amber-400" /> Standard Bids
+            <Gavel className="w-3.5 h-3.5 text-[#818cf8]" /> Standard Bids
           </span>
-          <span className="text-slate-500">Tap to raise instantaneously</span>
+          <span className="text-[#71717a]">Tap to raise instantaneously</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -134,21 +134,21 @@ export function BiddingControls() {
             return (
               <motion.button
                 key={amount}
-                whileTap={!disabled ? { scale: 0.96 } : {}}
+                whileTap={!disabled ? { scale: 0.97 } : {}}
                 onClick={() => placeBid(amount)}
                 disabled={disabled}
                 className={`py-3.5 px-4 rounded-2xl flex flex-col items-center justify-center font-bold transition shadow-lg relative overflow-hidden cursor-pointer ${
                   disabled
-                    ? "bg-slate-900/60 border border-slate-800 text-slate-600 cursor-not-allowed"
+                    ? "bg-[#121212]/50 border border-[#27272a] text-[#71717a] cursor-not-allowed"
                     : isPrimary
-                    ? "bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-amber-500/25"
-                    : "bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 text-white"
+                    ? "bg-gradient-to-r from-[#6366f1] via-[#7c3aed] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white shadow-lg shadow-[#6366f1]/25"
+                    : "bg-[#1e1e1e] hover:bg-[#27272a] border border-[#27272a] text-white"
                 }`}
               >
-                <div className="text-[10px] uppercase font-bold tracking-wider opacity-80">
+                <div className="text-[10px] uppercase font-semibold tracking-wider opacity-85">
                   {idx === 0 ? "Next Minimum Bid" : idx === 1 ? "Jump Raise (+2x)" : "Aggressive Raise (+4x)"}
                 </div>
-                <div className="text-xl sm:text-2xl font-black font-teko tracking-wide mt-0.5">
+                <div className="text-xl sm:text-2xl font-teko font-bold tracking-wide mt-0.5">
                   {formatCurrency(amount)}
                 </div>
                 {!isAffordable && (
@@ -162,8 +162,8 @@ export function BiddingControls() {
         {/* Quick Jump Increment Chips */}
         {auction.currentBid > 0 && (
           <div className="pt-2">
-            <div className="text-[10px] uppercase font-bold text-slate-500 mb-1.5 flex items-center gap-1">
-              <Zap className="w-3 h-3 text-amber-400" /> Rapid Raise Chips:
+            <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af] mb-1.5 flex items-center gap-1">
+              <Zap className="w-3 h-3 text-[#818cf8]" /> Rapid Raise Chips:
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[2000000, 5000000, 10000000, 20000000].map((inc) => {
@@ -185,14 +185,14 @@ export function BiddingControls() {
                     key={inc}
                     disabled={disabled}
                     onClick={() => placeBid(targetBid)}
-                    className={`py-2 px-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between border cursor-pointer ${
+                    className={`py-2 px-2.5 rounded-xl text-xs font-semibold transition flex items-center justify-between border cursor-pointer ${
                       disabled
-                        ? "bg-slate-950/40 border-slate-800 text-slate-600 cursor-not-allowed"
-                        : "bg-slate-900/90 hover:bg-slate-800 border-amber-500/30 text-amber-300 hover:border-amber-400"
+                        ? "bg-[#121212]/40 border-[#27272a] text-[#71717a] cursor-not-allowed"
+                        : "bg-[#121212] hover:bg-[#1e1e1e] border-[#27272a] hover:border-[#6366f1]/40 text-[#f3f4f6]"
                     }`}
                   >
                     <span>{label}</span>
-                    <span className="font-mono text-[11px] opacity-75">{formatCurrency(targetBid)}</span>
+                    <span className="font-mono text-[11px] text-amber-400">{formatCurrency(targetBid)}</span>
                   </button>
                 );
               })}

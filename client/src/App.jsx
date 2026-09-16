@@ -36,31 +36,31 @@ function AuctionApp() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col relative selection:bg-amber-500 selection:text-black">
+    <div className="min-h-screen bg-[#050505] text-[#f3f4f6] font-sans flex flex-col relative selection:bg-[#6366f1] selection:text-white">
       
       {/* Stadium Ambient Lights, Dynamic Franchise Glows & Floodlight Beams */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Sweeping Stadium Floodlight Beams */}
+        {/* Subtle Sweeping Stadium Floodlight Beams */}
         <div 
-          className="absolute -top-32 -left-20 w-[350px] h-[650px] bg-gradient-to-b from-white/10 via-amber-400/5 to-transparent blur-2xl animate-floodlight-left pointer-events-none"
+          className="absolute -top-32 -left-20 w-[350px] h-[650px] bg-gradient-to-b from-[#6366f1]/10 via-[#a855f7]/5 to-transparent blur-3xl animate-floodlight-left pointer-events-none"
         />
         <div 
-          className="absolute -top-32 -right-20 w-[350px] h-[650px] bg-gradient-to-b from-white/10 via-blue-400/5 to-transparent blur-2xl animate-floodlight-right pointer-events-none"
+          className="absolute -top-32 -right-20 w-[350px] h-[650px] bg-gradient-to-b from-[#6366f1]/10 via-blue-500/5 to-transparent blur-3xl animate-floodlight-right pointer-events-none"
         />
 
         {/* Dynamic Center Stage Spotlight (Pulsing in Franchise Colors) */}
         <motion.div 
           animate={{ 
             backgroundColor: activeGlowHex,
-            opacity: [0.10, 0.18, 0.10],
-            scale: [1, 1.05, 1]
+            opacity: [0.08, 0.14, 0.08],
+            scale: [1, 1.04, 1]
           }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
           className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[550px] blur-[120px] rounded-full transition-colors duration-700"
         />
 
-        <div className="absolute top-1/3 -left-32 w-80 h-80 bg-purple-600/10 blur-3xl rounded-full" />
-        <div className="absolute bottom-10 -right-32 w-80 h-80 bg-emerald-600/10 blur-3xl rounded-full" />
+        <div className="absolute top-1/3 -left-32 w-80 h-80 bg-[#6366f1]/10 blur-[100px] rounded-full" />
+        <div className="absolute bottom-10 -right-32 w-80 h-80 bg-[#a855f7]/10 blur-[100px] rounded-full" />
       </div>
 
       {/* Top Navbar */}
@@ -74,7 +74,7 @@ function AuctionApp() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
-              className="px-4 py-3 rounded-2xl bg-red-500/90 text-white text-xs font-bold shadow-2xl flex items-center gap-2 backdrop-blur-md border border-red-400"
+              className="px-4 py-3 rounded-2xl bg-red-500/90 text-white text-xs font-semibold shadow-2xl flex items-center gap-2 backdrop-blur-md border border-red-400"
             >
               <AlertTriangle className="w-4 h-4 shrink-0" />
               <span>{errorMessage}</span>
@@ -86,7 +86,7 @@ function AuctionApp() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
-              className="px-4 py-3 rounded-2xl bg-amber-500 text-slate-950 text-xs font-black shadow-2xl flex items-center gap-2 backdrop-blur-md"
+              className="px-4 py-3 rounded-2xl bg-[#6366f1] text-white text-xs font-semibold shadow-2xl flex items-center gap-2 backdrop-blur-md border border-[#818cf8]"
             >
               <CheckCircle className="w-4 h-4 shrink-0" />
               <span>{toastMessage}</span>
@@ -101,19 +101,19 @@ function AuctionApp() {
           <Lobby onOpenCustomPlayer={() => setCustomPlayerModalOpen(true)} />
         ) : roomState.status === "ENDED" ? (
           /* AUCTION COMPLETE RECAP */
-          <div className="glass-panel p-8 sm:p-12 rounded-3xl text-center max-w-3xl mx-auto my-10 space-y-6">
-            <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-400 to-yellow-500 text-slate-950 flex items-center justify-center mx-auto shadow-2xl shadow-amber-500/30">
+          <div className="glass-panel p-8 sm:p-12 rounded-3xl text-center max-w-3xl mx-auto my-10 space-y-6 border border-[#27272a] bg-[#121212]">
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-[#6366f1] to-[#8b5cf6] text-white flex items-center justify-center mx-auto shadow-2xl shadow-[#6366f1]/30">
               <Trophy className="w-10 h-10" />
             </div>
 
             <div>
-              <span className="text-xs uppercase tracking-widest font-black text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+              <span className="text-[10px] uppercase tracking-[0.1em] font-semibold text-[#818cf8] bg-[#6366f1]/15 px-3 py-1 rounded-full border border-[#6366f1]/30">
                 Tournament Complete
               </span>
-              <h2 className="text-3xl sm:text-5xl font-black text-white mt-3">
+              <h2 className="text-3xl sm:text-5xl font-heading font-bold text-white mt-3 tracking-[-0.03em]">
                 IPL Mega Auction Concluded!
               </h2>
-              <p className="text-sm text-slate-400 mt-2 max-w-lg mx-auto">
+              <p className="text-sm text-[#9ca3af] mt-2 max-w-lg mx-auto leading-relaxed">
                 All players have gone under the hammer! All 10 franchises have assembled their official rosters.
               </p>
             </div>
@@ -121,7 +121,7 @@ function AuctionApp() {
             <div className="pt-4">
               <button
                 onClick={() => handleOpenSquad()}
-                className="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg shadow-amber-500/25 transition cursor-pointer"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-bold text-sm tracking-tight shadow-lg shadow-[#6366f1]/25 transition cursor-pointer"
               >
                 Inspect All Franchise Squads
               </button>
@@ -158,8 +158,8 @@ function AuctionApp() {
       <LiveChat />
 
       {/* Footer */}
-      <footer className="w-full py-4 text-center text-xs text-slate-500 border-t border-white/5 relative z-10">
-        100% Free Open Platform • IPL Mega Auction Live Arena • No Sign-up Required
+      <footer className="w-full py-5 text-center text-xs text-[#71717a] border-t border-[#27272a] relative z-10 bg-[#050505]">
+        100% Free Open Platform • IPL Mega Auction Live Arena • Built for Indian Cricket Fans
       </footer>
 
     </div>

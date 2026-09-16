@@ -65,12 +65,12 @@ export function LiveChat() {
       <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2">
         
         {/* Quick Reaction Bar */}
-        <div className="flex items-center gap-1.5 p-1.5 rounded-full bg-slate-900/90 border border-white/10 shadow-2xl backdrop-blur-md">
+        <div className="flex items-center gap-1.5 p-1.5 rounded-full bg-[#121212]/90 border border-[#27272a] shadow-2xl backdrop-blur-md">
           {QUICK_REACTIONS.map((emoji) => (
             <button
               key={emoji}
               onClick={() => sendReaction(emoji)}
-              className="w-8 h-8 rounded-full hover:bg-slate-800 flex items-center justify-center text-lg hover:scale-125 transition transform active:scale-90 cursor-pointer"
+              className="w-8 h-8 rounded-full hover:bg-[#1e1e1e] flex items-center justify-center text-lg hover:scale-125 transition transform active:scale-90 cursor-pointer"
               title={`React ${emoji}`}
             >
               {emoji}
@@ -81,9 +81,9 @@ export function LiveChat() {
         {/* Chat Toggle Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs shadow-xl shadow-amber-500/25 transition cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-semibold text-xs shadow-xl shadow-[#6366f1]/25 transition cursor-pointer"
         >
-          <MessageSquare className="w-4 h-4 fill-slate-950" />
+          <MessageSquare className="w-4 h-4 fill-white" />
           <span>Live Banter ({chats.length})</span>
           {isOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
         </button>
@@ -95,19 +95,19 @@ export function LiveChat() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              className="w-80 sm:w-96 h-96 glass-panel rounded-3xl border border-white/15 shadow-2xl flex flex-col overflow-hidden bg-slate-950/95"
+              className="w-80 sm:w-96 h-96 glass-panel rounded-3xl border border-[#27272a] shadow-2xl flex flex-col overflow-hidden bg-[#121212]/95"
             >
               {/* Chat Header */}
-              <div className="p-3.5 border-b border-white/10 flex items-center justify-between">
+              <div className="p-3.5 border-b border-[#27272a] flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs font-black uppercase tracking-wider text-white">
+                  <span className="text-xs font-heading font-bold uppercase tracking-[0.08em] text-white">
                     Auction War Room Chat
                   </span>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white cursor-pointer"
+                  className="p-1 rounded-lg text-[#9ca3af] hover:text-white cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -116,26 +116,26 @@ export function LiveChat() {
               {/* Chat Messages Stream */}
               <div className="flex-1 p-3 overflow-y-auto space-y-2.5 text-xs">
                 {chats.length === 0 ? (
-                  <div className="h-full flex flex-col items-center justify-center text-center text-slate-500 p-4">
-                    <Sparkles className="w-8 h-8 mb-2 opacity-30 text-amber-400" />
-                    <p className="font-semibold text-slate-400">No banter yet!</p>
-                    <p className="text-[11px] text-slate-600">Send a message or react to celebrate a bid.</p>
+                  <div className="h-full flex flex-col items-center justify-center text-center text-[#71717a] p-4">
+                    <Sparkles className="w-8 h-8 mb-2 opacity-30 text-[#818cf8]" />
+                    <p className="font-semibold text-[#9ca3af]">No banter yet!</p>
+                    <p className="text-[11px] text-[#71717a]">Send a message or react to celebrate a bid.</p>
                   </div>
                 ) : (
                   chats.map((c) => (
-                    <div key={c.id} className="p-2 rounded-xl bg-slate-900/80 border border-white/5 space-y-0.5">
+                    <div key={c.id} className="p-2.5 rounded-xl bg-[#050505] border border-[#27272a] space-y-0.5">
                       <div className="flex items-center justify-between text-[10px]">
                         <span 
                           className="font-bold uppercase tracking-wider" 
-                          style={{ color: c.teamColor || '#F59E0B' }}
+                          style={{ color: c.teamColor || '#818cf8' }}
                         >
                           {c.teamShortName ? `[${c.teamShortName}] ${c.sender}` : c.sender}
                         </span>
-                        <span className="text-slate-500">
+                        <span className="text-[#71717a]">
                           {new Date(c.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </div>
-                      <p className="text-slate-200 break-words leading-relaxed text-xs">
+                      <p className="text-[#f3f4f6] break-words leading-relaxed text-xs">
                         {c.text}
                       </p>
                     </div>
@@ -145,19 +145,19 @@ export function LiveChat() {
               </div>
 
               {/* Chat Input */}
-              <form onSubmit={handleSend} className="p-2.5 border-t border-white/10 bg-slate-900/60 flex items-center gap-2">
+              <form onSubmit={handleSend} className="p-2.5 border-t border-[#27272a] bg-[#121212] flex items-center gap-2">
                 <input
                   type="text"
                   maxLength={150}
                   placeholder={myTeam ? `Chat as ${myTeam.shortName}...` : "Send a message..."}
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
-                  className="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-amber-500"
+                  className="flex-1 px-3 py-2 rounded-xl bg-[#050505] border border-[#27272a] text-white placeholder-[#71717a] text-xs focus:outline-none focus:border-[#6366f1]"
                 />
                 <button
                   type="submit"
                   disabled={!inputMessage.trim()}
-                  className="p-2 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:opacity-40 text-slate-950 transition cursor-pointer"
+                  className="p-2 rounded-xl bg-[#6366f1] hover:bg-[#4f46e5] disabled:opacity-40 text-white transition cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                 </button>

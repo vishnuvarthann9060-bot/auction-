@@ -12,15 +12,15 @@ export function TeamsOverview({ onSelectTeamDetail }) {
   const totalPurse = roomState.rules?.totalPurse || 1000000000;
 
   return (
-    <div className="glass-panel p-5 rounded-3xl border border-white/10 space-y-4">
+    <div className="glass-panel p-5 rounded-3xl border border-[#27272a] space-y-4 bg-[#121212]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Trophy className="w-4 h-4 text-amber-400" />
-          <h3 className="text-sm font-extrabold uppercase tracking-wider text-white">
+          <Trophy className="w-4 h-4 text-[#818cf8]" />
+          <h3 className="text-sm font-heading font-bold uppercase tracking-[-0.01em] text-white">
             Franchise Standings & Purses
           </h3>
         </div>
-        <span className="text-[11px] text-slate-400">Click any team to inspect squad</span>
+        <span className="text-[11px] text-[#9ca3af]">Click any franchise to inspect roster</span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
@@ -36,8 +36,8 @@ export function TeamsOverview({ onSelectTeamDetail }) {
               onClick={() => onSelectTeamDetail(team)}
               className={`p-3.5 rounded-2xl border transition cursor-pointer relative overflow-hidden ${
                 isMine 
-                  ? "bg-slate-900 border-amber-500/60 shadow-md shadow-amber-500/10" 
-                  : "bg-slate-900/60 border-slate-800 hover:border-slate-700"
+                  ? "bg-[#121212] border-[#6366f1] shadow-md shadow-[#6366f1]/10" 
+                  : "bg-[#121212] border-[#27272a] hover:border-[#3f3f46]"
               }`}
             >
               {/* Colored left edge bar */}
@@ -50,13 +50,13 @@ export function TeamsOverview({ onSelectTeamDetail }) {
                 <div className="flex items-center gap-2">
                   <span className="text-lg">{meta?.logoEmoji || "🏏"}</span>
                   <div>
-                    <div className="text-xs font-black text-white flex items-center gap-1.5">
+                    <div className="text-xs font-heading font-bold text-white flex items-center gap-1.5">
                       {team.shortName}
                       {isMine && (
-                        <span className="text-[9px] text-amber-400 bg-amber-500/20 px-1 rounded font-bold">YOU</span>
+                        <span className="text-[9px] text-[#818cf8] bg-[#6366f1]/20 px-1 rounded font-bold">YOU</span>
                       )}
                     </div>
-                    <div className="text-[10px] text-slate-400 truncate max-w-[100px]">
+                    <div className="text-[10px] text-[#9ca3af] truncate max-w-[100px]">
                       {team.ownerName || "Unclaimed"}
                     </div>
                   </div>
@@ -66,12 +66,12 @@ export function TeamsOverview({ onSelectTeamDetail }) {
                   <div className="text-xs font-mono font-bold text-emerald-400">
                     {formatCurrency(team.purse)}
                   </div>
-                  <div className="text-[10px] text-slate-500">Purse Left</div>
+                  <div className="text-[10px] text-[#71717a]">Purse Left</div>
                 </div>
               </div>
 
               {/* Progress bar of purse */}
-              <div className="w-full bg-slate-950 rounded-full h-1.5 mt-2.5 overflow-hidden">
+              <div className="w-full bg-[#050505] rounded-full h-1.5 mt-2.5 overflow-hidden">
                 <div 
                   className="h-full rounded-full transition-all duration-500" 
                   style={{ 
@@ -82,7 +82,7 @@ export function TeamsOverview({ onSelectTeamDetail }) {
               </div>
 
               {/* Squad & Overseas Tally */}
-              <div className="mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-400 pl-1">
+              <div className="mt-2 pt-2 border-t border-[#27272a] flex items-center justify-between text-[10px] text-[#9ca3af] pl-1">
                 <span>Squad: <strong className="text-white">{team.squad.length}</strong></span>
                 <span>Overseas: <strong className="text-white">{overseasCount}</strong>/{roomState.rules?.maxOverseas || 8}</span>
               </div>

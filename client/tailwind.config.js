@@ -6,15 +6,37 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ['Outfit', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        teko: ['Teko', 'sans-serif'],
+      },
       colors: {
+        dark: {
+          bg: '#050505',
+          surface: '#121212',
+          card: '#161616',
+          hover: '#1e1e1e',
+          border: '#27272a',
+        },
+        brand: {
+          indigo: '#6366f1',
+          violet: '#a855f7',
+          glow: 'rgba(99, 102, 241, 0.35)',
+        },
         ipl: {
-          dark: '#0a0f1d',
-          card: '#111827',
+          dark: '#050505',
+          card: '#121212',
           gold: '#f59e0b',
-          accent: '#3b82f6',
+          accent: '#6366f1',
           danger: '#ef4444',
           success: '#10b981'
         }
+      },
+      letterSpacing: {
+        tighter: '-0.04em',
+        tight: '-0.03em',
+        widest: '0.1em',
       },
       keyframes: {
         pulseGlow: {

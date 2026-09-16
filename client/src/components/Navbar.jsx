@@ -26,25 +26,25 @@ export function Navbar({ onOpenSquads }) {
   const teamMeta = myTeam ? TEAMS_DATA[myTeam.id] : null;
 
   return (
-    <header className="w-full bg-[#0d1322]/90 backdrop-blur-md border-b border-white/10 px-4 lg:px-8 py-3 sticky top-0 z-40">
+    <header className="w-full bg-[#050505]/90 backdrop-blur-md border-b border-[#27272a] px-4 lg:px-8 py-3 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* Brand Logo & Free Badge */}
         <div className="flex items-center gap-3">
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-300 shadow-lg shadow-amber-500/20">
-            <span className="font-teko text-2xl font-bold text-slate-950 tracking-wider">IPL</span>
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping" />
+          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-[#6366f1] via-[#8b5cf6] to-[#a855f7] shadow-lg shadow-[#6366f1]/20">
+            <span className="font-heading text-lg font-extrabold text-white tracking-tight">IPL</span>
+            <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#10b981] rounded-full animate-ping" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-amber-200 bg-clip-text text-transparent">
+              <span className="font-heading font-bold text-lg tracking-[-0.03em] text-white">
                 MEGA AUCTION
               </span>
-              <span className="hidden sm:inline-block text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              <span className="hidden sm:inline-block text-[10px] uppercase font-semibold tracking-[0.1em] px-2 py-0.5 rounded-full bg-[#6366f1]/15 text-[#818cf8] border border-[#6366f1]/30">
                 100% FREE
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium hidden sm:block">Open Multiplayer Cricket Bidding Arena</p>
+            <p className="text-[11px] text-[#9ca3af] font-normal hidden sm:block">Real-Time Cricket Auction Arena</p>
           </div>
         </div>
 
@@ -54,14 +54,14 @@ export function Navbar({ onOpenSquads }) {
             <button
               onClick={copyShareLink}
               title="Click to copy full invite link"
-              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 transition group cursor-pointer"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] transition group cursor-pointer"
             >
-              <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">ROOM:</span>
+              <span className="text-[10px] text-[#9ca3af] uppercase tracking-[0.1em] font-semibold">ROOM:</span>
               <span className="font-mono font-bold text-amber-400 tracking-wider">{roomState.id}</span>
               {copiedLink ? (
                 <Check className="w-3.5 h-3.5 text-emerald-400" />
               ) : (
-                <Copy className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition" />
+                <Copy className="w-3.5 h-3.5 text-[#9ca3af] group-hover:text-white transition" />
               )}
             </button>
 
@@ -69,7 +69,7 @@ export function Navbar({ onOpenSquads }) {
             <button
               onClick={shareOnWhatsApp}
               title="Share Room to WhatsApp cricket group"
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/40 text-emerald-400 text-xs font-bold transition cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-semibold transition cursor-pointer"
             >
               <span>📲 WhatsApp</span>
             </button>
@@ -84,7 +84,7 @@ export function Navbar({ onOpenSquads }) {
         {/* Right Actions: Team Badge, Sound Toggle, Squads */}
         <div className="flex items-center gap-2 sm:gap-3">
           {myTeam ? (
-            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border ${teamMeta?.borderClass || 'border-slate-700'} bg-slate-900/90 shadow-sm`}>
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border ${teamMeta?.borderClass || 'border-[#27272a]'} bg-[#121212] shadow-sm`}>
               <span className="text-base">{teamMeta?.logoEmoji || "🏏"}</span>
               <div className="text-left">
                 <div className="flex items-center gap-1.5">
@@ -92,7 +92,7 @@ export function Navbar({ onOpenSquads }) {
                     {myTeam.shortName}
                   </span>
                   {isHost && (
-                    <span className="text-[9px] bg-amber-500/20 text-amber-400 px-1 rounded font-bold">HOST</span>
+                    <span className="text-[9px] bg-[#6366f1]/20 text-[#818cf8] px-1 rounded font-bold">HOST</span>
                   )}
                 </div>
                 <div className="text-[11px] font-mono text-emerald-400 font-semibold">
@@ -101,14 +101,14 @@ export function Navbar({ onOpenSquads }) {
               </div>
             </div>
           ) : (
-            <span className="text-xs text-slate-400 italic hidden sm:block">Spectator Mode</span>
+            <span className="text-xs text-[#9ca3af] italic hidden sm:block">Spectator Mode</span>
           )}
 
           {/* Squad Viewer Button */}
           {roomState && (
             <button
               onClick={onOpenSquads}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-semibold transition cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-[#f3f4f6] text-xs font-medium transition cursor-pointer"
             >
               <Trophy className="w-3.5 h-3.5 text-amber-400" />
               <span className="hidden sm:inline">Rosters</span>
@@ -119,7 +119,7 @@ export function Navbar({ onOpenSquads }) {
           <button
             onClick={toggleSound}
             title={soundMuted ? "Unmute Audio" : "Mute Audio"}
-            className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 text-slate-300 hover:text-white transition cursor-pointer"
+            className="p-2 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-[#9ca3af] hover:text-white transition cursor-pointer"
           >
             {soundMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
           </button>
