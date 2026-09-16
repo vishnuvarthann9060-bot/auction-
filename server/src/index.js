@@ -209,6 +209,6 @@ setInterval(() => {
 }, 10 * 60 * 1000);
 
 const PORT = process.env.PORT || 4000;
-httpServer.listen(PORT, () => {
-  console.log(`⚡ IPL Auction Server running on port ${PORT}`);
+httpServer.listen(PORT, "0.0.0.0", () => {
+  console.log(`⚡ IPL Auction Server running on 0.0.0.0:${PORT}`);
 });
