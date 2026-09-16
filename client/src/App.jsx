@@ -9,6 +9,7 @@ import { HostControls } from "./components/HostControls";
 import { SquadModal } from "./components/SquadModal";
 import { SoldCelebration } from "./components/SoldCelebration";
 import { CustomPlayerModal } from "./components/CustomPlayerModal";
+import { TournamentSimulatorModal } from "./components/TournamentSimulatorModal";
 import { LiveChat } from "./components/LiveChat";
 import { TEAMS_DATA } from "./data/teams";
 import { Trophy, CheckCircle, AlertTriangle } from "lucide-react";
@@ -20,6 +21,7 @@ function AuctionApp() {
   const [squadModalOpen, setSquadModalOpen] = useState(false);
   const [selectedSquadTeamId, setSelectedSquadTeamId] = useState("csk");
   const [customPlayerModalOpen, setCustomPlayerModalOpen] = useState(false);
+  const [tournamentModalOpen, setTournamentModalOpen] = useState(false);
 
   // Dynamic stadium arena glow based on active leading bidder
   const activeBidderTeamId = roomState?.currentAuction?.highestBidderTeamId;
@@ -64,7 +66,10 @@ function AuctionApp() {
       </div>
 
       {/* Top Navbar */}
-      <Navbar onOpenSquads={() => handleOpenSquad()} />
+      <Navbar 
+        onOpenSquads={() => handleOpenSquad()} 
+        onOpenTournament={() => setTournamentModalOpen(true)} 
+      />
 
       {/* Floating Notifications */}
       <div className="fixed top-16 right-4 z-50 flex flex-col gap-2 pointer-events-none">
@@ -102,26 +107,34 @@ function AuctionApp() {
         ) : roomState.status === "ENDED" ? (
           /* AUCTION COMPLETE RECAP */
           <div className="glass-panel p-6 sm:p-12 rounded-3xl text-center max-w-3xl mx-auto my-6 sm:my-10 space-y-5 border border-[#27272a] bg-[#121212]">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-tr from-[#6366f1] to-[#8b5cf6] text-white flex items-center justify-center mx-auto shadow-2xl shadow-[#6366f1]/30">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-tr from-amber-400 to-yellow-300 text-black flex items-center justify-center mx-auto shadow-2xl shadow-amber-500/30">
               <Trophy className="w-8 h-8 sm:w-10 sm:h-10" />
             </div>
 
             <div>
-              <span className="text-[10px] uppercase tracking-[0.1em] font-semibold text-[#818cf8] bg-[#6366f1]/15 px-3 py-1 rounded-full border border-[#6366f1]/30">
-                Tournament Complete
+              <span className="text-[10px] uppercase tracking-[0.1em] font-semibold text-amber-400 bg-amber-500/15 px-3 py-1 rounded-full border border-amber-500/30">
+                Auction Concluded
               </span>
-              <h2 className="text-2xl sm:text-5xl font-heading font-bold text-white mt-3 tracking-[-0.03em]">
-                IPL Mega Auction Concluded!
+              <h2 className="text-2xl sm:text-5xl font-heading font-black text-white mt-3 tracking-[-0.03em]">
+                IPL Mega Auction Complete!
               </h2>
               <p className="text-xs sm:text-sm text-[#9ca3af] mt-2 max-w-lg mx-auto leading-relaxed">
-                All players have gone under the hammer! All 10 franchises have assembled their official rosters.
+                All players have gone under the hammer! All 10 franchises have assembled their official rosters. Ready to see who built the champion team?
               </p>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={() => setTournamentModalOpen(true)}
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-heading font-black text-sm tracking-tight shadow-xl shadow-amber-500/25 transition cursor-pointer flex items-center gap-2"
+              >
+                <Trophy className="w-4 h-4 text-black" />
+                <span>Simulate IPL Playoffs & Crown Champion</span>
+              </button>
+
               <button
                 onClick={() => handleOpenSquad()}
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-bold text-sm tracking-tight shadow-lg shadow-[#6366f1]/25 transition cursor-pointer"
+                className="px-6 py-3 rounded-xl bg-[#1e1e1e] hover:bg-[#27272a] text-white font-heading font-bold text-sm tracking-tight border border-[#27272a] transition cursor-pointer"
               >
                 Inspect All Franchise Squads
               </button>
@@ -132,7 +145,10 @@ function AuctionApp() {
         ) : (
           /* ACTIVE AUCTION ARENA */
           <div className="space-y-3 sm:space-y-4">
-            <HostControls onOpenCustomPlayer={() => setCustomPlayerModalOpen(true)} />
+            <HostControls 
+              onOpenCustomPlayer={() => setCustomPlayerModalOpen(true)} 
+              onOpenTournament={() => setTournamentModalOpen(true)}
+            />
             <AuctionStage />
             <TeamsOverview onSelectTeamDetail={handleOpenSquad} />
           </div>
@@ -140,6 +156,11 @@ function AuctionApp() {
       </main>
 
       {/* Modals & Full-Screen Overlays */}
+      <TournamentSimulatorModal
+        isOpen={tournamentModalOpen}
+        onClose={() => setTournamentModalOpen(false)}
+      />
+
       <SquadModal
         isOpen={squadModalOpen}
         onClose={() => setSquadModalOpen(false)}

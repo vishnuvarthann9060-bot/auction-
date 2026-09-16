@@ -2,10 +2,10 @@ import React from "react";
 import { useSocket } from "../context/SocketContext";
 import { 
   Pause, Play, FastForward, Gavel, XCircle, 
-  ShieldAlert, PlusCircle, Sparkles 
+  ShieldAlert, PlusCircle, Sparkles, Trophy 
 } from "lucide-react";
 
-export function HostControls({ onOpenCustomPlayer }) {
+export function HostControls({ onOpenCustomPlayer, onOpenTournament }) {
   const { 
     isHost, 
     roomState, 
@@ -81,6 +81,15 @@ export function HostControls({ onOpenCustomPlayer }) {
         >
           <PlusCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
           <span>Inject Player</span>
+        </button>
+
+        {/* Simulate IPL Tournament */}
+        <button
+          onClick={onOpenTournament}
+          className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 transition cursor-pointer"
+        >
+          <Trophy className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" />
+          <span>Simulate IPL</span>
         </button>
       </div>
     </div>

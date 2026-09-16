@@ -2,6 +2,8 @@ import React from "react";
 import { useSocket } from "../context/SocketContext";
 import { formatCurrency } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
+import { SmartPurseAdvisor } from "./SmartPurseAdvisor";
+import { analyzeSquad } from "../utils/squadAdvisor";
 import { Gavel, AlertCircle, Shield, CheckCircle, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -65,6 +67,13 @@ export function BiddingControls() {
         </div>
       </div>
 
+      {/* Smart Purse & Squad Advisor HUD */}
+      <SmartPurseAdvisor 
+        myTeam={myTeam} 
+        currentPlayer={player} 
+        rules={roomState.rules} 
+      />
+
       {/* Warnings if quota reached */}
       {isOverseasMaxed && (
         <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs sm:text-sm flex items-center gap-2">
@@ -124,6 +133,9 @@ export function BiddingControls() {
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {bidOptions.map((amount, idx) => {
             const isAffordable = myTeam.purse >= amount;
+            const squadAnalysis = analyzeSquad(myTeam, player, roomState?.rules);
+            const isRisky = isAffordable && squadAnalysis && amount > squadAnalysis.maxSafeBid;
+
             const disabled = 
               isAuctionPaused || 
               isHoldingHighestBid || 
@@ -155,9 +167,11 @@ export function BiddingControls() {
                 <div className="text-base sm:text-2xl font-teko font-bold tracking-wide mt-0.5 truncate max-w-full">
                   {formatCurrency(amount)}
                 </div>
-                {!isAffordable && (
+                {!isAffordable ? (
                   <span className="text-[9px] text-red-400 font-semibold">Purse Limit</span>
-                )}
+                ) : isRisky ? (
+                  <span className="text-[9px] text-amber-300 font-semibold" title="Leaves less than ₹20L per remaining slot">Reserve Alert</span>
+                ) : null}
               </motion.button>
             );
           })}

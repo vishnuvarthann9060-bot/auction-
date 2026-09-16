@@ -4,7 +4,7 @@ import { formatCurrency } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
 import { Volume2, VolumeX, Copy, Check, Users, Shield, Trophy, Share2, Sparkles } from "lucide-react";
 
-export function Navbar({ onOpenSquads }) {
+export function Navbar({ onOpenSquads, onOpenTournament }) {
   const { roomState, myTeam, isHost, soundMuted, toggleSound, connected } = useSocket();
   const [copiedLink, setCopiedLink] = useState(false);
 
@@ -104,6 +104,18 @@ export function Navbar({ onOpenSquads }) {
             <span className="text-xs sm:text-sm text-[#9ca3af] italic hidden md:block">Spectator</span>
           )}
 
+          {/* Tournament Simulator Button */}
+          {roomState && (
+            <button
+              onClick={onOpenTournament}
+              title="Simulate IPL Tournament & Playoffs"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/35 text-amber-300 text-xs sm:text-sm font-semibold transition cursor-pointer"
+            >
+              <Trophy className="w-4 h-4 text-amber-400" />
+              <span className="hidden md:inline">Simulate IPL</span>
+            </button>
+          )}
+
           {/* Squad Viewer Button */}
           {roomState && (
             <button
@@ -111,7 +123,7 @@ export function Navbar({ onOpenSquads }) {
               title="Inspect Squad Rosters"
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-[#f3f4f6] text-xs sm:text-sm font-semibold transition cursor-pointer"
             >
-              <Trophy className="w-4 h-4 text-amber-400" />
+              <Users className="w-4 h-4 text-[#818cf8]" />
               <span className="hidden sm:inline">Rosters</span>
             </button>
           )}
