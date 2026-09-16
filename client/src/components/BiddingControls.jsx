@@ -80,7 +80,7 @@ export function BiddingControls() {
         </div>
       )}
 
-      {isHoldingHighestBid && (
+      {isHoldingHighestBid ? (
         <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-bold flex items-center justify-between">
           <span className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 shrink-0" />
@@ -88,7 +88,15 @@ export function BiddingControls() {
           </span>
           <span className="font-mono font-bold text-sm sm:text-base">{formatCurrency(auction.currentBid)}</span>
         </div>
-      )}
+      ) : auction.highestBidderTeamId && auction.bidHistory?.some(b => b.teamShortName === myTeam.shortName) ? (
+        <div className="p-3 rounded-xl bg-red-500/15 border border-red-500/40 text-red-400 text-xs sm:text-sm font-bold flex items-center justify-between animate-pulse">
+          <span className="flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+            Outbid! Counter-bid now to stay in the race!
+          </span>
+          <span className="text-[10px] uppercase font-mono bg-red-500/20 px-2 py-0.5 rounded">Clutch</span>
+        </div>
+      ) : null}
 
       {/* Reaction Cheer Bar */}
       <div className="flex items-center justify-between gap-2 p-2 sm:p-2.5 rounded-2xl bg-[#050505] border border-[#27272a]">
@@ -112,7 +120,7 @@ export function BiddingControls() {
       <div className="space-y-3">
         <div className="text-xs font-bold uppercase tracking-[0.08em] text-[#9ca3af] flex items-center justify-between">
           <span className="flex items-center gap-1.5">
-            <Gavel className="w-4 h-4 text-[#818cf8]" /> Standard Bids
+            <Gavel className="w-4 h-4 text-amber-400" /> Standard Bids
           </span>
           <span className="text-[#71717a] text-xs font-medium hidden xs:inline">Instant Raise</span>
         </div>
@@ -141,11 +149,11 @@ export function BiddingControls() {
                   disabled
                     ? "bg-[#121212]/50 border border-[#27272a] text-[#71717a] cursor-not-allowed"
                     : isPrimary
-                    ? "bg-gradient-to-r from-[#6366f1] via-[#7c3aed] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white shadow-lg shadow-[#6366f1]/25"
-                    : "bg-[#1e1e1e] hover:bg-[#27272a] border border-[#27272a] text-white"
+                    ? "bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black shadow-lg shadow-amber-500/25 border border-amber-300 font-extrabold"
+                    : "bg-[#18181b] hover:bg-[#27272a] border border-[#3f3f46] hover:border-amber-500/50 text-white"
                 }`}
               >
-                <div className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider opacity-85 text-center leading-tight">
+                <div className={`text-[9px] sm:text-[10px] uppercase font-bold tracking-wider opacity-85 text-center leading-tight ${isPrimary ? "text-amber-950 font-black" : "text-[#9ca3af]"}`}>
                   {idx === 0 ? "Next Bid" : idx === 1 ? "Jump (+2x)" : "Aggressive (+4x)"}
                 </div>
                 <div className="text-base sm:text-2xl font-teko font-bold tracking-wide mt-0.5 truncate max-w-full">

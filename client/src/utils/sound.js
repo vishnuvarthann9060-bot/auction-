@@ -154,6 +154,79 @@ class SoundEngine {
     osc.stop(t + 0.25);
   }
 
+  // Sniper bid alert: high-frequency cyber laser / riser
+  playSniper() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const t = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(300, t);
+    osc.frequency.exponentialRampToValueAtTime(1200, t + 0.15);
+
+    gain.gain.setValueAtTime(0.3, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.22);
+  }
+
+  // Bidding War rapid alert: dual high rising tones
+  playBiddingWar() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const t = this.ctx.currentTime;
+    [600, 750, 900].forEach((freq, idx) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(freq, t + idx * 0.05);
+
+      gain.gain.setValueAtTime(0.25, t + idx * 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.05 + 0.12);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(t + idx * 0.05);
+      osc.stop(t + idx * 0.05 + 0.12);
+    });
+  }
+
+  // Deep heartbeat thud: clutch tension below 5s
+  playHeartbeat() {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const t = this.ctx.currentTime;
+    // Double beat: lub-dub
+    [0, 0.12].forEach((offset, idx) => {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = "sine";
+      const startFreq = idx === 0 ? 85 : 70;
+      osc.frequency.setValueAtTime(startFreq, t + offset);
+      osc.frequency.exponentialRampToValueAtTime(35, t + offset + 0.1);
+
+      gain.gain.setValueAtTime(idx === 0 ? 0.45 : 0.35, t + offset);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + offset + 0.1);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(t + offset);
+      osc.stop(t + offset + 0.1);
+    });
+  }
+
   // SOLD Fanfare: triumphant horn progression
   playSoldFanfare() {
     if (!this.enabled) return;

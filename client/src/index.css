@@ -143,3 +143,65 @@
   animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
 }
 
+/* Ultra-Luxury Gold Gradient & Shimmer */
+@keyframes gold-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-shimmer-text {
+  background: linear-gradient(90deg, #FDE68A 0%, #FFFFFF 25%, #F59E0B 50%, #FDE68A 75%, #D97706 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-shimmer 3.5s linear infinite;
+}
+
+.luxury-border-gold {
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 0 20px -5px rgba(245, 158, 11, 0.15);
+}
+
+.luxury-border-gold:hover {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 25px -3px rgba(245, 158, 11, 0.3);
+}
+
+/* Sniper Alert Animation */
+@keyframes sniper-alert {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.6), inset 0 0 15px rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.9);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.9), inset 0 0 30px rgba(245, 158, 11, 0.4);
+    border-color: rgba(245, 158, 11, 1);
+  }
+}
+
+.animate-sniper-alert {
+  animation: sniper-alert 0.7s ease-in-out infinite;
+}
+
+/* Bidding War Banner Animation */
+@keyframes war-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 28px rgba(239, 68, 68, 0.85);
+  }
+}
+
+.animate-war-pulse {
+  animation: war-pulse 1s ease-in-out infinite;
+}
+

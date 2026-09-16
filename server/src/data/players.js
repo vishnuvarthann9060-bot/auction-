@@ -10,7 +10,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 1",
     stats: { matches: 252, runs: 8004, avg: 38.7, sr: 131.9, hs: "113*" },
     rating: 98,
-    image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p2",
@@ -22,7 +22,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 1",
     stats: { matches: 257, runs: 6628, avg: 29.7, sr: 131.1, hs: "109*" },
     rating: 96,
-    image: "https://images.unsplash.com/photo-1531415074868-036b1c57e329?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p3",
@@ -34,7 +34,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 1",
     stats: { matches: 133, wickets: 165, econ: 7.30, avg: 22.5, bb: "5/10" },
     rating: 99,
-    image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p4",
@@ -46,7 +46,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 1",
     stats: { matches: 58, wickets: 63, runs: 515, sr: 147.1, bb: "4/34" },
     rating: 95,
-    image: "https://images.unsplash.com/photo-1508802288454-055322ad1385?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p5",
@@ -58,7 +58,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 1",
     stats: { matches: 25, runs: 772, avg: 38.6, sr: 185.6, hs: "102" },
     rating: 96,
-    image: "https://images.unsplash.com/photo-1517649763962-0c623266ddc0?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p6",
@@ -70,7 +70,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 1",
     stats: { matches: 111, runs: 3284, avg: 35.3, sr: 148.9, catches: 75 },
     rating: 95,
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p7",
@@ -82,7 +82,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 1",
     stats: { matches: 35, runs: 993, avg: 38.2, sr: 168.3, hs: "104*" },
     rating: 96,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p8",
@@ -94,7 +94,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 1",
     stats: { matches: 41, wickets: 51, econ: 8.52, avg: 24.1, bb: "4/15" },
     rating: 94,
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
 
   // --- MARQUEE SET 2 ---
@@ -108,7 +108,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 2",
     stats: { matches: 264, runs: 5243, avg: 39.1, sr: 137.5, dismissals: 190 },
     rating: 97,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p10",
@@ -120,7 +120,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 2",
     stats: { matches: 137, runs: 2525, wickets: 64, sr: 145.9, bb: "3/17" },
     rating: 94,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p11",
@@ -132,7 +132,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 2",
     stats: { matches: 150, runs: 3594, avg: 32.1, sr: 145.3, hs: "103*" },
     rating: 97,
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p12",
@@ -144,7 +144,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 2",
     stats: { matches: 121, wickets: 149, econ: 6.82, avg: 21.8, bb: "4/24" },
     rating: 98,
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p13",
@@ -156,7 +156,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 2",
     stats: { matches: 177, wickets: 180, runs: 1534, sr: 165.8, bb: "5/19" },
     rating: 96,
-    image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p14",
@@ -168,7 +168,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 2",
     stats: { matches: 127, runs: 2484, wickets: 115, sr: 174.9, bb: "5/15" },
     rating: 96,
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p15",
@@ -180,7 +180,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 2",
     stats: { matches: 103, runs: 3216, avg: 37.8, sr: 135.7, hs: "129" },
     rating: 94,
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p16",
@@ -192,7 +192,7 @@ export const DEFAULT_PLAYERS = [
     set: "Marquee Set 2",
     stats: { matches: 80, wickets: 117, econ: 8.42, avg: 21.6, bb: "4/21" },
     rating: 93,
-    image: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
 
   // --- BATSMEN SET 1 ---
@@ -206,7 +206,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 1",
     stats: { matches: 167, runs: 4419, avg: 30.7, sr: 139.1, hs: "119" },
     rating: 93,
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p18",
@@ -218,7 +218,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 1",
     stats: { matches: 52, runs: 1607, avg: 32.8, sr: 150.6, hs: "124" },
     rating: 94,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p19",
@@ -230,7 +230,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 1",
     stats: { matches: 132, runs: 4683, avg: 45.5, sr: 134.6, hs: "132*" },
     rating: 93,
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p20",
@@ -242,7 +242,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 1",
     stats: { matches: 45, runs: 893, avg: 30.8, sr: 143.3, hs: "67*" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p21",
@@ -254,7 +254,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 1",
     stats: { matches: 21, runs: 653, avg: 36.3, sr: 175.5, hs: "89*" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p22",
@@ -266,7 +266,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 1",
     stats: { matches: 76, runs: 1769, avg: 29.5, sr: 162.4, hs: "77" },
     rating: 93,
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p23",
@@ -278,7 +278,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 1",
     stats: { matches: 63, runs: 1377, sr: 155.6, wickets: 9, hs: "75" },
     rating: 90,
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p24",
@@ -290,7 +290,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 1",
     stats: { matches: 66, runs: 2380, avg: 39.0, sr: 136.9, hs: "108*" },
     rating: 93,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
 
   // --- FAST BOWLERS SET 1 ---
@@ -304,7 +304,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 1",
     stats: { matches: 110, wickets: 127, econ: 8.44, avg: 26.8, bb: "4/11" },
     rating: 94,
-    image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p26",
@@ -316,7 +316,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 1",
     stats: { matches: 65, wickets: 76, econ: 8.74, avg: 27.0, bb: "5/32" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p27",
@@ -328,7 +328,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 1",
     stats: { matches: 104, wickets: 121, econ: 8.29, avg: 26.5, bb: "4/18" },
     rating: 93,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p28",
@@ -340,7 +340,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 1",
     stats: { matches: 46, wickets: 60, econ: 8.96, avg: 25.8, bb: "3/33" },
     rating: 90,
-    image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p29",
@@ -352,7 +352,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 1",
     stats: { matches: 20, wickets: 34, econ: 7.88, avg: 17.5, bb: "4/28" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p30",
@@ -364,7 +364,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 1",
     stats: { matches: 105, wickets: 135, econ: 8.68, avg: 23.4, bb: "5/27" },
     rating: 90,
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p31",
@@ -376,7 +376,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 1",
     stats: { matches: 27, wickets: 35, econ: 8.06, avg: 23.1, bb: "4/25" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p32",
@@ -388,7 +388,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 1",
     stats: { matches: 4, wickets: 7, econ: 6.99, avg: 12.1, speed: "156.7 kmh" },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
 
   // --- ALL-ROUNDERS SET 1 ---
@@ -402,7 +402,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 1",
     stats: { matches: 240, runs: 2959, wickets: 160, econ: 7.62, catches: 105 },
     rating: 95,
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p34",
@@ -414,7 +414,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 1",
     stats: { matches: 134, runs: 2771, wickets: 37, sr: 156.7, hs: "95" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p35",
@@ -426,7 +426,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 1",
     stats: { matches: 150, runs: 1653, wickets: 123, econ: 7.24, bb: "4/21" },
     rating: 93,
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p36",
@@ -438,7 +438,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 1",
     stats: { matches: 59, runs: 883, wickets: 58, sr: 142.6, bb: "4/11" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p37",
@@ -450,7 +450,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 1",
     stats: { matches: 96, runs: 1866, wickets: 43, sr: 142.1, hs: "124*" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p38",
@@ -462,7 +462,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 1",
     stats: { matches: 39, runs: 939, wickets: 11, sr: 162.5, hs: "94" },
     rating: 90,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p39",
@@ -474,7 +474,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 1",
     stats: { matches: 65, runs: 1502, avg: 29.5, sr: 158.4, hs: "95*" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p40",
@@ -486,7 +486,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 1",
     stats: { matches: 29, runs: 707, wickets: 16, sr: 153.7, hs: "100*" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
 
   // --- SPINNERS SET 1 ---
@@ -500,7 +500,7 @@ export const DEFAULT_PLAYERS = [
     set: "Spinners 1",
     stats: { matches: 160, wickets: 205, econ: 7.84, avg: 22.4, bb: "5/40" },
     rating: 94,
-    image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p42",
@@ -512,7 +512,7 @@ export const DEFAULT_PLAYERS = [
     set: "Spinners 1",
     stats: { matches: 84, wickets: 87, econ: 8.08, avg: 26.3, bb: "4/14" },
     rating: 94,
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p43",
@@ -524,7 +524,7 @@ export const DEFAULT_PLAYERS = [
     set: "Spinners 1",
     stats: { matches: 71, wickets: 83, econ: 7.56, avg: 25.1, bb: "5/20" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p44",
@@ -536,7 +536,7 @@ export const DEFAULT_PLAYERS = [
     set: "Spinners 1",
     stats: { matches: 66, wickets: 63, econ: 7.85, avg: 28.5, bb: "3/24" },
     rating: 90,
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p45",
@@ -548,7 +548,7 @@ export const DEFAULT_PLAYERS = [
     set: "Spinners 1",
     stats: { matches: 26, wickets: 35, econ: 8.13, avg: 21.4, bb: "5/18" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p46",
@@ -560,7 +560,7 @@ export const DEFAULT_PLAYERS = [
     set: "Spinners 1",
     stats: { matches: 27, wickets: 25, econ: 7.66, avg: 31.9, bb: "4/33" },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p47",
@@ -572,7 +572,7 @@ export const DEFAULT_PLAYERS = [
     set: "Spinners 1",
     stats: { matches: 23, wickets: 24, econ: 8.04, avg: 27.6, bb: "3/37" },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p48",
@@ -584,7 +584,7 @@ export const DEFAULT_PLAYERS = [
     set: "Spinners 1",
     stats: { matches: 79, wickets: 75, econ: 7.65, avg: 28.1, bb: "4/27" },
     rating: 88,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
 
   // --- BATSMEN SET 2 ---
@@ -598,7 +598,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 2",
     stats: { matches: 145, runs: 4571, avg: 35.9, sr: 136.4, hs: "96" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p50",
@@ -610,7 +610,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 2",
     stats: { matches: 184, runs: 6565, avg: 40.5, sr: 139.8, hs: "126" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p51",
@@ -622,7 +622,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 2",
     stats: { matches: 25, runs: 1034, avg: 47.0, sr: 139.2, hs: "103" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p52",
@@ -634,7 +634,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 2",
     stats: { matches: 115, runs: 3127, avg: 32.2, sr: 127.5, hs: "96" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p53",
@@ -646,7 +646,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 2",
     stats: { matches: 38, runs: 1156, avg: 39.8, sr: 146.3, hs: "84*" },
     rating: 92,
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p54",
@@ -658,7 +658,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 2",
     stats: { matches: 27, runs: 799, avg: 34.7, sr: 158.8, hs: "112*" },
     rating: 90,
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p55",
@@ -670,7 +670,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 2",
     stats: { matches: 9, runs: 330, avg: 36.7, sr: 234.0, hs: "84" },
     rating: 93,
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p56",
@@ -682,7 +682,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 2",
     stats: { matches: 15, runs: 303, wickets: 3, sr: 142.9, hs: "76*" },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
 
   // --- FAST BOWLERS SET 2 ---
@@ -696,7 +696,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 2",
     stats: { matches: 93, wickets: 93, econ: 8.65, avg: 30.3, bb: "4/21" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p58",
@@ -708,7 +708,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 2",
     stats: { matches: 176, wickets: 181, econ: 7.56, avg: 27.2, bb: "5/19" },
     rating: 90,
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p59",
@@ -720,7 +720,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 2",
     stats: { matches: 63, wickets: 75, econ: 8.84, avg: 26.5, bb: "4/24" },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p60",
@@ -732,7 +732,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 2",
     stats: { matches: 45, wickets: 46, econ: 8.85, avg: 31.7, bb: "4/28" },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p61",
@@ -744,7 +744,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 2",
     stats: { matches: 81, wickets: 77, econ: 7.98, avg: 28.9, bb: "4/13" },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p62",
@@ -756,7 +756,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 2",
     stats: { matches: 10, wickets: 13, econ: 10.17, avg: 26.2, bb: "4/34" },
     rating: 88,
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p63",
@@ -768,7 +768,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 2",
     stats: { matches: 36, wickets: 42, econ: 9.62, avg: 28.5, bb: "4/27" },
     rating: 87,
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p64",
@@ -780,7 +780,7 @@ export const DEFAULT_PLAYERS = [
     set: "Fast Bowlers 2",
     stats: { matches: 127, wickets: 137, econ: 7.92, avg: 27.5, bb: "5/18" },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
 
   // --- WICKETKEEPERS & ALL-ROUNDERS SET 2 ---
@@ -794,7 +794,7 @@ export const DEFAULT_PLAYERS = [
     set: "Keepers 2",
     stats: { matches: 105, runs: 2644, avg: 28.4, sr: 135.8, hs: "99" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p66",
@@ -806,7 +806,7 @@ export const DEFAULT_PLAYERS = [
     set: "Keepers 2",
     stats: { matches: 40, runs: 730, avg: 22.8, sr: 151.1, hs: "49*" },
     rating: 88,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p67",
@@ -818,7 +818,7 @@ export const DEFAULT_PLAYERS = [
     set: "Keepers 2",
     stats: { matches: 50, runs: 1589, avg: 34.5, sr: 144.3, hs: "114" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p68",
@@ -830,7 +830,7 @@ export const DEFAULT_PLAYERS = [
     set: "Keepers 2",
     stats: { matches: 107, runs: 3157, avg: 31.3, sr: 134.2, hs: "140*" },
     rating: 91,
-    image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p69",
@@ -842,7 +842,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 2",
     stats: { matches: 67, runs: 1162, wickets: 35, sr: 141.9, econ: 7.15 },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p70",
@@ -854,7 +854,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 2",
     stats: { matches: 60, wickets: 37, runs: 378, econ: 7.54, sr: 116.3 },
     rating: 88,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p71",
@@ -866,7 +866,7 @@ export const DEFAULT_PLAYERS = [
     set: "Batters 2",
     stats: { matches: 38, runs: 659, avg: 31.4, sr: 170.3, hs: "46" },
     rating: 90,
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p72",
@@ -878,7 +878,7 @@ export const DEFAULT_PLAYERS = [
     set: "All-Rounders 2",
     stats: { matches: 127, runs: 1647, wickets: 76, sr: 133.5, econ: 7.37 },
     rating: 88,
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
 
   // --- EMERGING & UNCAPPED STARS ---
@@ -892,7 +892,7 @@ export const DEFAULT_PLAYERS = [
     set: "Emerging Talents",
     stats: { matches: 24, runs: 423, avg: 38.5, sr: 161.5, hs: "68*" },
     rating: 88,
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p74",
@@ -904,7 +904,7 @@ export const DEFAULT_PLAYERS = [
     set: "Emerging Talents",
     stats: { matches: 11, runs: 189, avg: 27.0, sr: 167.3, hs: "61" },
     rating: 87,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p75",
@@ -916,7 +916,7 @@ export const DEFAULT_PLAYERS = [
     set: "Emerging Talents",
     stats: { matches: 21, wickets: 25, econ: 9.05, avg: 23.4, bb: "3/24" },
     rating: 89,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p76",
@@ -928,7 +928,7 @@ export const DEFAULT_PLAYERS = [
     set: "Emerging Talents",
     stats: { matches: 18, runs: 360, avg: 30.0, sr: 153.2, hs: "65" },
     rating: 86,
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p77",
@@ -940,7 +940,7 @@ export const DEFAULT_PLAYERS = [
     set: "Emerging Talents",
     stats: { matches: 13, wickets: 12, econ: 8.52, avg: 31.0, bb: "3/30" },
     rating: 85,
-    image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p78",
@@ -952,7 +952,7 @@ export const DEFAULT_PLAYERS = [
     set: "Emerging Talents",
     stats: { matches: 15, wickets: 17, econ: 9.20, avg: 26.2, bb: "3/27" },
     rating: 85,
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p79",
@@ -964,7 +964,7 @@ export const DEFAULT_PLAYERS = [
     set: "Emerging Talents",
     stats: { matches: 10, runs: 163, avg: 23.3, sr: 155.2, hs: "54" },
     rating: 86,
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    image: null
   },
   {
     id: "p80",
@@ -976,6 +976,6 @@ export const DEFAULT_PLAYERS = [
     set: "Emerging Talents",
     stats: { matches: 40, runs: 553, avg: 21.3, sr: 145.4, hs: "58" },
     rating: 87,
-    image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    image: null
   }
 ];

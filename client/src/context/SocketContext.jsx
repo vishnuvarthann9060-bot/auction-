@@ -65,7 +65,9 @@ export function SocketProvider({ children }) {
     });
 
     newSocket.on("timer_tick", ({ timer }) => {
-      if (timer <= 5 && timer > 0) {
+      if (timer <= 4 && timer > 0) {
+        sounds.playHeartbeat();
+      } else if (timer <= 8 && timer > 0) {
         sounds.playTick();
       }
     });
@@ -77,10 +79,10 @@ export function SocketProvider({ children }) {
     newSocket.on("player_sold", (soldData) => {
       sounds.playSoldFanfare();
       confetti({
-        particleCount: 120,
-        spread: 90,
-        origin: { y: 0.6 },
-        colors: [soldData.teamColor || '#F59E0B', '#FFFFFF', '#3B82F6', '#10B981']
+        particleCount: 160,
+        spread: 100,
+        origin: { y: 0.55 },
+        colors: [soldData.teamColor || '#F59E0B', '#FFD700', '#FDE68A', '#FFFFFF', '#6366F1']
       });
     });
 
@@ -118,8 +120,22 @@ export function SocketProvider({ children }) {
   useEffect(() => {
     if (!socket) return;
 
-    const handleNewBid = ({ bid, outbidTeamId }) => {
-      sounds.playBid();
+    let lastBidTime = 0;
+
+    const handleNewBid = ({ bid, outbidTeamId, timer }) => {
+      const now = Date.now();
+      const timeSinceLastBid = now - lastBidTime;
+      lastBidTime = now;
+
+      // Sound selection based on game context
+      if (timer !== undefined && timer <= 3) {
+        sounds.playSniper();
+      } else if (timeSinceLastBid < 2500 && timeSinceLastBid > 0) {
+        sounds.playBiddingWar();
+      } else {
+        sounds.playBid();
+      }
+
       const myTeam = roomState?.teams?.find(t => t.ownerId === socket.id);
       if (myTeam && outbidTeamId === myTeam.id) {
         sounds.playOutbid();

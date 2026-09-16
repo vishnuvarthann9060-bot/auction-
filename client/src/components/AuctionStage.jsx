@@ -3,9 +3,10 @@ import { useSocket } from "../context/SocketContext";
 import { formatCurrency, getRoleBadgeClass } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
 import { BiddingControls } from "./BiddingControls";
+import { PlayerPortrait } from "./PlayerPortrait";
 import { 
   Gavel, Clock, Flame, Shield, ArrowUpRight, 
-  Award, Globe, CheckCircle2, UserCheck, Zap 
+  Award, Globe, CheckCircle2, UserCheck, Zap, Crosshair 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -36,6 +37,12 @@ export function AuctionStage() {
     ? roomState.teams.find(t => t.id === auction.highestBidderTeamId)
     : null;
   const bidderMeta = highestBidderTeam ? TEAMS_DATA[highestBidderTeam.id] : null;
+
+  // Real-time excitement states
+  const recentBids = auction.bidHistory || [];
+  const distinctBidderTeams = new Set(recentBids.slice(0, 5).map(b => b.teamShortName));
+  const isBiddingWar = distinctBidderTeams.size >= 2 && recentBids.length >= 3;
+  const isSniperActive = recentBids.length > 0 && timer <= 3 && timer > 0;
 
   // Reusable Live Bid Activity Ticker
   const renderBidTicker = () => (
@@ -111,6 +118,58 @@ export function AuctionStage() {
         </div>
       </div>
 
+      {/* Dynamic Adrenaline Banner: Sniper or Bidding War */}
+      {isSniperActive ? (
+        <motion.div 
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-red-600/30 via-amber-600/30 to-red-600/30 border border-red-500/50 flex items-center justify-between animate-sniper-alert"
+        >
+          <div className="flex items-center gap-2.5">
+            <span className="p-1.5 rounded-lg bg-red-500/20 text-red-400">
+              <Crosshair className="w-5 h-5 animate-spin" style={{ animationDuration: '3s' }} />
+            </span>
+            <div>
+              <div className="font-heading font-extrabold text-sm sm:text-base text-red-400 tracking-wide flex items-center gap-2">
+                <span>⚡ SNIPER BID DETECTED</span>
+                <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-red-500/20 border border-red-500/40 font-mono">
+                  FINAL SECONDS
+                </span>
+              </div>
+              <div className="text-xs text-amber-200">
+                Clutch counter-bid landed with seconds left! Clock extended!
+              </div>
+            </div>
+          </div>
+          <div className="font-mono font-extrabold text-lg sm:text-2xl text-red-400 animate-pulse">
+            {timer}s
+          </div>
+        </motion.div>
+      ) : isBiddingWar ? (
+        <motion.div 
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="p-3 rounded-2xl bg-gradient-to-r from-amber-600/20 via-orange-600/25 to-red-600/20 border border-amber-500/40 flex items-center justify-between animate-war-pulse"
+        >
+          <div className="flex items-center gap-2.5">
+            <span className="p-1.5 rounded-lg bg-amber-500/20 text-amber-400">
+              <Flame className="w-5 h-5 animate-bounce" />
+            </span>
+            <div>
+              <div className="font-heading font-extrabold text-sm sm:text-base gold-gradient-text tracking-wide">
+                🔥 FIERCE BIDDING WAR!
+              </div>
+              <div className="text-xs text-[#9ca3af]">
+                Franchises locked in aggressive counter-bids for {player.name}!
+              </div>
+            </div>
+          </div>
+          <div className="text-xs uppercase font-bold text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+            {recentBids.length} Bids
+          </div>
+        </motion.div>
+      ) : null}
+
       {/* Main Center Stage Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-6 items-start">
         
@@ -146,20 +205,7 @@ export function AuctionStage() {
 
             {/* Player Media & Headline */}
             <div className="p-4 sm:p-6 flex flex-row items-center sm:items-end gap-4 sm:gap-6 relative">
-              <div className="relative w-28 h-36 sm:w-40 sm:h-52 md:w-44 md:h-56 rounded-2xl overflow-hidden shadow-2xl border border-[#27272a] bg-[#050505] shrink-0">
-                <img
-                  src={player.image}
-                  alt={player.name}
-                  className="w-full h-full object-cover object-top hover:scale-105 transition duration-500"
-                  onError={(e) => {
-                    e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute bottom-1.5 left-1 right-1 text-center text-[10px] sm:text-xs uppercase font-bold text-amber-400 tracking-wider truncate">
-                  {player.set}
-                </div>
-              </div>
+              <PlayerPortrait player={player} size="lg" />
 
               <div className="space-y-2 text-left flex-1 min-w-0">
                 <h2 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white tracking-[-0.03em] truncate">

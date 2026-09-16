@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSocket } from "../context/SocketContext";
 import { formatCurrency, getRoleBadgeClass } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
+import { PlayerPortrait } from "./PlayerPortrait";
 import { X, Shield, DollarSign, Users, Award, Globe, LayoutGrid, Radio } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -178,14 +179,7 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                         >
                           {p ? (
                             <>
-                              <img 
-                                src={p.image} 
-                                alt={p.name} 
-                                className="w-9 h-11 rounded-lg object-cover object-top border border-[#27272a] shrink-0" 
-                                onError={(e) => {
-                                  e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
-                                }}
-                              />
+                              <PlayerPortrait player={p} size="xs" />
                               <div className="min-w-0">
                                 <div className="text-[10px] font-semibold text-[#818cf8]">#{pos + 1} • {p.role}</div>
                                 <div className="text-xs font-heading font-bold text-white truncate">{p.name}</div>
@@ -222,14 +216,7 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                         >
                           {p ? (
                             <>
-                              <img 
-                                src={p.image} 
-                                alt={p.name} 
-                                className="w-8 h-10 sm:w-9 sm:h-11 rounded-lg object-cover object-top border border-[#27272a] shrink-0" 
-                                onError={(e) => {
-                                  e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
-                                }}
-                              />
+                              <PlayerPortrait player={p} size="xs" />
                               <div className="min-w-0">
                                 <div className="text-[9px] sm:text-[10px] font-semibold text-cyan-400 truncate">#{pos + 1} • {p.role}</div>
                                 <div className="text-[11px] sm:text-xs font-heading font-bold text-white truncate">{p.name}</div>
@@ -266,14 +253,7 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                         >
                           {p ? (
                             <>
-                              <img 
-                                src={p.image} 
-                                alt={p.name} 
-                                className="w-8 h-10 sm:w-9 sm:h-11 rounded-lg object-cover object-top border border-[#27272a] shrink-0" 
-                                onError={(e) => {
-                                  e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
-                                }}
-                              />
+                              <PlayerPortrait player={p} size="xs" />
                               <div className="min-w-0">
                                 <div className="text-[9px] sm:text-[10px] font-semibold text-rose-400 truncate">#{pos + 1} • {p.role}</div>
                                 <div className="text-[11px] sm:text-xs font-heading font-bold text-white truncate">{p.name}</div>
@@ -301,14 +281,7 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                       className="p-3 sm:p-4 rounded-2xl bg-[#121212] border border-[#27272a] flex items-center justify-between gap-3 hover:border-[#3f3f46] transition"
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        <img
-                          src={player.image}
-                          alt={player.name}
-                          className="w-12 h-14 sm:w-14 sm:h-16 rounded-xl object-cover object-top border border-[#27272a] shrink-0"
-                          onError={(e) => {
-                            e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
-                          }}
-                        />
+                        <PlayerPortrait player={player} size="sm" />
                         <div className="min-w-0">
                           <div className="text-sm sm:text-base font-heading font-bold text-white leading-tight truncate">{player.name}</div>
                           <div className="flex items-center gap-1.5 mt-1">
