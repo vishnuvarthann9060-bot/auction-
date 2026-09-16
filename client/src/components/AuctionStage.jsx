@@ -93,20 +93,34 @@ export function AuctionStage() {
   return (
     <div className="w-full space-y-4 sm:space-y-5">
       
-      {/* Set & Lot Progress Tracker */}
-      <div className="flex items-center justify-between text-xs sm:text-sm text-[#9ca3af] px-1">
+      {/* Set & Lot Progress Tracker (Fixed height, zero layout shift) */}
+      <div className="flex flex-wrap items-center justify-between gap-2.5 text-xs sm:text-sm text-[#9ca3af] px-1 min-h-[34px]">
         <div className="flex items-center gap-2">
           <span className="px-3 py-1 rounded-full bg-[#121212] border border-[#27272a] font-bold text-[#818cf8] uppercase tracking-[0.08em] text-xs">
             {player.set || "Marquee Set"}
           </span>
           <span className="font-medium text-xs sm:text-sm text-[#9ca3af]">
-            Player {roomState.currentPlayerIndex + 1} of {roomState.totalPlayersCount}
+            Lot {roomState.currentPlayerIndex + 1} of {roomState.totalPlayersCount}
           </span>
         </div>
+
         <div className="flex items-center gap-2">
+          {/* Subtle in-flow status badges (Never cause layout shift) */}
+          {isSniperActive ? (
+            <span className="px-2.5 py-1 rounded-full bg-red-500/15 border border-red-500/35 text-red-400 font-bold text-xs flex items-center gap-1.5">
+              <Crosshair className="w-3.5 h-3.5" />
+              <span>Sniper Bid</span>
+            </span>
+          ) : isBiddingWar ? (
+            <span className="px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/35 text-amber-400 font-bold text-xs flex items-center gap-1.5">
+              <Flame className="w-3.5 h-3.5" />
+              <span>Bidding War</span>
+            </span>
+          ) : null}
+
           <span className="text-xs uppercase tracking-[0.08em] text-[#71717a] font-semibold">Stage:</span>
           <span className={`font-heading font-bold uppercase tracking-[0.05em] text-xs sm:text-sm ${
-            auction.status === "GOING_TWICE" ? "text-red-400 animate-pulse" :
+            auction.status === "GOING_TWICE" ? "text-red-400" :
             auction.status === "GOING_ONCE" ? "text-amber-400" :
             auction.status === "SOLD" ? "text-emerald-400" : "text-[#818cf8]"
           }`}>
@@ -117,58 +131,6 @@ export function AuctionStage() {
           </span>
         </div>
       </div>
-
-      {/* Dynamic Adrenaline Banner: Sniper or Bidding War */}
-      {isSniperActive ? (
-        <motion.div 
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-red-600/30 via-amber-600/30 to-red-600/30 border border-red-500/50 flex items-center justify-between animate-sniper-alert"
-        >
-          <div className="flex items-center gap-2.5">
-            <span className="p-1.5 rounded-lg bg-red-500/20 text-red-400">
-              <Crosshair className="w-5 h-5 animate-spin" style={{ animationDuration: '3s' }} />
-            </span>
-            <div>
-              <div className="font-heading font-extrabold text-sm sm:text-base text-red-400 tracking-wide flex items-center gap-2">
-                <span>⚡ SNIPER BID DETECTED</span>
-                <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-red-500/20 border border-red-500/40 font-mono">
-                  FINAL SECONDS
-                </span>
-              </div>
-              <div className="text-xs text-amber-200">
-                Clutch counter-bid landed with seconds left! Clock extended!
-              </div>
-            </div>
-          </div>
-          <div className="font-mono font-extrabold text-lg sm:text-2xl text-red-400 animate-pulse">
-            {timer}s
-          </div>
-        </motion.div>
-      ) : isBiddingWar ? (
-        <motion.div 
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="p-3 rounded-2xl bg-gradient-to-r from-amber-600/20 via-orange-600/25 to-red-600/20 border border-amber-500/40 flex items-center justify-between animate-war-pulse"
-        >
-          <div className="flex items-center gap-2.5">
-            <span className="p-1.5 rounded-lg bg-amber-500/20 text-amber-400">
-              <Flame className="w-5 h-5 animate-bounce" />
-            </span>
-            <div>
-              <div className="font-heading font-extrabold text-sm sm:text-base gold-gradient-text tracking-wide">
-                🔥 FIERCE BIDDING WAR!
-              </div>
-              <div className="text-xs text-[#9ca3af]">
-                Franchises locked in aggressive counter-bids for {player.name}!
-              </div>
-            </div>
-          </div>
-          <div className="text-xs uppercase font-bold text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
-            {recentBids.length} Bids
-          </div>
-        </motion.div>
-      ) : null}
 
       {/* Main Center Stage Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-6 items-start">
@@ -334,7 +296,7 @@ export function AuctionStage() {
                     />
                   </svg>
                   <span className={`absolute font-heading font-extrabold text-xl sm:text-2xl ${
-                    isUrgent ? "text-red-400 animate-ping" : "text-white"
+                    isUrgent ? "text-red-400" : "text-white"
                   }`}>
                     {timer}
                   </span>
@@ -347,19 +309,15 @@ export function AuctionStage() {
                 </div>
               </div>
 
-              {/* Wooden Gavel Drop Icon with Dynamic Motion */}
-              <motion.div 
-                animate={isUrgent ? { rotate: [-20, 15, 0], scale: [1, 1.15, 1] } : {}}
-                transition={{ repeat: Infinity, duration: 1 }}
-                className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#6366f1]/10 border border-[#6366f1]/20 flex items-center justify-center text-[#818cf8] shadow-inner"
-              >
+              {/* Wooden Gavel Drop Icon */}
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#6366f1]/10 border border-[#6366f1]/20 flex items-center justify-center text-[#818cf8] shadow-inner">
                 <Gavel className="w-7 h-7 sm:w-8 sm:h-8 transform -rotate-45" />
-              </motion.div>
+              </div>
             </div>
 
             {/* Live Auctioneer Broadcast Voice Bubble */}
             <div className="my-3 sm:my-4 p-3 sm:p-4 rounded-2xl bg-[#050505] border border-[#27272a] flex items-center gap-2.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping shrink-0" />
+              <div className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
               <p className="text-xs sm:text-sm text-[#9ca3af] leading-relaxed">
                 <span className="text-[#818cf8] font-bold">Auctioneer: </span>
                 {currentBid === 0

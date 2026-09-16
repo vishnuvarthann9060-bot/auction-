@@ -30,30 +30,29 @@ export function LiveChat() {
 
   return (
     <>
-      {/* Floating Animated Reaction Bubbles across the screen */}
+      {/* Floating Animated Reaction Bubbles (Docked safely on right edge so they never distract or obstruct bidding) */}
       <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
         <AnimatePresence>
           {floatingReactions.map((r, i) => (
             <motion.div
               key={r.id}
+              style={{ right: `${1.25 + (i % 3) * 1.2}rem` }}
               initial={{ 
-                opacity: 1, 
-                y: "85vh", 
-                x: `${15 + (i * 12) % 70}vw`, 
-                scale: 0.8 
+                opacity: 0.9, 
+                y: "80vh", 
+                scale: 0.85 
               }}
               animate={{ 
                 opacity: 0, 
-                y: "20vh", 
-                scale: [0.8, 1.4, 1.2],
-                rotate: [-10, 15, -10]
+                y: "28vh", 
+                scale: 1.05
               }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 2.2, ease: "easeOut" }}
+              transition={{ duration: 2.0, ease: "easeOut" }}
               className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/90 border border-white/20 shadow-2xl backdrop-blur-md text-sm font-bold"
             >
-              <span className="text-2xl">{r.emoji}</span>
-              <span className="text-xs text-white">
+              <span className="text-xl">{r.emoji}</span>
+              <span className="text-xs text-white truncate max-w-[120px]">
                 {r.teamShortName ? `${r.teamShortName}: ${r.sender}` : r.sender}
               </span>
             </motion.div>

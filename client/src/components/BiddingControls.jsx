@@ -80,43 +80,39 @@ export function BiddingControls() {
         </div>
       )}
 
-      {isHoldingHighestBid ? (
-        <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-bold flex items-center justify-between">
-          <span className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 shrink-0" />
-            Winning Bidder
-          </span>
-          <span className="font-mono font-bold text-sm sm:text-base">{formatCurrency(auction.currentBid)}</span>
-        </div>
-      ) : auction.highestBidderTeamId && auction.bidHistory?.some(b => b.teamShortName === myTeam.shortName) ? (
-        <div className="p-3 rounded-xl bg-red-500/15 border border-red-500/40 text-red-400 text-xs sm:text-sm font-bold flex items-center justify-between animate-pulse">
-          <span className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
-            Outbid! Counter-bid now to stay in the race!
-          </span>
-          <span className="text-[10px] uppercase font-mono bg-red-500/20 px-2 py-0.5 rounded">Clutch</span>
-        </div>
-      ) : null}
-
-      {/* Reaction Cheer Bar */}
-      <div className="flex items-center justify-between gap-2 p-2 sm:p-2.5 rounded-2xl bg-[#050505] border border-[#27272a]">
-        <span className="text-xs font-bold text-[#9ca3af] uppercase tracking-[0.08em] pl-1.5 hidden sm:inline">
-          Cheer:
-        </span>
-        <div className="flex items-center gap-1 sm:gap-2 flex-1 justify-around sm:justify-start">
-          {["🏏", "🔥", "💛", "💙", "❤️", "💸", "👏"].map((emoji) => (
-            <button
-              key={emoji}
-              onClick={() => sendReaction(emoji)}
-              className="px-2.5 py-1.5 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-lg sm:text-xl hover:scale-125 active:scale-95 transition transform cursor-pointer"
-            >
-              {emoji}
-            </button>
-          ))}
-        </div>
+      {/* Persistent Bid Status Bar (Constant height, zero layout shift) */}
+      <div className={`min-h-[44px] flex items-center justify-between rounded-2xl px-3.5 py-2 border transition duration-300 text-xs sm:text-sm font-bold ${
+        isHoldingHighestBid
+          ? "bg-emerald-500/10 border-emerald-500/35 text-emerald-400"
+          : auction.highestBidderTeamId && auction.bidHistory?.some(b => b.teamShortName === myTeam.shortName)
+          ? "bg-red-500/10 border-red-500/35 text-red-400"
+          : "bg-[#0a0a0a] border-[#27272a] text-[#9ca3af]"
+      }`}>
+        {isHoldingHighestBid ? (
+          <div className="flex items-center justify-between w-full">
+            <span className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 shrink-0 text-emerald-400" />
+              <span>You Hold Leading Bid</span>
+            </span>
+            <span className="font-mono text-emerald-400 font-bold">{formatCurrency(auction.currentBid)}</span>
+          </div>
+        ) : auction.highestBidderTeamId && auction.bidHistory?.some(b => b.teamShortName === myTeam.shortName) ? (
+          <div className="flex items-center justify-between w-full">
+            <span className="flex items-center gap-2 text-red-400">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>Outbid! Counter-bid to lead</span>
+            </span>
+            <span className="text-[10px] uppercase font-mono bg-red-500/20 px-2 py-0.5 rounded text-red-300">Action</span>
+          </div>
+        ) : (
+          <div className="flex items-center justify-between w-full text-xs text-[#71717a]">
+            <span>Ready for your bid on {player.name}</span>
+            <span className="font-mono text-amber-400/80">{auction.currentBid > 0 ? `Current: ${formatCurrency(auction.currentBid)}` : `Base: ${formatCurrency(player.basePrice)}`}</span>
+          </div>
+        )}
       </div>
 
-      {/* Dynamic Bidding Buttons */}
+      {/* Dynamic Bidding Buttons (Rock-solid position) */}
       <div className="space-y-3">
         <div className="text-xs font-bold uppercase tracking-[0.08em] text-[#9ca3af] flex items-center justify-between">
           <span className="flex items-center gap-1.5">
@@ -142,10 +138,10 @@ export function BiddingControls() {
             return (
               <motion.button
                 key={amount}
-                whileTap={!disabled ? { scale: 0.97 } : {}}
+                whileTap={!disabled ? { scale: 0.98 } : {}}
                 onClick={() => placeBid(amount)}
                 disabled={disabled}
-                className={`py-3 sm:py-4 px-2.5 sm:px-3.5 rounded-2xl flex flex-col items-center justify-center font-bold transition shadow-lg relative overflow-hidden cursor-pointer ${
+                className={`py-3 sm:py-4 px-2.5 sm:px-3.5 rounded-2xl flex flex-col items-center justify-center font-bold transition duration-200 shadow-lg relative overflow-hidden cursor-pointer ${
                   disabled
                     ? "bg-[#121212]/50 border border-[#27272a] text-[#71717a] cursor-not-allowed"
                     : isPrimary
@@ -207,6 +203,24 @@ export function BiddingControls() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Reaction Cheer Bar (Docked at bottom of controls) */}
+      <div className="flex items-center justify-between gap-2 p-2 rounded-2xl bg-[#050505] border border-[#27272a]">
+        <span className="text-[11px] font-bold text-[#71717a] uppercase tracking-[0.08em] pl-1.5 hidden sm:inline">
+          Cheer:
+        </span>
+        <div className="flex items-center gap-1 sm:gap-2 flex-1 justify-around sm:justify-start">
+          {["🏏", "🔥", "💛", "💙", "❤️", "💸", "👏"].map((emoji) => (
+            <button
+              key={emoji}
+              onClick={() => sendReaction(emoji)}
+              className="px-2 py-1 rounded-lg bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-base sm:text-lg hover:scale-110 active:scale-95 transition transform cursor-pointer"
+            >
+              {emoji}
+            </button>
+          ))}
+        </div>
       </div>
 
     </div>
