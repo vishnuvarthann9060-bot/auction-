@@ -166,18 +166,24 @@ io.on("connection", (socket) => {
   });
 });
 
-// Serve static frontend in production
+// Global SEO headers for search engine crawlers
+app.use((req, res, next) => {
+  res.setHeader("X-Robots-Tag", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
+  next();
+});
+
 // Explicit SEO endpoints for Googlebot (Before static middleware)
 const clientDistPath = path.resolve(__dirname, "../../client/dist");
 
 app.get("/robots.txt", (req, res) => {
-  res.setHeader("Content-Type", "text/plain");
+  res.setHeader("Content-Type", "text/plain; charset=utf-8");
   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-  res.send(`User-agent: *\nAllow: /\nDisallow:\n\nUser-agent: Googlebot\nAllow: /\nDisallow:\n\nUser-agent: Googlebot-Mobile\nAllow: /\nDisallow:\n\nSitemap: https://ipl-auction-game-vvdr.onrender.com/sitemap.xml\n`);
+  res.setHeader("X-Robots-Tag", "all");
+  res.send(`User-agent: *\nAllow: /\n\nSitemap: https://ipl-auction-game-vvdr.onrender.com/sitemap.xml\n`);
 });
 
 app.get("/sitemap.xml", (req, res) => {
-  res.setHeader("Content-Type", "application/xml");
+  res.setHeader("Content-Type", "application/xml; charset=utf-8");
   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   res.sendFile(path.join(clientDistPath, "sitemap.xml"));
 });
