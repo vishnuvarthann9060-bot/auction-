@@ -60,7 +60,7 @@ export function CustomPlayerModal({ isOpen, onClose }) {
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="w-full max-w-lg glass-panel p-6 rounded-3xl border border-[#27272a] shadow-2xl relative z-10 bg-[#121212]"
+          className="w-full max-w-lg max-h-[92vh] overflow-y-auto glass-panel p-4 sm:p-6 rounded-3xl border border-[#27272a] shadow-2xl relative z-10 bg-[#121212]"
         >
           <div className="flex items-center justify-between pb-3 border-b border-[#27272a]">
             <div className="flex items-center gap-2">

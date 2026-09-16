@@ -96,29 +96,29 @@ function AuctionApp() {
       </div>
 
       {/* Main Content Area */}
-      <main className="flex-1 relative z-10 p-4 lg:p-6 max-w-7xl mx-auto w-full">
+      <main className="flex-1 relative z-10 px-3 sm:px-6 lg:px-8 py-3 sm:py-6 max-w-[1600px] mx-auto w-full">
         {!roomState || roomState.status === "LOBBY" ? (
           <Lobby onOpenCustomPlayer={() => setCustomPlayerModalOpen(true)} />
         ) : roomState.status === "ENDED" ? (
           /* AUCTION COMPLETE RECAP */
-          <div className="glass-panel p-8 sm:p-12 rounded-3xl text-center max-w-3xl mx-auto my-10 space-y-6 border border-[#27272a] bg-[#121212]">
-            <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-[#6366f1] to-[#8b5cf6] text-white flex items-center justify-center mx-auto shadow-2xl shadow-[#6366f1]/30">
-              <Trophy className="w-10 h-10" />
+          <div className="glass-panel p-6 sm:p-12 rounded-3xl text-center max-w-3xl mx-auto my-6 sm:my-10 space-y-5 border border-[#27272a] bg-[#121212]">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-tr from-[#6366f1] to-[#8b5cf6] text-white flex items-center justify-center mx-auto shadow-2xl shadow-[#6366f1]/30">
+              <Trophy className="w-8 h-8 sm:w-10 sm:h-10" />
             </div>
 
             <div>
               <span className="text-[10px] uppercase tracking-[0.1em] font-semibold text-[#818cf8] bg-[#6366f1]/15 px-3 py-1 rounded-full border border-[#6366f1]/30">
                 Tournament Complete
               </span>
-              <h2 className="text-3xl sm:text-5xl font-heading font-bold text-white mt-3 tracking-[-0.03em]">
+              <h2 className="text-2xl sm:text-5xl font-heading font-bold text-white mt-3 tracking-[-0.03em]">
                 IPL Mega Auction Concluded!
               </h2>
-              <p className="text-sm text-[#9ca3af] mt-2 max-w-lg mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#9ca3af] mt-2 max-w-lg mx-auto leading-relaxed">
                 All players have gone under the hammer! All 10 franchises have assembled their official rosters.
               </p>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-2">
               <button
                 onClick={() => handleOpenSquad()}
                 className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-bold text-sm tracking-tight shadow-lg shadow-[#6366f1]/25 transition cursor-pointer"
@@ -131,10 +131,9 @@ function AuctionApp() {
           </div>
         ) : (
           /* ACTIVE AUCTION ARENA */
-          <div className="space-y-5">
+          <div className="space-y-3 sm:space-y-4">
             <HostControls onOpenCustomPlayer={() => setCustomPlayerModalOpen(true)} />
             <AuctionStage />
-            <BiddingControls />
             <TeamsOverview onSelectTeamDetail={handleOpenSquad} />
           </div>
         )}

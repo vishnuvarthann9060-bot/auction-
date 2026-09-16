@@ -55,15 +55,15 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="w-full max-w-4xl max-h-[90vh] glass-panel rounded-3xl border border-[#27272a] shadow-2xl relative z-10 flex flex-col overflow-hidden bg-[#121212]"
+          className="w-full max-w-5xl xl:max-w-6xl max-h-[92vh] glass-panel rounded-3xl border border-[#27272a] shadow-2xl relative z-10 flex flex-col overflow-hidden bg-[#121212]"
         >
           {/* Top Bar with Franchise Tabs */}
-          <div className="p-4 sm:p-6 pb-3 border-b border-[#27272a] flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">{meta?.logoEmoji || "🏏"}</span>
+          <div className="p-3.5 sm:p-6 pb-2.5 sm:pb-3 border-b border-[#27272a] flex items-center justify-between">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <span className="text-2xl sm:text-3xl">{meta?.logoEmoji || "🏏"}</span>
               <div>
-                <h3 className="text-xl font-heading font-bold text-white tracking-[-0.03em]">{currentTeam.name}</h3>
-                <p className="text-xs text-[#9ca3af]">
+                <h3 className="text-lg sm:text-xl font-heading font-bold text-white tracking-[-0.03em]">{currentTeam.name}</h3>
+                <p className="text-[11px] sm:text-xs text-[#9ca3af]">
                   Managed by <strong className="text-white">{currentTeam.ownerName || "Unassigned"}</strong>
                 </p>
               </div>
@@ -71,21 +71,21 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl bg-[#1e1e1e] hover:bg-[#27272a] text-[#9ca3af] hover:text-white border border-[#27272a] transition cursor-pointer"
+              className="p-1.5 sm:p-2 rounded-xl bg-[#1e1e1e] hover:bg-[#27272a] text-[#9ca3af] hover:text-white border border-[#27272a] transition cursor-pointer"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
 
           {/* Franchise Select Carousel Bar */}
-          <div className="flex items-center gap-1.5 px-4 sm:px-6 py-2.5 bg-[#050505] overflow-x-auto border-b border-[#27272a] scrollbar-none">
+          <div className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-6 py-2 bg-[#050505] overflow-x-auto border-b border-[#27272a] scrollbar-none">
             {roomState.teams.map((t) => {
               const isActive = t.id === selectedTeamId;
               return (
                 <button
                   key={t.id}
                   onClick={() => setSelectedTeamId(t.id)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition flex items-center gap-1.5 cursor-pointer border ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-xs font-semibold shrink-0 transition flex items-center gap-1 sm:gap-1.5 cursor-pointer border ${
                     isActive 
                       ? "bg-[#6366f1] text-white border-[#6366f1] shadow" 
                       : "bg-[#121212] text-[#9ca3af] hover:text-white border-[#27272a]"
@@ -100,22 +100,22 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
           </div>
 
           {/* Summary Pills Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-4 sm:p-6 py-3 bg-[#0a0a0a]/60 border-b border-[#27272a]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 p-3 sm:p-6 py-2.5 sm:py-3 bg-[#0a0a0a]/60 border-b border-[#27272a]">
             <div className="glass-card p-2 rounded-xl text-center border border-[#27272a] bg-[#121212]">
-              <div className="text-[10px] text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Total Spent</div>
-              <div className="text-sm font-heading font-bold text-amber-400 font-mono">{formatCurrency(totalSpent)}</div>
+              <div className="text-[9px] sm:text-[10px] text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Total Spent</div>
+              <div className="text-xs sm:text-sm font-heading font-bold text-amber-400 font-mono">{formatCurrency(totalSpent)}</div>
             </div>
             <div className="glass-card p-2 rounded-xl text-center border border-[#27272a] bg-[#121212]">
-              <div className="text-[10px] text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Purse Remaining</div>
-              <div className="text-sm font-heading font-bold text-emerald-400 font-mono">{formatCurrency(currentTeam.purse)}</div>
+              <div className="text-[9px] sm:text-[10px] text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Purse Remaining</div>
+              <div className="text-xs sm:text-sm font-heading font-bold text-emerald-400 font-mono">{formatCurrency(currentTeam.purse)}</div>
             </div>
             <div className="glass-card p-2 rounded-xl text-center border border-[#27272a] bg-[#121212]">
-              <div className="text-[10px] text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Squad Size</div>
-              <div className="text-sm font-heading font-bold text-white">{squad.length} / {roomState.rules.maxSquadSize}</div>
+              <div className="text-[9px] sm:text-[10px] text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Squad Size</div>
+              <div className="text-xs sm:text-sm font-heading font-bold text-white">{squad.length} / {roomState.rules.maxSquadSize}</div>
             </div>
             <div className="glass-card p-2 rounded-xl text-center border border-[#27272a] bg-[#121212]">
-              <div className="text-[10px] text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Overseas Quota</div>
-              <div className="text-sm font-heading font-bold text-[#818cf8]">{overseasCount} / {roomState.rules.maxOverseas}</div>
+              <div className="text-[9px] sm:text-[10px] text-[#9ca3af] uppercase tracking-[0.08em] font-semibold">Overseas Quota</div>
+              <div className="text-xs sm:text-sm font-heading font-bold text-[#818cf8]">{overseasCount} / {roomState.rules.maxOverseas}</div>
             </div>
           </div>
 
@@ -208,13 +208,13 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                   <div className="text-[10px] font-semibold uppercase tracking-[0.08em] text-cyan-400 mb-2 flex items-center gap-1.5">
                     <span>🧤 Wicketkeeper & All-Rounders</span>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5">
                     {[4, 5, 6].map((pos) => {
                       const p = playingXI[pos];
                       return (
                         <div 
                           key={`mid-${pos}`}
-                          className={`p-2.5 rounded-2xl border transition flex items-center gap-2.5 ${
+                          className={`p-2 sm:p-2.5 rounded-2xl border transition flex items-center gap-2 sm:gap-2.5 ${
                             p 
                               ? "bg-[#121212] border-[#27272a] shadow-md hover:border-[#3f3f46]" 
                               : "bg-[#050505] border-dashed border-[#27272a] text-[#71717a]"
@@ -225,15 +225,15 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                               <img 
                                 src={p.image} 
                                 alt={p.name} 
-                                className="w-9 h-11 rounded-lg object-cover object-top border border-[#27272a] shrink-0" 
+                                className="w-8 h-10 sm:w-9 sm:h-11 rounded-lg object-cover object-top border border-[#27272a] shrink-0" 
                                 onError={(e) => {
                                   e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
                                 }}
                               />
                               <div className="min-w-0">
-                                <div className="text-[10px] font-semibold text-cyan-400">#{pos + 1} • {p.role}</div>
-                                <div className="text-xs font-heading font-bold text-white truncate">{p.name}</div>
-                                <div className="text-[10px] font-mono text-[#9ca3af]">{formatCurrency(p.soldPrice)}</div>
+                                <div className="text-[9px] sm:text-[10px] font-semibold text-cyan-400 truncate">#{pos + 1} • {p.role}</div>
+                                <div className="text-[11px] sm:text-xs font-heading font-bold text-white truncate">{p.name}</div>
+                                <div className="text-[9px] sm:text-[10px] font-mono text-[#9ca3af]">{formatCurrency(p.soldPrice)}</div>
                               </div>
                             </>
                           ) : (
@@ -252,13 +252,13 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                   <div className="text-[10px] font-semibold uppercase tracking-[0.08em] text-rose-400 mb-2 flex items-center gap-1.5">
                     <span>⚡ Bowling Attack (Pace & Spin)</span>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2.5">
                     {[7, 8, 9, 10].map((pos) => {
                       const p = playingXI[pos];
                       return (
                         <div 
                           key={`bowl-${pos}`}
-                          className={`p-2.5 rounded-2xl border transition flex items-center gap-2.5 ${
+                          className={`p-2 sm:p-2.5 rounded-2xl border transition flex items-center gap-2 sm:gap-2.5 ${
                             p 
                               ? "bg-[#121212] border-[#27272a] shadow-md hover:border-[#3f3f46]" 
                               : "bg-[#050505] border-dashed border-[#27272a] text-[#71717a]"
@@ -269,15 +269,15 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                               <img 
                                 src={p.image} 
                                 alt={p.name} 
-                                className="w-9 h-11 rounded-lg object-cover object-top border border-[#27272a] shrink-0" 
+                                className="w-8 h-10 sm:w-9 sm:h-11 rounded-lg object-cover object-top border border-[#27272a] shrink-0" 
                                 onError={(e) => {
                                   e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
                                 }}
                               />
                               <div className="min-w-0">
-                                <div className="text-[10px] font-semibold text-rose-400">#{pos + 1} • {p.role}</div>
-                                <div className="text-xs font-heading font-bold text-white truncate">{p.name}</div>
-                                <div className="text-[10px] font-mono text-[#9ca3af]">{formatCurrency(p.soldPrice)}</div>
+                                <div className="text-[9px] sm:text-[10px] font-semibold text-rose-400 truncate">#{pos + 1} • {p.role}</div>
+                                <div className="text-[11px] sm:text-xs font-heading font-bold text-white truncate">{p.name}</div>
+                                <div className="text-[9px] sm:text-[10px] font-mono text-[#9ca3af]">{formatCurrency(p.soldPrice)}</div>
                               </div>
                             </>
                           ) : (
@@ -294,39 +294,39 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
             ) : (
               /* SQUAD LIST VIEW */
               <div className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
                   {squad.map((player) => (
                     <div 
                       key={player.id}
-                      className="p-3.5 rounded-2xl bg-[#121212] border border-[#27272a] flex items-center justify-between gap-3 hover:border-[#3f3f46] transition"
+                      className="p-2.5 sm:p-3.5 rounded-2xl bg-[#121212] border border-[#27272a] flex items-center justify-between gap-2.5 hover:border-[#3f3f46] transition"
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                         <img
                           src={player.image}
                           alt={player.name}
-                          className="w-12 h-14 rounded-xl object-cover object-top border border-[#27272a] shrink-0"
+                          className="w-10 h-12 sm:w-12 sm:h-14 rounded-xl object-cover object-top border border-[#27272a] shrink-0"
                           onError={(e) => {
                             e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
                           }}
                         />
-                        <div>
-                          <div className="text-sm font-heading font-bold text-white leading-tight">{player.name}</div>
-                          <div className="flex items-center gap-1.5 mt-1">
-                            <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${getRoleBadgeClass(player.role)}`}>
+                        <div className="min-w-0">
+                          <div className="text-xs sm:text-sm font-heading font-bold text-white leading-tight truncate">{player.name}</div>
+                          <div className="flex items-center gap-1 mt-1">
+                            <span className={`text-[9px] sm:text-[10px] font-semibold px-1.5 py-0.2 rounded-full border ${getRoleBadgeClass(player.role)}`}>
                               {player.role}
                             </span>
-                            <span className="text-[10px] text-[#9ca3af]">
-                              {player.isOverseas ? "✈️ Overseas" : "🇮🇳 Indian"}
+                            <span className="text-[9px] sm:text-[10px] text-[#9ca3af]">
+                              {player.isOverseas ? "✈️" : "🇮🇳"}
                             </span>
                           </div>
                         </div>
                       </div>
 
-                      <div className="text-right">
-                        <div className="text-xs font-mono font-bold text-amber-400">
+                      <div className="text-right shrink-0">
+                        <div className="text-[11px] sm:text-xs font-mono font-bold text-amber-400">
                           {formatCurrency(player.soldPrice)}
                         </div>
-                        <div className="text-[10px] text-[#71717a]">Won At</div>
+                        <div className="text-[9px] text-[#71717a]">Won At</div>
                       </div>
                     </div>
                   ))}

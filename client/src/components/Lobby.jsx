@@ -146,79 +146,133 @@ export function Lobby({ onOpenCustomPlayer }) {
   // --- LANDING SCREEN (WHEN NOT IN ROOM) ---
   if (!roomState) {
     return (
-      <div className="min-h-[85vh] flex flex-col items-center justify-center px-4 py-8 relative">
-        {/* Soft Radial Indigo & Violet Ambient Glows */}
-        <div className="absolute top-1/6 left-1/4 w-[500px] h-[500px] bg-[#6366f1]/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#a855f7]/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="w-full max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-10 relative">
+        {/* Soft Radial Ambient Glows */}
+        <div className="absolute top-10 left-1/4 w-[500px] h-[500px] bg-[#6366f1]/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-[#a855f7]/10 rounded-full blur-[120px] pointer-events-none" />
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-2xl glass-panel p-6 sm:p-10 rounded-3xl relative z-10 shadow-2xl border border-[#27272a]"
-        >
-          {/* Header Banner */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/30 text-[#818cf8] text-[11px] font-semibold tracking-[0.1em] uppercase mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-[#818cf8]" />
-              100% Free Online Cricket Auction Platform • India
+        {/* Hero & Interactive Terminal Dual-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start relative z-10">
+          
+          {/* LEFT: Headline, Description, Step Badges, Quality Badges (7 cols on lg) */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="lg:col-span-7 flex flex-col justify-between space-y-5 sm:space-y-6"
+          >
+            <div>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/30 text-[#818cf8] text-[10px] sm:text-[11px] font-semibold tracking-[0.1em] uppercase mb-3 sm:mb-4">
+                <Sparkles className="w-3.5 h-3.5 text-[#818cf8]" />
+                100% Free Online Cricket Auction Platform • India
+              </div>
+              <h1 className="text-3xl sm:text-5xl xl:text-6xl font-heading font-extrabold text-white tracking-[-0.03em] leading-tight">
+                LEAD YOUR FRANCHISE.<br />
+                <span className="bg-gradient-to-r from-[#6366f1] via-[#818cf8] to-[#c084fc] bg-clip-text text-transparent">
+                  COMMAND THE MEGA AUCTION.
+                </span>
+              </h1>
+              <p className="text-sm sm:text-base text-[#9ca3af] mt-3 sm:mt-4 max-w-xl leading-relaxed">
+                Experience the authentic thrill of a live IPL Mega Auction arena. Outbid cricket managers across India with official ₹100 Crore budgets, dynamic countdown timers, overseas player limits, and tactical XI pitches.
+              </p>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-heading font-bold text-white tracking-[-0.03em] leading-tight">
-              IPL MEGA AUCTION ARENA
-            </h1>
-            <p className="text-sm sm:text-base text-[#9ca3af] mt-3 max-w-lg mx-auto leading-relaxed">
-              Experience the authentic thrill of a live IPL Mega Auction. Form your ultimate championship squad with friends or cricket fans across India.
-            </p>
-          </div>
 
-          {/* Quick Nickname Input */}
-          <div className="mb-6 p-4 rounded-2xl bg-[#121212] border border-[#27272a]">
-            <label className="block text-[11px] font-semibold text-[#9ca3af] uppercase tracking-[0.1em] mb-1.5">
-              Franchise Manager Nickname
-            </label>
-            <input
-              type="text"
-              required
-              placeholder="e.g. Captain Cool / King Kohli"
-              value={nameInput}
-              onChange={(e) => setNameInput(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-[#050505] border border-[#27272a] text-white placeholder-[#71717a] text-sm focus:outline-none focus:border-[#6366f1] transition"
-            />
-          </div>
+            {/* 3 Step Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-3.5">
+              <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-[#27272a] bg-[#121212] flex flex-col justify-between">
+                <div>
+                  <span className="step-indicator text-2xl font-extrabold block mb-1.5">01</span>
+                  <h3 className="font-heading font-semibold text-white text-sm tracking-[-0.02em]">Official Franchises</h3>
+                  <p className="text-xs text-[#9ca3af] mt-1 leading-relaxed">
+                    CSK, MI, RCB, KKR, and all 10 franchises with real ₹100 Cr purse caps.
+                  </p>
+                </div>
+              </div>
 
-          {/* Tab Switcher */}
-          <div className="flex bg-[#121212] p-1.5 rounded-2xl border border-[#27272a] mb-6 gap-1.5">
-            <button
-              onClick={() => setActiveTab("public_browser")}
-              className={`flex-1 py-2.5 rounded-xl text-xs font-heading font-semibold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1.5 ${
-                activeTab === "public_browser"
-                  ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/25"
-                  : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
-              }`}
-            >
-              <Radio className="w-3.5 h-3.5" />
-              <span>Public Arenas ({publicRooms.length})</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("create")}
-              className={`flex-1 py-2.5 rounded-xl text-xs font-heading font-semibold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1.5 ${
-                activeTab === "create"
-                  ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/25"
-                  : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
-              }`}
-            >
-              <span>👑 Create Arena</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("join")}
-              className={`flex-1 py-2.5 rounded-xl text-xs font-heading font-semibold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1.5 ${
-                activeTab === "join"
-                  ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/25"
-                  : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
-              }`}
-            >
-              <span>🔑 Enter PIN</span>
-            </button>
-          </div>
+              <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-[#27272a] bg-[#121212] flex flex-col justify-between">
+                <div>
+                  <span className="step-indicator text-2xl font-extrabold block mb-1.5">02</span>
+                  <h3 className="font-heading font-semibold text-white text-sm tracking-[-0.02em]">Live Bidding Engine</h3>
+                  <p className="text-xs text-[#9ca3af] mt-1 leading-relaxed">
+                    Sub-50ms synchronized bids, dynamic countdown resets & gavel strikes.
+                  </p>
+                </div>
+              </div>
+
+              <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-[#27272a] bg-[#121212] flex flex-col justify-between">
+                <div>
+                  <span className="step-indicator text-2xl font-extrabold block mb-1.5">03</span>
+                  <h3 className="font-heading font-semibold text-white text-sm tracking-[-0.02em]">Tactical Dream XI</h3>
+                  <p className="text-xs text-[#9ca3af] mt-1 leading-relaxed">
+                    Enforce overseas quotas, arrange Playing XI on turf & inspect rosters.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Platform Highlights */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px]">
+              <span className="px-2.5 py-1 rounded-lg bg-[#121212] border border-[#27272a] text-[#9ca3af]">🇮🇳 Built for India</span>
+              <span className="px-2.5 py-1 rounded-lg bg-[#121212] border border-[#27272a] text-[#9ca3af]">⚡ 100+ Star Players</span>
+              <span className="px-2.5 py-1 rounded-lg bg-[#121212] border border-[#27272a] text-[#9ca3af]">🤖 Smart AI Bots</span>
+              <span className="px-2.5 py-1 rounded-lg bg-[#121212] border border-[#27272a] text-[#9ca3af]">📲 WhatsApp Invites</span>
+            </div>
+          </motion.div>
+
+          {/* RIGHT: The Interactive Action Terminal (5 cols on lg) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="w-full lg:col-span-5 glass-panel p-4 sm:p-6 rounded-3xl relative z-10 shadow-2xl border border-[#27272a] bg-[#121212]"
+          >
+            {/* Quick Nickname Input */}
+            <div className="mb-4 p-3.5 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
+              <label className="block text-[10px] sm:text-[11px] font-semibold text-[#9ca3af] uppercase tracking-[0.1em] mb-1">
+                Franchise Manager Nickname
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="e.g. Captain Cool / King Kohli"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#050505] border border-[#27272a] text-white placeholder-[#71717a] text-sm focus:outline-none focus:border-[#6366f1] transition"
+              />
+            </div>
+
+            {/* Tab Switcher */}
+            <div className="flex bg-[#0a0a0a] p-1 sm:p-1.5 rounded-2xl border border-[#27272a] mb-4 gap-1">
+              <button
+                onClick={() => setActiveTab("public_browser")}
+                className={`flex-1 py-2 sm:py-2.5 rounded-xl text-[11px] sm:text-xs font-heading font-semibold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1 ${
+                  activeTab === "public_browser"
+                    ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/25"
+                    : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
+                }`}
+              >
+                <Radio className="w-3.5 h-3.5 shrink-0 hidden xs:inline" />
+                <span>Public ({publicRooms.length})</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("create")}
+                className={`flex-1 py-2 sm:py-2.5 rounded-xl text-[11px] sm:text-xs font-heading font-semibold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1 ${
+                  activeTab === "create"
+                    ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/25"
+                    : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
+                }`}
+              >
+                <span>👑 Create</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("join")}
+                className={`flex-1 py-2 sm:py-2.5 rounded-xl text-[11px] sm:text-xs font-heading font-semibold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1 ${
+                  activeTab === "join"
+                    ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/25"
+                    : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
+                }`}
+              >
+                <span>🔑 Enter PIN</span>
+              </button>
+            </div>
 
           {formError && (
             <div className="mb-4 p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs">
@@ -424,88 +478,79 @@ export function Lobby({ onOpenCustomPlayer }) {
             </form>
           )}
         </motion.div>
-
-        {/* Numbered Benefits & Architectural Step Cards (Styled like lingyauvprinters) */}
-        <div className="w-full max-w-2xl mt-10 space-y-6">
-          
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-            <div className="glass-panel p-5 rounded-2xl border border-[#27272a] flex flex-col justify-between">
-              <div>
-                <span className="step-indicator text-2xl font-extrabold block mb-2">01</span>
-                <h3 className="font-heading font-semibold text-white text-sm tracking-[-0.02em]">Official Franchises</h3>
-                <p className="text-xs text-[#9ca3af] mt-1.5 leading-relaxed">
-                  Manage CSK, MI, RCB, KKR, and all 10 franchises with real ₹100 Cr purse caps.
-                </p>
-              </div>
-            </div>
-
-            <div className="glass-panel p-5 rounded-2xl border border-[#27272a] flex flex-col justify-between">
-              <div>
-                <span className="step-indicator text-2xl font-extrabold block mb-2">02</span>
-                <h3 className="font-heading font-semibold text-white text-sm tracking-[-0.02em]">Live Bidding Engine</h3>
-                <p className="text-xs text-[#9ca3af] mt-1.5 leading-relaxed">
-                  Sub-50ms synchronized bids, dynamic countdown resets & authentic gavel strikes.
-                </p>
-              </div>
-            </div>
-
-            <div className="glass-panel p-5 rounded-2xl border border-[#27272a] flex flex-col justify-between">
-              <div>
-                <span className="step-indicator text-2xl font-extrabold block mb-2">03</span>
-                <h3 className="font-heading font-semibold text-white text-sm tracking-[-0.02em]">Tactical Dream XI</h3>
-                <p className="text-xs text-[#9ca3af] mt-1.5 leading-relaxed">
-                  Enforce overseas player quotas, build Playing XI on tactical pitch & inspect rosters.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Frequently Asked Questions (FAQ) */}
-          <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-[#27272a] space-y-4">
-            <div className="badge-tag text-[10px] tracking-[0.1em] text-[#818cf8]">KNOWLEDGE BASE</div>
-            <h3 className="text-xl font-heading font-bold text-white tracking-[-0.03em]">
-              Frequently Asked Questions
-            </h3>
-
-            <div className="space-y-3 pt-2 text-xs">
-              <div className="p-4 rounded-2xl bg-[#121212] border border-[#27272a]">
-                <h4 className="font-heading font-semibold text-white tracking-[-0.02em]">Is this IPL auction game completely free to play?</h4>
-                <p className="text-[#9ca3af] mt-1.5 leading-relaxed">
-                  Yes, IPL Auction Game is 100% free with unlimited rooms and no in-app purchases. You can create or join public and private rooms with friends anytime.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#121212] border border-[#27272a]">
-                <h4 className="font-heading font-semibold text-white tracking-[-0.02em]">How do I invite friends across India?</h4>
-                <p className="text-[#9ca3af] mt-1.5 leading-relaxed">
-                  Click "Create New Arena", set it to Private or Public, and copy your unique 8-character Room PIN or click "WhatsApp Invite" to send it straight to your cricket group chat.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#121212] border border-[#27272a]">
-                <h4 className="font-heading font-semibold text-white tracking-[-0.02em]">Can I play solo or with less than 10 people?</h4>
-                <p className="text-[#9ca3af] mt-1.5 leading-relaxed">
-                  Yes! Toggle "Auto-Fill with AI" in the lobby to let smart AI bots manage the remaining franchises. They actively place realistic bids based on player ratings and budget constraints.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#121212] border border-[#27272a]">
-                <h4 className="font-heading font-semibold text-white tracking-[-0.02em]">How does the bidding timer and budget work?</h4>
-                <p className="text-[#9ca3af] mt-1.5 leading-relaxed">
-                  Each lot starts with a customizable timer (e.g. 15 seconds). Every new bid resets the countdown to give everyone time to counter. The engine automatically enforces minimum reserve purse limits to ensure teams don't run out of money before completing their required squad size.
-                </p>
-              </div>
-            </div>
-          </div>
-
         </div>
+
+        {/* 10 Official Franchises Showcase Bar */}
+        <div className="glass-panel p-4 sm:p-6 rounded-3xl border border-[#27272a] space-y-3 bg-[#121212]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-[#818cf8]" />
+              <h3 className="text-xs sm:text-sm font-heading font-bold uppercase tracking-[-0.01em] text-white">
+                All 10 Official IPL Franchises Available
+              </h3>
+            </div>
+            <span className="text-[10px] sm:text-[11px] text-[#9ca3af] hidden sm:inline">Pick any franchise upon entering arena</span>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2">
+            {Object.values(TEAMS_DATA).map((team) => (
+              <div 
+                key={team.id}
+                className="p-2 sm:p-2.5 rounded-2xl bg-[#0a0a0a] border border-[#27272a] text-center flex flex-col items-center justify-between"
+              >
+                <div className="text-lg sm:text-2xl mb-0.5 sm:mb-1">{team.logoEmoji}</div>
+                <div className="text-xs font-heading font-bold text-white">{team.shortName}</div>
+                <div className="text-[9px] text-[#71717a] mt-0.5">{team.trophies > 0 ? `${team.trophies} 🏆` : "IPL Team"}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Frequently Asked Questions (FAQ) */}
+        <div className="glass-panel p-5 sm:p-8 rounded-3xl border border-[#27272a] space-y-4 bg-[#121212]">
+          <div className="badge-tag text-[10px] tracking-[0.1em] text-[#818cf8]">KNOWLEDGE BASE</div>
+          <h3 className="text-lg sm:text-xl font-heading font-bold text-white tracking-[-0.03em]">
+            Frequently Asked Questions
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1 text-xs">
+            <div className="p-4 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
+              <h4 className="font-heading font-semibold text-white tracking-[-0.02em]">Is this IPL auction game completely free to play?</h4>
+              <p className="text-[#9ca3af] mt-1.5 leading-relaxed">
+                Yes, IPL Auction Game is 100% free with unlimited rooms and no in-app purchases. You can create or join public and private rooms with friends anytime.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
+              <h4 className="font-heading font-semibold text-white tracking-[-0.02em]">How do I invite friends across India?</h4>
+              <p className="text-[#9ca3af] mt-1.5 leading-relaxed">
+                Click "Create Arena", choose Private or Public, and copy your unique 8-character Room PIN or click "WhatsApp Invite" to send it straight to your cricket group chat.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
+              <h4 className="font-heading font-semibold text-white tracking-[-0.02em]">Can I play solo or with less than 10 people?</h4>
+              <p className="text-[#9ca3af] mt-1.5 leading-relaxed">
+                Yes! Toggle "Auto-Fill with AI" in the lobby to let smart AI bots manage the remaining franchises. They actively place realistic bids based on player ratings and budget constraints.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
+              <h4 className="font-heading font-semibold text-white tracking-[-0.02em]">How does the bidding timer and budget work?</h4>
+              <p className="text-[#9ca3af] mt-1.5 leading-relaxed">
+                Each lot starts with a customizable timer (e.g. 15 seconds). Every new bid resets the countdown. The engine automatically enforces reserve purse limits.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
     );
   }
 
   // --- INSIDE LOBBY / WAR ROOM SCREEN ---
   return (
-    <div className="max-w-7xl mx-auto px-4 lg:px-8 py-6 space-y-6">
+    <div className="max-w-[1600px] w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
       
       {/* Top Banner with Room PIN, Share Link, & Host Controls */}
       <div className="glass-panel p-6 rounded-3xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-[#27272a]">
@@ -592,60 +637,60 @@ export function Lobby({ onOpenCustomPlayer }) {
       </div>
 
       {/* Rules Summary Bar */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="glass-card p-3 rounded-2xl flex items-center gap-3 border border-[#27272a]">
-          <div className="p-2 rounded-xl bg-[#6366f1]/10 text-[#818cf8]">
-            <DollarSign className="w-4 h-4" />
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+        <div className="glass-card p-2.5 sm:p-3 rounded-2xl flex items-center gap-2.5 sm:gap-3 border border-[#27272a]">
+          <div className="p-1.5 sm:p-2 rounded-xl bg-[#6366f1]/10 text-[#818cf8]">
+            <DollarSign className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </div>
           <div>
-            <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Purse Budget</div>
-            <div className="text-sm font-heading font-bold text-white">{formatCurrency(roomState.rules.totalPurse)}</div>
+            <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Purse Budget</div>
+            <div className="text-xs sm:text-sm font-heading font-bold text-white">{formatCurrency(roomState.rules.totalPurse)}</div>
           </div>
         </div>
 
-        <div className="glass-card p-3 rounded-2xl flex items-center gap-3 border border-[#27272a]">
-          <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400">
-            <Clock className="w-4 h-4" />
+        <div className="glass-card p-2.5 sm:p-3 rounded-2xl flex items-center gap-2.5 sm:gap-3 border border-[#27272a]">
+          <div className="p-1.5 sm:p-2 rounded-xl bg-blue-500/10 text-blue-400">
+            <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </div>
           <div>
-            <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Bid Countdown</div>
-            <div className="text-sm font-heading font-bold text-white">{roomState.rules.timerSeconds} Seconds</div>
+            <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Bid Countdown</div>
+            <div className="text-xs sm:text-sm font-heading font-bold text-white">{roomState.rules.timerSeconds} Seconds</div>
           </div>
         </div>
 
-        <div className="glass-card p-3 rounded-2xl flex items-center gap-3 border border-[#27272a]">
-          <div className="p-2 rounded-xl bg-purple-500/10 text-purple-400">
-            <Globe className="w-4 h-4" />
+        <div className="glass-card p-2.5 sm:p-3 rounded-2xl flex items-center gap-2.5 sm:gap-3 border border-[#27272a]">
+          <div className="p-1.5 sm:p-2 rounded-xl bg-purple-500/10 text-purple-400">
+            <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </div>
           <div>
-            <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Overseas Cap</div>
-            <div className="text-sm font-heading font-bold text-white">Max {roomState.rules.maxOverseas} Players</div>
+            <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Overseas Cap</div>
+            <div className="text-xs sm:text-sm font-heading font-bold text-white">Max {roomState.rules.maxOverseas} Players</div>
           </div>
         </div>
 
-        <div className="glass-card p-3 rounded-2xl flex items-center gap-3 border border-[#27272a]">
-          <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
-            <Award className="w-4 h-4" />
+        <div className="glass-card p-2.5 sm:p-3 rounded-2xl flex items-center gap-2.5 sm:gap-3 border border-[#27272a]">
+          <div className="p-1.5 sm:p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
+            <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </div>
           <div>
-            <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Squad Size</div>
-            <div className="text-sm font-heading font-bold text-white">{roomState.rules.minSquadSize} - {roomState.rules.maxSquadSize} Players</div>
+            <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Squad Size</div>
+            <div className="text-xs sm:text-sm font-heading font-bold text-white">{roomState.rules.minSquadSize} - {roomState.rules.maxSquadSize} Players</div>
           </div>
         </div>
       </div>
 
       {/* Team Selection Grid */}
       <div>
-        <div className="flex items-center justify-between mb-3.5">
-          <h3 className="text-base font-heading font-bold text-white tracking-[-0.02em] flex items-center gap-2">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm sm:text-base font-heading font-bold text-white tracking-[-0.02em] flex items-center gap-2">
             <Shield className="w-4 h-4 text-[#818cf8]" /> Choose Your Franchise
           </h3>
-          <span className="text-xs text-[#9ca3af]">
+          <span className="text-[11px] sm:text-xs text-[#9ca3af]">
             {roomState.teams.filter(t => t.ownerId || t.isBot).length} of 10 Franchises Assigned
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3.5">
           {roomState.teams.map((team) => {
             const meta = TEAMS_DATA[team.id];
             const isSelectedByMe = myTeam?.id === team.id;
@@ -659,7 +704,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                 onClick={() => {
                   if (!isClaimedByHuman) selectTeam(team.id);
                 }}
-                className={`p-4 rounded-2xl border transition relative overflow-hidden cursor-pointer ${
+                className={`p-3 sm:p-4 rounded-2xl border transition relative overflow-hidden cursor-pointer flex flex-col justify-between ${
                   isSelectedByMe
                     ? `border-2 ${meta?.borderClass || 'border-[#6366f1]'} bg-[#121212] shadow-lg shadow-[#6366f1]/15`
                     : isClaimedByHuman
@@ -675,45 +720,47 @@ export function Lobby({ onOpenCustomPlayer }) {
                 />
 
                 <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl">{meta?.logoEmoji || "🏏"}</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="text-xl sm:text-2xl">{meta?.logoEmoji || "🏏"}</span>
                     {meta?.trophies > 0 && (
-                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                      <span className="text-[9px] sm:text-[10px] font-bold px-1 sm:px-1.5 py-0.2 sm:py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
                         {meta.trophies} 🏆
                       </span>
                     )}
                   </div>
                   {isSelectedByMe && (
-                    <span className="flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                    <span className="flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-emerald-400 bg-emerald-500/15 px-1.5 sm:px-2 py-0.5 rounded-full border border-emerald-500/30">
                       <CheckCircle2 className="w-3 h-3" /> Selected
                     </span>
                   )}
                   {isClaimedByHuman && (
-                    <span className="text-[10px] text-[#9ca3af] bg-[#1e1e1e] px-2 py-0.5 rounded-full border border-[#27272a]">
+                    <span className="text-[9px] sm:text-[10px] text-[#9ca3af] bg-[#1e1e1e] px-1.5 sm:px-2 py-0.5 rounded-full border border-[#27272a]">
                       Claimed
                     </span>
                   )}
                   {isBotManaged && !isSelectedByMe && (
-                    <span className="text-[10px] text-[#818cf8] bg-[#6366f1]/15 px-2 py-0.5 rounded-full border border-[#6366f1]/30 font-medium">
+                    <span className="text-[9px] sm:text-[10px] text-[#818cf8] bg-[#6366f1]/15 px-1.5 sm:px-2 py-0.5 rounded-full border border-[#6366f1]/30 font-medium">
                       🤖 AI Bot
                     </span>
                   )}
                 </div>
 
-                <div className="mt-3">
+                <div className="mt-2.5 sm:mt-3">
                   <div className="flex items-center justify-between text-xs font-semibold text-[#9ca3af]">
                     <span>{team.shortName}</span>
                     {meta?.captain && (
-                      <span className="text-[10px] text-[#71717a]">Cap: {meta.captain}</span>
+                      <span className="text-[9px] sm:text-[10px] text-[#71717a] truncate max-w-[70px]">Cap: {meta.captain}</span>
                     )}
                   </div>
-                  <div className="text-sm font-heading font-bold text-white tracking-[-0.02em] leading-snug">{team.name}</div>
-                  <div className="text-[11px] text-[#71717a] italic mt-0.5">{meta?.tagline}</div>
+                  <div className="text-xs sm:text-sm font-heading font-bold text-white tracking-[-0.02em] leading-snug truncate">
+                    {team.name}
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] text-[#71717a] italic mt-0.5 truncate">{meta?.tagline}</div>
                 </div>
 
-                <div className="mt-3 pt-2.5 border-t border-[#27272a] flex items-center justify-between text-xs">
+                <div className="mt-2.5 sm:mt-3 pt-2 border-t border-[#27272a] flex items-center justify-between text-[11px] sm:text-xs">
                   <span className="text-[#9ca3af]">Manager:</span>
-                  <span className="font-medium text-white truncate max-w-[120px]">
+                  <span className="font-medium text-white truncate max-w-[90px] sm:max-w-[120px]">
                     {team.ownerName || "Unassigned"}
                   </span>
                 </div>

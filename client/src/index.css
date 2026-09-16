@@ -70,6 +70,14 @@
   background: #3f3f46;
 }
 
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Glassmorphism & Precision Panels */
 .glass-panel {
   background: rgba(18, 18, 18, 0.90);
