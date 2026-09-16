@@ -167,19 +167,23 @@ io.on("connection", (socket) => {
 });
 
 // Serve static frontend in production
+// Explicit SEO endpoints for Googlebot (Before static middleware)
 const clientDistPath = path.resolve(__dirname, "../../client/dist");
-app.use(express.static(clientDistPath));
 
-// Explicit SEO endpoints for Googlebot
+app.get("/robots.txt", (req, res) => {
+  res.setHeader("Content-Type", "text/plain");
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.send(`User-agent: *\nAllow: /\nDisallow:\n\nUser-agent: Googlebot\nAllow: /\nDisallow:\n\nUser-agent: Googlebot-Mobile\nAllow: /\nDisallow:\n\nSitemap: https://ipl-auction-game-vvdr.onrender.com/sitemap.xml\n`);
+});
+
 app.get("/sitemap.xml", (req, res) => {
-  res.header("Content-Type", "application/xml");
+  res.setHeader("Content-Type", "application/xml");
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   res.sendFile(path.join(clientDistPath, "sitemap.xml"));
 });
 
-app.get("/robots.txt", (req, res) => {
-  res.header("Content-Type", "text/plain");
-  res.sendFile(path.join(clientDistPath, "robots.txt"));
-});
+// Serve static frontend in production
+app.use(express.static(clientDistPath));
 
 // For SPA client routing, return index.html for all remaining routes
 app.get("*", (req, res) => {
@@ -189,6 +193,14 @@ app.get("*", (req, res) => {
     }
   });
 });
+
+// Self-ping to prevent Render sleep mode and keep-alive for Googlebot
+const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL || "https://ipl-auction-game-vvdr.onrender.com";
+setInterval(() => {
+  fetch(`${RENDER_EXTERNAL_URL}/api/health`)
+    .then(() => console.log("💓 Keep-alive heartbeat ping successful"))
+    .catch(() => {});
+}, 10 * 60 * 1000);
 
 const PORT = process.env.PORT || 4000;
 httpServer.listen(PORT, () => {
