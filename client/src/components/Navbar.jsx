@@ -16,6 +16,13 @@ export function Navbar({ onOpenSquads }) {
     setTimeout(() => setCopiedLink(false), 2000);
   };
 
+  const shareOnWhatsApp = () => {
+    if (!roomState?.id) return;
+    const url = `${window.location.origin}/?room=${roomState.id}`;
+    const text = encodeURIComponent(`🏏 Join my IPL Mega Auction Arena!\n🏆 Room PIN: ${roomState.id}\n💰 Purse: ₹100 Cr\n\nPick your franchise (CSK, MI, RCB, KKR) and let's bid:\n${url}`);
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  };
+
   const teamMeta = myTeam ? TEAMS_DATA[myTeam.id] : null;
 
   return (
@@ -41,9 +48,9 @@ export function Navbar({ onOpenSquads }) {
           </div>
         </div>
 
-        {/* Room PIN & Share Link */}
+        {/* Room PIN & Quick Share */}
         {roomState && (
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2">
             <button
               onClick={copyShareLink}
               title="Click to copy full invite link"
@@ -54,8 +61,17 @@ export function Navbar({ onOpenSquads }) {
               {copiedLink ? (
                 <Check className="w-3.5 h-3.5 text-emerald-400" />
               ) : (
-                <Share2 className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition" />
+                <Copy className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition" />
               )}
+            </button>
+
+            {/* 1-Tap WhatsApp Share */}
+            <button
+              onClick={shareOnWhatsApp}
+              title="Share Room to WhatsApp cricket group"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/40 text-emerald-400 text-xs font-bold transition cursor-pointer"
+            >
+              <span>📲 WhatsApp</span>
             </button>
 
             <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">

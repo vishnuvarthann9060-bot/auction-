@@ -136,6 +136,13 @@ export function Lobby({ onOpenCustomPlayer }) {
     setTimeout(() => setCopiedLink(false), 2000);
   };
 
+  const shareOnWhatsApp = () => {
+    if (!roomState) return;
+    const url = `${window.location.origin}/?room=${roomState.id}`;
+    const text = encodeURIComponent(`🏏 Join my IPL Mega Auction War Room!\n🏆 Room PIN: ${roomState.id}\n💰 Purse: ₹${(roomState.rules?.totalPurse || 1000000000) / 10000000} Cr\n\nPick your franchise (CSK, MI, RCB, KKR) and let's bid:\n${url}`);
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  };
+
   // --- LANDING SCREEN (WHEN NOT IN ROOM) ---
   if (!roomState) {
     return (
@@ -522,7 +529,15 @@ export function Lobby({ onOpenCustomPlayer }) {
             className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition cursor-pointer"
           >
             {copiedLink ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-amber-400" />}
-            <span>{copiedLink ? "Link Copied!" : "Copy Invite Link"}</span>
+            <span>{copiedLink ? "Link Copied!" : "Copy Link"}</span>
+          </button>
+
+          {/* 1-Tap WhatsApp Invite */}
+          <button
+            onClick={shareOnWhatsApp}
+            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-black shadow-lg shadow-emerald-500/20 transition cursor-pointer"
+          >
+            <span>📲 WhatsApp Invite</span>
           </button>
 
           {isHost && (
@@ -651,7 +666,14 @@ export function Lobby({ onOpenCustomPlayer }) {
                 />
 
                 <div className="flex items-start justify-between">
-                  <div className="text-2xl">{meta?.logoEmoji || "🏏"}</div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">{meta?.logoEmoji || "🏏"}</span>
+                    {meta?.trophies > 0 && (
+                      <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        {meta.trophies} 🏆
+                      </span>
+                    )}
+                  </div>
                   {isSelectedByMe && (
                     <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30">
                       <CheckCircle2 className="w-3 h-3" /> Selected
@@ -664,13 +686,18 @@ export function Lobby({ onOpenCustomPlayer }) {
                   )}
                   {isBotManaged && !isSelectedByMe && (
                     <span className="text-[10px] text-blue-400 bg-blue-500/15 px-2 py-0.5 rounded-full border border-blue-500/30">
-                      🤖 AI Bot (Click to Take)
+                      🤖 AI Bot
                     </span>
                   )}
                 </div>
 
                 <div className="mt-3">
-                  <div className="text-xs font-semibold text-slate-400">{team.shortName}</div>
+                  <div className="flex items-center justify-between text-xs font-semibold text-slate-400">
+                    <span>{team.shortName}</span>
+                    {meta?.captain && (
+                      <span className="text-[10px] text-slate-500">Cap: {meta.captain}</span>
+                    )}
+                  </div>
                   <div className="text-sm font-extrabold text-white leading-snug">{team.name}</div>
                   <div className="text-[11px] text-slate-500 italic mt-0.5">{meta?.tagline}</div>
                 </div>

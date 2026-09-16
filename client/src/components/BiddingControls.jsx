@@ -90,10 +90,30 @@ export function BiddingControls() {
         </div>
       )}
 
+      {/* Reaction Cheer Bar */}
+      <div className="flex items-center justify-between gap-2 p-2 rounded-2xl bg-slate-950/60 border border-white/5">
+        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider hidden sm:inline">
+          Live Reactions:
+        </span>
+        <div className="flex items-center gap-1.5 flex-1 justify-around sm:justify-start">
+          {["🏏", "🔥", "💛", "💙", "❤️", "💸", "👏"].map((emoji) => (
+            <button
+              key={emoji}
+              onClick={() => sendReaction(emoji)}
+              className="px-2.5 py-1 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-white/5 text-lg hover:scale-125 active:scale-95 transition transform cursor-pointer"
+            >
+              {emoji}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Dynamic Bidding Buttons */}
-      <div className="space-y-2">
+      <div className="space-y-3">
         <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-          <span>Place Bid</span>
+          <span className="flex items-center gap-1.5">
+            <Gavel className="w-3.5 h-3.5 text-amber-400" /> Standard Bids
+          </span>
           <span className="text-slate-500">Tap to raise instantaneously</span>
         </div>
 
@@ -138,6 +158,47 @@ export function BiddingControls() {
             );
           })}
         </div>
+
+        {/* Quick Jump Increment Chips */}
+        {auction.currentBid > 0 && (
+          <div className="pt-2">
+            <div className="text-[10px] uppercase font-bold text-slate-500 mb-1.5 flex items-center gap-1">
+              <Zap className="w-3 h-3 text-amber-400" /> Rapid Raise Chips:
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {[2000000, 5000000, 10000000, 20000000].map((inc) => {
+                const targetBid = auction.currentBid + inc;
+                const canAfford = myTeam.purse >= targetBid;
+                const disabled = 
+                  isAuctionPaused || 
+                  isHoldingHighestBid || 
+                  !canAfford || 
+                  isOverseasMaxed || 
+                  isSquadFull || 
+                  auction.status === "SOLD" || 
+                  auction.status === "UNSOLD";
+
+                const label = inc === 2000000 ? "+₹20 Lakhs" : inc === 5000000 ? "+₹50 Lakhs" : inc === 10000000 ? "+₹1.00 Crore" : "+₹2.00 Crores";
+
+                return (
+                  <button
+                    key={inc}
+                    disabled={disabled}
+                    onClick={() => placeBid(targetBid)}
+                    className={`py-2 px-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between border cursor-pointer ${
+                      disabled
+                        ? "bg-slate-950/40 border-slate-800 text-slate-600 cursor-not-allowed"
+                        : "bg-slate-900/90 hover:bg-slate-800 border-amber-500/30 text-amber-300 hover:border-amber-400"
+                    }`}
+                  >
+                    <span>{label}</span>
+                    <span className="font-mono text-[11px] opacity-75">{formatCurrency(targetBid)}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
     </div>

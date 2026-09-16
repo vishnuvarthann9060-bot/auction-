@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useSocket } from "../context/SocketContext";
 import { formatCurrency, getRoleBadgeClass } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
-import { X, Shield, DollarSign, Users, Award, Globe } from "lucide-react";
+import { X, Shield, DollarSign, Users, Award, Globe, LayoutGrid, Radio } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function SquadModal({ isOpen, onClose, initialTeamId }) {
   const { roomState } = useSocket();
   const [selectedTeamId, setSelectedTeamId] = useState(initialTeamId || "csk");
+  const [viewMode, setViewMode] = useState("list"); // "list" | "pitch"
 
   if (!isOpen || !roomState) return null;
 
@@ -23,6 +24,19 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
   const bowlers = squad.filter(p => p.role === "Bowler");
   const allRounders = squad.filter(p => p.role === "All-Rounder");
   const keepers = squad.filter(p => p.role === "Wicketkeeper");
+
+  // Construct Playing XI
+  const playingXI = [
+    ...batters.slice(0, 4),
+    ...keepers.slice(0, 1),
+    ...allRounders.slice(0, 2),
+    ...bowlers.slice(0, 4)
+  ];
+  // Fill remaining slots from rest of squad if needed
+  const remainingSquad = squad.filter(p => !playingXI.includes(p));
+  while (playingXI.length < 11 && remainingSquad.length > 0) {
+    playingXI.push(remainingSquad.shift());
+  }
 
   return (
     <AnimatePresence>
@@ -105,6 +119,32 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
             </div>
           </div>
 
+          {/* View Mode Toggle Bar */}
+          <div className="px-4 sm:px-6 py-2.5 bg-slate-950/70 border-b border-white/5 flex items-center justify-between">
+            <div className="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-white/5">
+              <button
+                onClick={() => setViewMode("list")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                  viewMode === "list" ? "bg-amber-500 text-slate-950 font-black shadow" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                <span>📋 Squad List ({squad.length})</span>
+              </button>
+              <button
+                onClick={() => setViewMode("pitch")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                  viewMode === "pitch" ? "bg-amber-500 text-slate-950 font-black shadow" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                <span>🏏 Tactical Pitch XI ({Math.min(squad.length, 11)}/11)</span>
+              </button>
+            </div>
+
+            <span className="text-[11px] text-slate-500 hidden sm:inline">
+              {viewMode === "pitch" ? "Dream 11 Tactical Lineup" : "Full Franchise Roster"}
+            </span>
+          </div>
+
           {/* Player Roster Content */}
           <div className="p-4 sm:p-6 overflow-y-auto flex-1 space-y-5">
             {squad.length === 0 ? (
@@ -113,7 +153,146 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                 <p className="text-sm font-semibold">No players acquired yet.</p>
                 <p className="text-xs text-slate-600 mt-1">Winning bids for {currentTeam.shortName} will appear here.</p>
               </div>
+            ) : viewMode === "pitch" ? (
+              /* TACTICAL CRICKET PITCH / PLAYING XI VIEW */
+              <div className="relative rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-emerald-950/50 via-slate-950/90 to-emerald-950/50 p-4 sm:p-6 shadow-inner space-y-6 overflow-hidden">
+                {/* Stadium Center Crease */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-28 rounded-full border border-emerald-500/15 pointer-events-none" />
+
+                {/* Top Order Batters (1-4) */}
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 mb-2 flex items-center gap-1.5">
+                    <span>🏏 Top Order & Middle Order (Batters)</span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    {[0, 1, 2, 3].map((pos) => {
+                      const p = playingXI[pos];
+                      return (
+                        <div 
+                          key={`bat-${pos}`}
+                          className={`p-2.5 rounded-2xl border transition flex items-center gap-2.5 ${
+                            p 
+                              ? "bg-slate-900/90 border-amber-500/30 shadow-md" 
+                              : "bg-slate-950/40 border-dashed border-slate-800 text-slate-600"
+                          }`}
+                        >
+                          {p ? (
+                            <>
+                              <img 
+                                src={p.image} 
+                                alt={p.name} 
+                                className="w-9 h-11 rounded-lg object-cover object-top border border-white/10 shrink-0" 
+                                onError={(e) => {
+                                  e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
+                                }}
+                              />
+                              <div className="min-w-0">
+                                <div className="text-[10px] font-bold text-amber-400">#{pos + 1} • {p.role}</div>
+                                <div className="text-xs font-black text-white truncate">{p.name}</div>
+                                <div className="text-[10px] font-mono text-slate-400">{formatCurrency(p.soldPrice)}</div>
+                              </div>
+                            </>
+                          ) : (
+                            <div className="py-2.5 text-center w-full text-[11px] text-slate-600 font-bold">
+                              Slot #{pos + 1}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Wicketkeeper & All-Rounders (5-7) */}
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-cyan-400 mb-2 flex items-center gap-1.5">
+                    <span>🧤 Wicketkeeper & All-Rounders</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    {[4, 5, 6].map((pos) => {
+                      const p = playingXI[pos];
+                      return (
+                        <div 
+                          key={`mid-${pos}`}
+                          className={`p-2.5 rounded-2xl border transition flex items-center gap-2.5 ${
+                            p 
+                              ? "bg-slate-900/90 border-cyan-500/30 shadow-md" 
+                              : "bg-slate-950/40 border-dashed border-slate-800 text-slate-600"
+                          }`}
+                        >
+                          {p ? (
+                            <>
+                              <img 
+                                src={p.image} 
+                                alt={p.name} 
+                                className="w-9 h-11 rounded-lg object-cover object-top border border-white/10 shrink-0" 
+                                onError={(e) => {
+                                  e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
+                                }}
+                              />
+                              <div className="min-w-0">
+                                <div className="text-[10px] font-bold text-cyan-400">#{pos + 1} • {p.role}</div>
+                                <div className="text-xs font-black text-white truncate">{p.name}</div>
+                                <div className="text-[10px] font-mono text-slate-400">{formatCurrency(p.soldPrice)}</div>
+                              </div>
+                            </>
+                          ) : (
+                            <div className="py-2.5 text-center w-full text-[11px] text-slate-600 font-bold">
+                              Slot #{pos + 1}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Bowlers (8-11) */}
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-rose-400 mb-2 flex items-center gap-1.5">
+                    <span>⚡ Bowling Attack (Pace & Spin)</span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    {[7, 8, 9, 10].map((pos) => {
+                      const p = playingXI[pos];
+                      return (
+                        <div 
+                          key={`bowl-${pos}`}
+                          className={`p-2.5 rounded-2xl border transition flex items-center gap-2.5 ${
+                            p 
+                              ? "bg-slate-900/90 border-rose-500/30 shadow-md" 
+                              : "bg-slate-950/40 border-dashed border-slate-800 text-slate-600"
+                          }`}
+                        >
+                          {p ? (
+                            <>
+                              <img 
+                                src={p.image} 
+                                alt={p.name} 
+                                className="w-9 h-11 rounded-lg object-cover object-top border border-white/10 shrink-0" 
+                                onError={(e) => {
+                                  e.target.src = "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&auto=format&fit=crop&q=80";
+                                }}
+                              />
+                              <div className="min-w-0">
+                                <div className="text-[10px] font-bold text-rose-400">#{pos + 1} • {p.role}</div>
+                                <div className="text-xs font-black text-white truncate">{p.name}</div>
+                                <div className="text-[10px] font-mono text-slate-400">{formatCurrency(p.soldPrice)}</div>
+                              </div>
+                            </>
+                          ) : (
+                            <div className="py-2.5 text-center w-full text-[11px] text-slate-600 font-bold">
+                              Slot #{pos + 1}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
             ) : (
+              /* SQUAD LIST VIEW */
               <div className="space-y-4">
                 {/* Roster Table / Card Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

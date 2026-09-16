@@ -10,6 +10,7 @@ import { SquadModal } from "./components/SquadModal";
 import { SoldCelebration } from "./components/SoldCelebration";
 import { CustomPlayerModal } from "./components/CustomPlayerModal";
 import { LiveChat } from "./components/LiveChat";
+import { TEAMS_DATA } from "./data/teams";
 import { Trophy, CheckCircle, AlertTriangle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -19,6 +20,11 @@ function AuctionApp() {
   const [squadModalOpen, setSquadModalOpen] = useState(false);
   const [selectedSquadTeamId, setSelectedSquadTeamId] = useState("csk");
   const [customPlayerModalOpen, setCustomPlayerModalOpen] = useState(false);
+
+  // Dynamic stadium arena glow based on active leading bidder
+  const activeBidderTeamId = roomState?.currentAuction?.highestBidderTeamId;
+  const activeBidderMeta = activeBidderTeamId ? TEAMS_DATA[activeBidderTeamId] : null;
+  const activeGlowHex = activeBidderMeta?.glowHex || (myTeam ? TEAMS_DATA[myTeam.id]?.glowHex : "#F59E0B");
 
   const handleOpenSquad = (team) => {
     if (team?.id) {
@@ -32,9 +38,27 @@ function AuctionApp() {
   return (
     <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col relative selection:bg-amber-500 selection:text-black">
       
-      {/* Stadium Ambient Lights & Radial Glows */}
+      {/* Stadium Ambient Lights, Dynamic Franchise Glows & Floodlight Beams */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-b from-amber-500/10 via-blue-600/5 to-transparent blur-3xl" />
+        {/* Sweeping Stadium Floodlight Beams */}
+        <div 
+          className="absolute -top-32 -left-20 w-[350px] h-[650px] bg-gradient-to-b from-white/10 via-amber-400/5 to-transparent blur-2xl animate-floodlight-left pointer-events-none"
+        />
+        <div 
+          className="absolute -top-32 -right-20 w-[350px] h-[650px] bg-gradient-to-b from-white/10 via-blue-400/5 to-transparent blur-2xl animate-floodlight-right pointer-events-none"
+        />
+
+        {/* Dynamic Center Stage Spotlight (Pulsing in Franchise Colors) */}
+        <motion.div 
+          animate={{ 
+            backgroundColor: activeGlowHex,
+            opacity: [0.10, 0.18, 0.10],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[550px] blur-[120px] rounded-full transition-colors duration-700"
+        />
+
         <div className="absolute top-1/3 -left-32 w-80 h-80 bg-purple-600/10 blur-3xl rounded-full" />
         <div className="absolute bottom-10 -right-32 w-80 h-80 bg-emerald-600/10 blur-3xl rounded-full" />
       </div>

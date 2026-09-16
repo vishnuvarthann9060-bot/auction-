@@ -46,12 +46,54 @@
 
 /* Glassmorphism */
 .glass-panel {
-  background: rgba(17, 24, 39, 0.75);
-  backdrop-filter: blur(16px);
+  background: rgba(17, 24, 39, 0.82);
+  backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 .glass-card {
-  background: rgba(30, 41, 59, 0.5);
+  background: rgba(30, 41, 59, 0.55);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
+
+/* Stadium Floodlight Beams */
+@keyframes floodlight-sweep {
+  0% { transform: rotate(-25deg) scaleY(1); opacity: 0.15; }
+  50% { transform: rotate(25deg) scaleY(1.2); opacity: 0.35; }
+  100% { transform: rotate(-25deg) scaleY(1); opacity: 0.15; }
+}
+
+.animate-floodlight-left {
+  animation: floodlight-sweep 12s ease-in-out infinite;
+  transform-origin: top left;
+}
+
+.animate-floodlight-right {
+  animation: floodlight-sweep 14s ease-in-out infinite reverse;
+  transform-origin: top right;
+}
+
+/* Gavel Strike Shake */
+@keyframes gavel-impact {
+  0% { transform: scale(1); }
+  20% { transform: scale(0.97) translateY(2px); }
+  40% { transform: scale(1.02) translateY(-2px); }
+  60% { transform: scale(0.99) translateY(1px); }
+  100% { transform: scale(1); }
+}
+
+.animate-gavel-shake {
+  animation: gavel-impact 0.4s ease-out;
+}
+
+/* Radar pulse beacon */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+.pulse-beacon {
+  animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+

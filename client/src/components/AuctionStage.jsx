@@ -73,7 +73,10 @@ export function AuctionStage() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
-          className="lg:col-span-7 glass-panel rounded-3xl overflow-hidden border border-white/10 relative shadow-2xl flex flex-col"
+          style={{ 
+            boxShadow: bidderMeta ? `0 0 35px ${bidderMeta.glowHex}25` : undefined 
+          }}
+          className="lg:col-span-7 glass-panel rounded-3xl overflow-hidden border border-white/10 relative shadow-2xl flex flex-col transition-shadow duration-500"
         >
           {/* Card Top Header */}
           <div className="p-5 pb-0 flex items-start justify-between relative z-10">
@@ -192,7 +195,13 @@ export function AuctionStage() {
         <div className="lg:col-span-5 flex flex-col gap-4">
           
           {/* Current Bid & Gavel Arena */}
-          <div className="glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden flex flex-col justify-between">
+          <div 
+            style={{ 
+              boxShadow: bidderMeta ? `0 0 45px ${bidderMeta.glowHex}33` : undefined,
+              borderColor: bidderMeta ? `${bidderMeta.glowHex}55` : undefined
+            }}
+            className="glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden flex flex-col justify-between transition-all duration-500"
+          >
             {/* Top Row: Timer Ring and Auctioneer Gavel */}
             <div className="flex items-center justify-between">
               
@@ -248,8 +257,23 @@ export function AuctionStage() {
               </motion.div>
             </div>
 
+            {/* Live Auctioneer Broadcast Voice Bubble */}
+            <div className="my-3 p-2.5 rounded-xl bg-slate-950/80 border border-amber-500/20 flex items-center gap-2.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping shrink-0" />
+              <p className="text-xs font-semibold text-slate-300 leading-snug">
+                <span className="text-amber-400 font-bold">Auctioneer: </span>
+                {currentBid === 0
+                  ? `Opening bid called at base price of ${formatCurrency(player.basePrice)}. Any franchise?`
+                  : auction.status === "GOING_TWICE"
+                  ? `Going twice at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name}! Last chance to raise!`
+                  : auction.status === "GOING_ONCE"
+                  ? `Going once at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name}!`
+                  : `We have ${formatCurrency(currentBid)} from ${highestBidderTeam?.name}! Any advance on ${formatCurrency(currentBid)}?`}
+              </p>
+            </div>
+
             {/* Middle Section: Giant Current Bid Display */}
-            <div className="my-6 text-center">
+            <div className="my-4 text-center">
               <div className="text-xs uppercase tracking-widest font-extrabold text-slate-400 mb-1">
                 Current Highest Bid
               </div>

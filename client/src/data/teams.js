@@ -6,12 +6,15 @@ export const TEAMS_DATA = {
     primaryColor: "#F9CD05",
     secondaryColor: "#1D428A",
     accentColor: "#F59E0B",
+    glowHex: "#FFCC00",
     gradient: "from-yellow-500 to-amber-600",
     borderClass: "border-yellow-500",
     bgClass: "bg-yellow-500/10",
     textClass: "text-yellow-400",
     tagline: "Whistle Podu! 🦁",
-    logoEmoji: "🦁"
+    logoEmoji: "🦁",
+    trophies: 5,
+    captain: "Ruturaj Gaikwad"
   },
   mi: {
     id: "mi",
@@ -20,12 +23,15 @@ export const TEAMS_DATA = {
     primaryColor: "#004BA0",
     secondaryColor: "#D1AB3E",
     accentColor: "#3B82F6",
+    glowHex: "#0066FF",
     gradient: "from-blue-600 to-indigo-800",
     borderClass: "border-blue-500",
     bgClass: "bg-blue-500/10",
     textClass: "text-blue-400",
     tagline: "Duniya Hila Denge! 🌪️",
-    logoEmoji: "🌪️"
+    logoEmoji: "🌪️",
+    trophies: 5,
+    captain: "Hardik Pandya"
   },
   rcb: {
     id: "rcb",
@@ -34,12 +40,15 @@ export const TEAMS_DATA = {
     primaryColor: "#D71920",
     secondaryColor: "#000000",
     accentColor: "#EF4444",
+    glowHex: "#FF1744",
     gradient: "from-red-600 to-red-900",
     borderClass: "border-red-500",
     bgClass: "bg-red-500/10",
     textClass: "text-red-400",
     tagline: "Ee Sala Cup Namde! 👑",
-    logoEmoji: "👑"
+    logoEmoji: "👑",
+    trophies: 0,
+    captain: "Virat Kohli / Faf"
   },
   kkr: {
     id: "kkr",
@@ -48,12 +57,15 @@ export const TEAMS_DATA = {
     primaryColor: "#3A225D",
     secondaryColor: "#D4AF37",
     accentColor: "#8B5CF6",
+    glowHex: "#9933FF",
     gradient: "from-purple-700 to-violet-950",
     borderClass: "border-purple-500",
     bgClass: "bg-purple-500/10",
     textClass: "text-purple-400",
     tagline: "Korbo Lorbo Jeetbo! ⚔️",
-    logoEmoji: "⚔️"
+    logoEmoji: "⚔️",
+    trophies: 3,
+    captain: "Rinku Singh / Venky"
   },
   srh: {
     id: "srh",
@@ -62,12 +74,15 @@ export const TEAMS_DATA = {
     primaryColor: "#F26522",
     secondaryColor: "#000000",
     accentColor: "#F97316",
+    glowHex: "#FF6600",
     gradient: "from-orange-500 to-red-700",
     borderClass: "border-orange-500",
     bgClass: "bg-orange-500/10",
     textClass: "text-orange-400",
     tagline: "Orange Army! 🦅",
-    logoEmoji: "🦅"
+    logoEmoji: "🦅",
+    trophies: 2,
+    captain: "Pat Cummins"
   },
   rr: {
     id: "rr",
@@ -76,12 +91,15 @@ export const TEAMS_DATA = {
     primaryColor: "#EA1A85",
     secondaryColor: "#254AA5",
     accentColor: "#EC4899",
+    glowHex: "#FF1493",
     gradient: "from-pink-600 to-rose-800",
     borderClass: "border-pink-500",
     bgClass: "bg-pink-500/10",
     textClass: "text-pink-400",
     tagline: "Halla Bol! 🐘",
-    logoEmoji: "🐘"
+    logoEmoji: "🐘",
+    trophies: 1,
+    captain: "Sanju Samson"
   },
   dc: {
     id: "dc",
@@ -90,12 +108,15 @@ export const TEAMS_DATA = {
     primaryColor: "#0078BC",
     secondaryColor: "#B9251C",
     accentColor: "#0EA5E9",
+    glowHex: "#00A2FF",
     gradient: "from-sky-600 to-blue-800",
     borderClass: "border-sky-500",
     bgClass: "bg-sky-500/10",
     textClass: "text-sky-400",
     tagline: "Roar Macha! 🐯",
-    logoEmoji: "🐯"
+    logoEmoji: "🐯",
+    trophies: 0,
+    captain: "Axar Patel / KL Rahul"
   },
   gt: {
     id: "gt",
@@ -104,12 +125,15 @@ export const TEAMS_DATA = {
     primaryColor: "#1B2133",
     secondaryColor: "#E2AA3E",
     accentColor: "#14B8A6",
+    glowHex: "#00E5FF",
     gradient: "from-teal-600 to-slate-900",
     borderClass: "border-teal-500",
     bgClass: "bg-teal-500/10",
     textClass: "text-teal-400",
     tagline: "Aava De! ⚡",
-    logoEmoji: "⚡"
+    logoEmoji: "⚡",
+    trophies: 1,
+    captain: "Shubman Gill"
   },
   lsg: {
     id: "lsg",
@@ -118,12 +142,15 @@ export const TEAMS_DATA = {
     primaryColor: "#38A3A5",
     secondaryColor: "#E05A47",
     accentColor: "#06B6D4",
+    glowHex: "#00F5D4",
     gradient: "from-cyan-600 to-emerald-800",
     borderClass: "border-cyan-500",
     bgClass: "bg-cyan-500/10",
     textClass: "text-cyan-400",
     tagline: "Gazab Andaz! 🏹",
-    logoEmoji: "🏹"
+    logoEmoji: "🏹",
+    trophies: 0,
+    captain: "Nicholas Pooran / Pant"
   },
   pbks: {
     id: "pbks",
@@ -132,11 +159,14 @@ export const TEAMS_DATA = {
     primaryColor: "#DD1F2D",
     secondaryColor: "#A7A9AC",
     accentColor: "#F43F5E",
+    glowHex: "#FF2A55",
     gradient: "from-rose-600 to-red-800",
     borderClass: "border-rose-500",
     bgClass: "bg-rose-500/10",
     textClass: "text-rose-400",
     tagline: "Sadda Punjab! 🛡️",
-    logoEmoji: "🛡️"
+    logoEmoji: "🛡️",
+    trophies: 0,
+    captain: "Shreyas Iyer"
   }
 };
