@@ -425,7 +425,7 @@ export function Lobby({ onOpenCustomPlayer }) {
                     <div className="flex items-center gap-2 mt-1.5">
                       <input
                         type="range"
-                        min="10"
+                        min="5"
                         max="30"
                         step="1"
                         value={timerSec}
@@ -433,6 +433,23 @@ export function Lobby({ onOpenCustomPlayer }) {
                         className="w-full accent-[#6366f1]"
                       />
                       <span className="font-mono text-xs sm:text-sm font-bold text-amber-300 w-10 text-right">{timerSec}s</span>
+                    </div>
+                    {/* Quick Preset Buttons */}
+                    <div className="flex items-center gap-1.5 mt-2 flex-wrap">
+                      {[5, 10, 15, 20, 30].map((sec) => (
+                        <button
+                          key={sec}
+                          type="button"
+                          onClick={() => setTimerSec(sec)}
+                          className={`px-2 py-0.5 rounded-lg text-[10px] sm:text-xs font-bold border transition cursor-pointer ${
+                            timerSec === sec
+                              ? "bg-[#6366f1] text-white border-[#6366f1] shadow-sm"
+                              : "bg-[#0a0a0a] text-[#9ca3af] border-[#27272a] hover:border-[#3f3f46] hover:text-white"
+                          }`}
+                        >
+                          {sec}s
+                        </button>
+                      ))}
                     </div>
                   </div>
                 </div>

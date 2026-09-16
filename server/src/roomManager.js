@@ -39,7 +39,7 @@ export class RoomManager {
       minSquadSize: customRules.minSquadSize || 15,
       maxSquadSize: customRules.maxSquadSize || 25,
       maxOverseas: customRules.maxOverseas || 8,
-      timerSeconds: customRules.timerSeconds || 15,
+      timerSeconds: Math.max(5, Math.min(60, Number(customRules.timerSeconds) || 15)),
       auctionMode
     };
 
@@ -387,10 +387,14 @@ export class RoomManager {
 
       room.currentAuction.timer -= 1;
 
-      if (room.currentAuction.timer === 5) {
+      const totalT = room.rules.timerSeconds || 15;
+      const onceThreshold = totalT <= 5 ? 3 : 5;
+      const twiceThreshold = totalT <= 5 ? 1 : 2;
+
+      if (room.currentAuction.timer === onceThreshold) {
         room.currentAuction.status = "GOING_ONCE";
         this.io.to(room.id).emit("auction_warning", { stage: "GOING_ONCE" });
-      } else if (room.currentAuction.timer === 2) {
+      } else if (room.currentAuction.timer === twiceThreshold) {
         room.currentAuction.status = "GOING_TWICE";
         this.io.to(room.id).emit("auction_warning", { stage: "GOING_TWICE" });
       }
@@ -419,31 +423,33 @@ export class RoomManager {
     }
 
     const team = room.teams.find(t => t.id === user.teamId);
+    if (!team) {
+      socket.emit("error_message", { message: "Team not found!" });
+      return;
+    }
+
     const auction = room.currentAuction;
-
-    if (auction.highestBidderTeamId === team.id) {
-      socket.emit("error_message", { message: "Your team already has the highest bid!" });
+    if (auction.status === "SOLD" || auction.status === "UNSOLD") {
       return;
     }
 
-    const expectedMinBid = auction.currentBid === 0 ? auction.player.basePrice : auction.bidOptions[0];
-    if (bidAmount < expectedMinBid) {
-      socket.emit("error_message", { message: `Minimum bid required is ₹${(expectedMinBid / 10000000).toFixed(2)} Cr` });
-      return;
-    }
-
+    // Validation
     const validation = validateBid(team, auction.player, bidAmount, room.rules);
     if (!validation.valid) {
       socket.emit("error_message", { message: validation.reason });
       return;
     }
 
-    this.executeBid(room, team, user.name, bidAmount);
-
-    // If bots enabled, trigger bot consideration
-    if (room.aiBotsEnabled) {
-      this.scheduleBotDecision(room);
+    // Minimum Bid Increment Logic
+    const minRequiredBid = getNextMinBid(auction.currentBid, auction.player.basePrice);
+    if (bidAmount < minRequiredBid) {
+      socket.emit("error_message", { 
+        message: `Bid must be at least ₹${minRequiredBid >= 10000000 ? (minRequiredBid / 10000000) + ' Cr' : (minRequiredBid / 100000) + ' Lakhs'}` 
+      });
+      return;
     }
+
+    this.executeBid(room, team, user.name, bidAmount);
   }
 
   executeBid(room, team, bidderName, bidAmount) {
@@ -454,7 +460,7 @@ export class RoomManager {
     auction.highestBidderTeamId = team.id;
     auction.highestBidderName = `${team.shortName} (${bidderName})`;
     auction.status = "BIDDING";
-    auction.timer = Math.max(room.rules.timerSeconds, 10);
+    auction.timer = Math.max(room.rules.timerSeconds, 5);
 
     const bidRecord = {
       teamId: team.id,
