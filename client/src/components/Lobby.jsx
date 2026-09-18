@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSocket } from "../context/SocketContext";
+import { useAuth } from "../context/AuthContext";
 import { TEAMS_DATA } from "../data/teams";
 import { formatCurrency } from "../utils/formatters";
 import { 
   Users, Play, Settings, PlusCircle, Sparkles, Shield, 
   Clock, DollarSign, Globe, Award, ChevronRight, CheckCircle2,
-  Zap, Lock, Radio, Copy, Check, RefreshCw
+  Zap, Lock, Radio, Copy, Check, RefreshCw, UserCheck
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-export function Lobby({ onOpenCustomPlayer }) {
+export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfile }) {
   const { 
     roomState, 
     publicRooms,
@@ -24,13 +25,22 @@ export function Lobby({ onOpenCustomPlayer }) {
     userName: defaultUserName 
   } = useSocket();
 
+  const { user, activeRoomId } = useAuth();
+
   // Mode: 'public_browser' | 'create' | 'join'
   const [activeTab, setActiveTab] = useState("public_browser");
-  const [nameInput, setNameInput] = useState(defaultUserName || "");
+  const [nameInput, setNameInput] = useState(user?.name || defaultUserName || "");
   const [roomCodeInput, setRoomCodeInput] = useState(urlRoomCode || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
   const [copiedLink, setCopiedLink] = useState(false);
+
+  // Sync nameInput if user signs in
+  useEffect(() => {
+    if (user?.name) {
+      setNameInput(user.name);
+    }
+  }, [user?.name]);
 
   // Custom rules setup state
   const [isPublicRoom, setIsPublicRoom] = useState(true);
@@ -223,6 +233,54 @@ export function Lobby({ onOpenCustomPlayer }) {
             animate={{ opacity: 1, y: 0 }}
             className="w-full lg:col-span-5 glass-panel p-5 sm:p-7 rounded-3xl relative z-10 shadow-2xl border border-[#27272a] bg-[#121212]"
           >
+            {/* Google Account & Progress Status Card */}
+            {user ? (
+              <div 
+                onClick={onOpenUserProfile}
+                className="mb-3.5 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs flex items-center justify-between gap-2 shadow-sm cursor-pointer hover:bg-emerald-500/15 transition"
+              >
+                <div className="flex items-center gap-2 truncate">
+                  <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
+                  <span className="truncate">
+                    Signed in as <strong>{user.name}</strong> • Progress Synced
+                  </span>
+                </div>
+                <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded-full shrink-0">
+                  View Profile
+                </span>
+              </div>
+            ) : (
+              <div className="mb-4 p-3.5 sm:p-4 rounded-2xl bg-[#18181b] border border-[#3f3f46] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+                <div className="flex items-center gap-3 text-left w-full sm:w-auto">
+                  <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0 shadow-md">
+                    <svg className="w-5 h-5" viewBox="0 0 24 24">
+                      <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z" />
+                      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.13C3.26 21.43 7.31 24 12 24z" />
+                      <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.13z" />
+                      <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.57 1.24 6.58l4.04 3.13c.95-2.83 3.6-4.96 6.72-4.96z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                      <span>Sign In with Google</span>
+                      <span className="text-[10px] bg-[#6366f1]/25 text-[#a5b4fc] px-1.5 py-0.5 rounded font-bold uppercase">Save Progress</span>
+                    </div>
+                    <p className="text-[11px] text-[#9ca3af] leading-tight mt-0.5">
+                      Never lose your team or auction progress on page reload!
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={onOpenGoogleSignIn}
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-white hover:bg-gray-100 text-[#1f2937] font-heading font-bold text-xs shadow-md transition cursor-pointer flex items-center justify-center gap-1.5 shrink-0"
+                >
+                  <span>Sign In</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-600" />
+                </button>
+              </div>
+            )}
+
             {/* Quick Nickname Input */}
             <div className="mb-4 sm:mb-5 p-4 rounded-2xl bg-[#0a0a0a] border border-[#27272a]">
               <label className="block text-xs sm:text-sm font-bold text-[#9ca3af] uppercase tracking-[0.1em] mb-1.5">
@@ -237,6 +295,31 @@ export function Lobby({ onOpenCustomPlayer }) {
                 className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-[#050505] border border-[#27272a] text-white placeholder-[#71717a] text-sm sm:text-base focus:outline-none focus:border-[#6366f1] transition"
               />
             </div>
+
+            {/* Resume Active Auction Banner (If player refreshed or disconnected) */}
+            {activeRoomId && (!roomState || roomState.id !== activeRoomId) && (
+              <div className="mb-4 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 border border-amber-500/40 flex items-center justify-between gap-3 shadow-lg">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
+                  <div>
+                    <div className="text-xs sm:text-sm font-bold text-amber-300">
+                      Live Auction in Progress
+                    </div>
+                    <div className="text-[11px] text-[#9ca3af]">
+                      Your seat is waiting in room <span className="font-mono text-white font-bold">{activeRoomId}</span>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => joinRoom(activeRoomId, nameInput || defaultUserName)}
+                  className="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs sm:text-sm font-heading font-bold transition shadow-md cursor-pointer flex items-center gap-1.5 shrink-0"
+                >
+                  <span>Resume Stage</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            )}
 
             {/* Tab Switcher */}
             <div className="flex bg-[#0a0a0a] p-1 sm:p-1.5 rounded-2xl border border-[#27272a] mb-4 sm:mb-5 gap-1">

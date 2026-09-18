@@ -2,19 +2,28 @@ import React, { createContext, useContext, useEffect, useState, useMemo } from "
 import { io } from "socket.io-client";
 import confetti from "canvas-confetti";
 import { sounds } from "../utils/sound";
+import { useAuth } from "./AuthContext";
 
 const SocketContext = createContext(null);
 
 export function SocketProvider({ children }) {
+  const { user, activeRoomId, setActiveRoomId, updateStats } = useAuth();
   const [socket, setSocket] = useState(null);
   const [connected, setConnected] = useState(false);
   const [roomState, setRoomState] = useState(null);
   const [publicRooms, setPublicRooms] = useState([]);
-  const [userName, setUserName] = useState(() => localStorage.getItem("ipl_user_name") || "");
+  const [userName, setUserName] = useState(() => user?.name || localStorage.getItem("ipl_user_name") || "");
   const [errorMessage, setErrorMessage] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
   const [soundMuted, setSoundMuted] = useState(false);
   const [floatingReactions, setFloatingReactions] = useState([]);
+
+  // Keep userName synced with auth user
+  useEffect(() => {
+    if (user?.name) {
+      setUserName(user.name);
+    }
+  }, [user?.name]);
 
   // Check URL for ?room=CODE
   const [urlRoomCode, setUrlRoomCode] = useState(() => {
@@ -39,6 +48,36 @@ export function SocketProvider({ children }) {
       console.log("Connected to auction server:", newSocket.id);
       setConnected(true);
 
+      // Reconnect to active room if available (Google sign-in & session preservation)
+      const targetRoom = urlRoomCode || activeRoomId || localStorage.getItem("ipl_active_room_id");
+      let authUser = null;
+      try {
+        authUser = JSON.parse(localStorage.getItem("ipl_auth_user") || "null");
+      } catch {}
+      const savedName = authUser?.name || localStorage.getItem("ipl_user_name") || "";
+
+      if (targetRoom && (authUser?.id || savedName)) {
+        newSocket.emit(
+          "reconnect_user",
+          {
+            roomId: targetRoom,
+            userId: authUser?.id || null,
+            userName: savedName,
+            userAuth: {
+              userId: authUser?.id || null,
+              userEmail: authUser?.email || null,
+              userAvatar: authUser?.avatar || null
+            }
+          },
+          (res) => {
+            if (res && res.success && res.roomState) {
+              setRoomState(res.roomState);
+              if (setActiveRoomId) setActiveRoomId(res.roomId);
+            }
+          }
+        );
+      }
+
       // Fetch public rooms immediately upon connect
       newSocket.emit("get_public_rooms", (res) => {
         if (res && res.rooms) setPublicRooms(res.rooms);
@@ -52,6 +91,9 @@ export function SocketProvider({ children }) {
 
     newSocket.on("room_state_update", (updatedRoom) => {
       setRoomState(updatedRoom);
+      if (updatedRoom?.id && setActiveRoomId) {
+        setActiveRoomId(updatedRoom.id);
+      }
     });
 
     newSocket.on("error_message", ({ message }) => {
@@ -84,6 +126,16 @@ export function SocketProvider({ children }) {
         origin: { y: 0.55 },
         colors: [soldData.teamColor || '#F59E0B', '#FFD700', '#FDE68A', '#FFFFFF', '#6366F1']
       });
+
+      if (soldData?.winningTeamId && updateStats) {
+        const storedTeamId = localStorage.getItem("ipl_selected_team_id");
+        if (soldData.winningTeamId === storedTeamId) {
+          updateStats({
+            playersBought: 1,
+            totalPurseSpent: soldData.amount || 0
+          });
+        }
+      }
     });
 
     newSocket.on("player_unsold", () => {
@@ -169,10 +221,18 @@ export function SocketProvider({ children }) {
       localStorage.setItem("ipl_user_name", name);
       setUserName(name);
 
-      socket.emit("create_room", { hostName: name, rules: customRules }, (response) => {
+      const userAuth = {
+        userId: user?.id || null,
+        userEmail: user?.email || null,
+        userAvatar: user?.avatar || null
+      };
+
+      socket.emit("create_room", { hostName: name, rules: customRules, userAuth }, (response) => {
         if (response.success) {
           setRoomState(response.roomState);
+          if (setActiveRoomId) setActiveRoomId(response.roomId);
           window.history.pushState({}, "", `?room=${response.roomId}`);
+          if (updateStats) updateStats({ auctionsJoined: 1 });
           resolve(response.roomId);
         } else {
           reject(response.error);
@@ -187,10 +247,18 @@ export function SocketProvider({ children }) {
       localStorage.setItem("ipl_user_name", name);
       setUserName(name);
 
-      socket.emit("join_room", { roomId: code.trim().toUpperCase(), userName: name }, (response) => {
+      const userAuth = {
+        userId: user?.id || null,
+        userEmail: user?.email || null,
+        userAvatar: user?.avatar || null
+      };
+
+      socket.emit("join_room", { roomId: code.trim().toUpperCase(), userName: name, userAuth }, (response) => {
         if (response.success) {
           setRoomState(response.roomState);
+          if (setActiveRoomId) setActiveRoomId(response.roomId);
           window.history.pushState({}, "", `?room=${response.roomId}`);
+          if (updateStats) updateStats({ auctionsJoined: 1 });
           resolve(response.roomId);
         } else {
           reject(response.error);
@@ -205,10 +273,18 @@ export function SocketProvider({ children }) {
       localStorage.setItem("ipl_user_name", name);
       setUserName(name);
 
-      socket.emit("quick_match", { userName: name }, (response) => {
+      const userAuth = {
+        userId: user?.id || null,
+        userEmail: user?.email || null,
+        userAvatar: user?.avatar || null
+      };
+
+      socket.emit("quick_match", { userName: name, userAuth }, (response) => {
         if (response.success) {
           setRoomState(response.roomState);
+          if (setActiveRoomId) setActiveRoomId(response.roomId);
           window.history.pushState({}, "", `?room=${response.roomId}`);
+          if (updateStats) updateStats({ auctionsJoined: 1 });
           resolve(response.roomId);
         } else {
           reject(response.error);
@@ -219,6 +295,7 @@ export function SocketProvider({ children }) {
 
   const selectTeam = (teamId) => {
     if (!socket || !roomState) return;
+    localStorage.setItem("ipl_selected_team_id", teamId);
     socket.emit("select_team", { roomId: roomState.id, teamId });
   };
 

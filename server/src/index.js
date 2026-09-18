@@ -36,6 +36,90 @@ app.get("/api/public-rooms", (req, res) => {
   });
 });
 
+// In-Memory User Store for Player Progress & Career Sync
+const userProfiles = new Map();
+
+function getOrCreateUser(userId, data = {}) {
+  if (!userId) return null;
+  let user = userProfiles.get(userId);
+  if (!user) {
+    user = {
+      id: userId,
+      name: data.name || "Franchise Manager",
+      email: data.email || "",
+      avatar: data.avatar || "",
+      createdAt: Date.now(),
+      stats: {
+        auctionsJoined: 0,
+        tournamentsWon: 0,
+        playersBought: 0,
+        totalPurseSpent: 0
+      },
+      savedSquads: []
+    };
+    userProfiles.set(userId, user);
+  } else {
+    if (data.name) user.name = data.name;
+    if (data.email) user.email = data.email;
+    if (data.avatar) user.avatar = data.avatar;
+  }
+  return user;
+}
+
+// User Profile REST Endpoints
+app.get("/api/user/profile/:userId", (req, res) => {
+  const user = userProfiles.get(req.params.userId);
+  if (!user) {
+    return res.json({ success: true, user: null });
+  }
+  res.json({ success: true, user });
+});
+
+app.post("/api/user/profile", (req, res) => {
+  const { userId, name, email, avatar } = req.body;
+  if (!userId) {
+    return res.status(400).json({ success: false, error: "userId required" });
+  }
+  const user = getOrCreateUser(userId, { name, email, avatar });
+  res.json({ success: true, user });
+});
+
+app.post("/api/user/save-squad", (req, res) => {
+  const { userId, squadData } = req.body;
+  if (!userId || !squadData) {
+    return res.status(400).json({ success: false, error: "userId and squadData required" });
+  }
+  const user = getOrCreateUser(userId);
+  const squadItem = {
+    id: `squad-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    teamId: squadData.teamId,
+    teamName: squadData.teamName,
+    shortName: squadData.shortName,
+    color: squadData.color,
+    totalPlayers: squadData.squad ? squadData.squad.length : 0,
+    totalSpent: squadData.spent || 0,
+    purseLeft: squadData.purseLeft || 0,
+    squad: squadData.squad || [],
+    savedAt: Date.now()
+  };
+  user.savedSquads.unshift(squadItem);
+  if (user.savedSquads.length > 25) user.savedSquads.pop();
+  res.json({ success: true, squad: squadItem });
+});
+
+app.post("/api/user/stats", (req, res) => {
+  const { userId, deltaStats } = req.body;
+  if (!userId) return res.status(400).json({ success: false, error: "userId required" });
+  const user = getOrCreateUser(userId);
+  if (deltaStats) {
+    if (deltaStats.auctionsJoined) user.stats.auctionsJoined += Number(deltaStats.auctionsJoined);
+    if (deltaStats.tournamentsWon) user.stats.tournamentsWon += Number(deltaStats.tournamentsWon);
+    if (deltaStats.playersBought) user.stats.playersBought += Number(deltaStats.playersBought);
+    if (deltaStats.totalPurseSpent) user.stats.totalPurseSpent += Number(deltaStats.totalPurseSpent);
+  }
+  res.json({ success: true, stats: user.stats });
+});
+
 // Socket.io connection handling
 io.on("connection", (socket) => {
   console.log(`[Socket Connected] ID: ${socket.id}`);
@@ -47,10 +131,28 @@ io.on("connection", (socket) => {
     }
   });
 
-  // Quick match / Instant play
-  socket.on("quick_match", ({ userName }, callback) => {
+  // Reconnect user to existing room (prevents lost progress on page reload)
+  socket.on("reconnect_user", ({ roomId, userId, userName, userAuth }, callback) => {
     try {
-      const room = roomManager.quickMatch(socket, userName);
+      const room = roomManager.reconnectUser(socket, roomId, userId, userName, userAuth);
+      console.log(`[User Reconnected] ${userName || userId} -> Room ${room.id}`);
+      if (callback) {
+        callback({
+          success: true,
+          roomId: room.id,
+          roomState: roomManager.getPublicRoomState(room)
+        });
+      }
+    } catch (err) {
+      console.log(`[Reconnect Failed] ${err.message}`);
+      if (callback) callback({ success: false, error: err.message });
+    }
+  });
+
+  // Quick match / Instant play
+  socket.on("quick_match", ({ userName, userAuth }, callback) => {
+    try {
+      const room = roomManager.quickMatch(socket, userName, userAuth);
       console.log(`[Quick Match] ${userName} -> Room ${room.id}`);
       if (callback) {
         callback({
@@ -66,9 +168,9 @@ io.on("connection", (socket) => {
   });
 
   // Create room
-  socket.on("create_room", ({ hostName, rules }, callback) => {
+  socket.on("create_room", ({ hostName, rules, userAuth }, callback) => {
     try {
-      const room = roomManager.createRoom(socket, hostName, rules);
+      const room = roomManager.createRoom(socket, hostName, rules, userAuth);
       console.log(`[Room Created] ${room.id} by ${hostName} (Public: ${room.isPublic})`);
       if (callback) {
         callback({
@@ -84,9 +186,9 @@ io.on("connection", (socket) => {
   });
 
   // Join room
-  socket.on("join_room", ({ roomId, userName }, callback) => {
+  socket.on("join_room", ({ roomId, userName, userAuth }, callback) => {
     try {
-      const room = roomManager.joinRoom(socket, roomId, userName);
+      const room = roomManager.joinRoom(socket, roomId, userName, userAuth);
       console.log(`[User Joined] ${userName} -> Room ${room.id}`);
       if (callback) {
         callback({

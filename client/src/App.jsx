@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSocket, SocketProvider } from "./context/SocketContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import { Navbar } from "./components/Navbar";
 import { Lobby } from "./components/Lobby";
 import { AuctionStage } from "./components/AuctionStage";
@@ -10,18 +11,35 @@ import { SquadModal } from "./components/SquadModal";
 import { SoldCelebration } from "./components/SoldCelebration";
 import { CustomPlayerModal } from "./components/CustomPlayerModal";
 import { TournamentSimulatorModal } from "./components/TournamentSimulatorModal";
+import { GoogleSignInModal } from "./components/GoogleSignInModal";
+import { UserProfileModal } from "./components/UserProfileModal";
 import { LiveChat } from "./components/LiveChat";
 import { TEAMS_DATA } from "./data/teams";
-import { Trophy, CheckCircle, AlertTriangle } from "lucide-react";
+import { Trophy, CheckCircle, AlertTriangle, BookmarkCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 function AuctionApp() {
-  const { roomState, errorMessage, toastMessage, myTeam } = useSocket();
+  const { roomState, errorMessage, toastMessage, myTeam, joinRoom, userName } = useSocket();
+  const { user, saveSquad } = useAuth();
 
   const [squadModalOpen, setSquadModalOpen] = useState(false);
   const [selectedSquadTeamId, setSelectedSquadTeamId] = useState("csk");
   const [customPlayerModalOpen, setCustomPlayerModalOpen] = useState(false);
   const [tournamentModalOpen, setTournamentModalOpen] = useState(false);
+  const [googleSignInModalOpen, setGoogleSignInModalOpen] = useState(false);
+  const [userProfileModalOpen, setUserProfileModalOpen] = useState(false);
+  const [squadSavedSuccess, setSquadSavedSuccess] = useState(false);
+
+  const handleSaveCurrentSquad = async () => {
+    if (!myTeam) return;
+    if (!user) {
+      setGoogleSignInModalOpen(true);
+      return;
+    }
+    await saveSquad(myTeam);
+    setSquadSavedSuccess(true);
+    setTimeout(() => setSquadSavedSuccess(false), 3000);
+  };
 
   // Dynamic stadium arena glow based on active leading bidder
   const activeBidderTeamId = roomState?.currentAuction?.highestBidderTeamId;
@@ -69,6 +87,8 @@ function AuctionApp() {
       <Navbar 
         onOpenSquads={() => handleOpenSquad()} 
         onOpenTournament={() => setTournamentModalOpen(true)} 
+        onOpenGoogleSignIn={() => setGoogleSignInModalOpen(true)}
+        onOpenUserProfile={() => setUserProfileModalOpen(true)}
       />
 
       {/* Floating Notifications */}
@@ -97,13 +117,29 @@ function AuctionApp() {
               <span>{toastMessage}</span>
             </motion.div>
           )}
+
+          {squadSavedSuccess && (
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              className="px-4 py-3 rounded-2xl bg-emerald-500 text-white text-xs font-semibold shadow-2xl flex items-center gap-2 backdrop-blur-md border border-emerald-400"
+            >
+              <BookmarkCheck className="w-4 h-4 shrink-0" />
+              <span>🎉 Squad saved permanently to your Google profile!</span>
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
 
       {/* Main Content Area */}
       <main className="flex-1 relative z-10 px-3 sm:px-6 lg:px-8 py-3 sm:py-6 max-w-[1600px] mx-auto w-full">
         {!roomState || roomState.status === "LOBBY" ? (
-          <Lobby onOpenCustomPlayer={() => setCustomPlayerModalOpen(true)} />
+          <Lobby 
+            onOpenCustomPlayer={() => setCustomPlayerModalOpen(true)} 
+            onOpenGoogleSignIn={() => setGoogleSignInModalOpen(true)}
+            onOpenUserProfile={() => setUserProfileModalOpen(true)}
+          />
         ) : roomState.status === "ENDED" ? (
           /* AUCTION COMPLETE RECAP */
           <div className="glass-panel p-6 sm:p-12 rounded-3xl text-center max-w-3xl mx-auto my-6 sm:my-10 space-y-5 border border-[#27272a] bg-[#121212]">
@@ -131,6 +167,16 @@ function AuctionApp() {
                 <Trophy className="w-4 h-4 text-black" />
                 <span>Simulate IPL Playoffs & Crown Champion</span>
               </button>
+
+              {myTeam && (
+                <button
+                  onClick={handleSaveCurrentSquad}
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-heading font-bold text-sm tracking-tight shadow-xl shadow-emerald-500/20 transition cursor-pointer flex items-center gap-2"
+                >
+                  <BookmarkCheck className="w-4 h-4" />
+                  <span>Save {myTeam.shortName} Squad to Google Profile</span>
+                </button>
+              )}
 
               <button
                 onClick={() => handleOpenSquad()}
@@ -172,6 +218,17 @@ function AuctionApp() {
         onClose={() => setCustomPlayerModalOpen(false)}
       />
 
+      <GoogleSignInModal
+        isOpen={googleSignInModalOpen}
+        onClose={() => setGoogleSignInModalOpen(false)}
+      />
+
+      <UserProfileModal
+        isOpen={userProfileModalOpen}
+        onClose={() => setUserProfileModalOpen(false)}
+        onResumeRoom={(code) => joinRoom(code, userName)}
+      />
+
       <SoldCelebration />
 
       {/* In-Game Live Chat & Floating Reactions */}
@@ -188,8 +245,10 @@ function AuctionApp() {
 
 export default function App() {
   return (
-    <SocketProvider>
-      <AuctionApp />
-    </SocketProvider>
+    <AuthProvider>
+      <SocketProvider>
+        <AuctionApp />
+      </SocketProvider>
+    </AuthProvider>
   );
 }

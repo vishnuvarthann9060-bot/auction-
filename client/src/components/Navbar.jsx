@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useSocket } from "../context/SocketContext";
+import { useAuth } from "../context/AuthContext";
 import { formatCurrency } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
-import { Volume2, VolumeX, Copy, Check, Users, Shield, Trophy, Share2, Sparkles } from "lucide-react";
+import { Volume2, VolumeX, Copy, Check, Users, Shield, Trophy, Share2, Sparkles, UserCheck } from "lucide-react";
 
-export function Navbar({ onOpenSquads, onOpenTournament }) {
+export function Navbar({ onOpenSquads, onOpenTournament, onOpenGoogleSignIn, onOpenUserProfile }) {
   const { roomState, myTeam, isHost, soundMuted, toggleSound, connected } = useSocket();
+  const { user, careerStats } = useAuth();
   const [copiedLink, setCopiedLink] = useState(false);
 
   const copyShareLink = () => {
@@ -100,8 +102,56 @@ export function Navbar({ onOpenSquads, onOpenTournament }) {
                 </div>
               </div>
             </div>
+          ) : null}
+
+          {/* Google Sign-In or User Career Profile */}
+          {user ? (
+            <button
+              onClick={onOpenUserProfile}
+              title="View Google Career Profile & Saved Squads"
+              className="flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-xl bg-[#121212] hover:bg-[#1c1c20] border border-[#27272a] hover:border-[#6366f1]/60 transition cursor-pointer group shadow-sm"
+            >
+              <div className="relative">
+                {user.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-[#6366f1]"
+                  />
+                ) : (
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-tr from-[#6366f1] to-[#a855f7] text-white flex items-center justify-center text-xs font-bold font-heading">
+                    {user.name?.charAt(0) || 'M'}
+                  </div>
+                )}
+                <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-[#121212]" />
+              </div>
+
+              <div className="text-left hidden sm:block">
+                <div className="text-xs font-bold text-white group-hover:text-amber-300 transition truncate max-w-[110px]">
+                  {user.name?.split(' ')[0]}
+                </div>
+                <div className="text-[10px] text-[#9ca3af] flex items-center gap-1 font-medium">
+                  <span>Saved</span>
+                  {careerStats?.tournamentsWon > 0 && (
+                    <span className="text-amber-400 font-bold">🏆 {careerStats.tournamentsWon}</span>
+                  )}
+                </div>
+              </div>
+            </button>
           ) : (
-            <span className="text-xs sm:text-sm text-[#9ca3af] italic hidden md:block">Guest</span>
+            <button
+              onClick={onOpenGoogleSignIn}
+              title="Sign In with Google to save progress & teams"
+              className="flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-white hover:bg-gray-100 text-[#1f2937] text-xs sm:text-sm font-heading font-bold shadow-lg shadow-white/10 transition cursor-pointer group"
+            >
+              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z" />
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.13C3.26 21.43 7.31 24 12 24z" />
+                <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.42l4.04-3.13z" />
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.57 1.24 6.58l4.04 3.13c.95-2.83 3.6-4.96 6.72-4.96z" />
+              </svg>
+              <span>Sign In with Google</span>
+            </button>
           )}
 
           {/* Tournament Simulator Button */}

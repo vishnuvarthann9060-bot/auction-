@@ -29,7 +29,7 @@ export class RoomManager {
     return code;
   }
 
-  createRoom(socket, hostName, customRules = {}) {
+  createRoom(socket, hostName, customRules = {}, userAuth = {}) {
     const roomId = this.generateRoomCode();
     const isPublic = customRules.isPublic !== false; // default true for public matching
     const auctionMode = customRules.auctionMode || "MEGA"; // "MEGA" or "MINI"
@@ -47,6 +47,7 @@ export class RoomManager {
       ...team,
       ownerId: null,
       ownerName: null,
+      ownerUserId: null,
       isBot: false,
       purse: rules.totalPurse,
       squad: []
@@ -55,6 +56,7 @@ export class RoomManager {
     const room = {
       id: roomId,
       hostId: socket.id,
+      hostUserId: userAuth?.userId || null,
       rules,
       isPublic,
       aiBotsEnabled: false,
@@ -72,30 +74,30 @@ export class RoomManager {
     };
 
     this.rooms.set(roomId, room);
-    this.joinUserToRoom(socket, roomId, hostName, true);
+    this.joinUserToRoom(socket, roomId, hostName, true, userAuth);
     return room;
   }
 
-  joinRoom(socket, roomId, userName) {
+  joinRoom(socket, roomId, userName, userAuth = {}) {
     const room = this.rooms.get(roomId.toUpperCase());
     if (!room) {
       throw new Error("Room not found. Please check the code!");
     }
-    return this.joinUserToRoom(socket, room.id, userName, false);
+    return this.joinUserToRoom(socket, room.id, userName, false, userAuth);
   }
 
-  quickMatch(socket, userName) {
+  quickMatch(socket, userName, userAuth = {}) {
     // Find an active public room in LOBBY with free team slots
     for (const [id, room] of this.rooms.entries()) {
       if (room.isPublic && room.status === "LOBBY") {
         const freeTeams = room.teams.filter(t => !t.ownerId && !t.isBot);
         if (freeTeams.length > 0) {
-          return this.joinUserToRoom(socket, id, userName, false);
+          return this.joinUserToRoom(socket, id, userName, false, userAuth);
         }
       }
     }
     // If no suitable room found, automatically create a new public room!
-    return this.createRoom(socket, userName || "CricketFan", { isPublic: true });
+    return this.createRoom(socket, userName || "CricketFan", { isPublic: true }, userAuth);
   }
 
   getPublicRooms() {
@@ -118,19 +120,86 @@ export class RoomManager {
     return list;
   }
 
-  joinUserToRoom(socket, roomId, userName, isHost = false) {
+  joinUserToRoom(socket, roomId, userName, isHost = false, userAuth = {}) {
     const room = this.rooms.get(roomId);
+    if (!room) return null;
     socket.join(roomId);
+
+    const userId = userAuth?.userId || null;
+    const userEmail = userAuth?.userEmail || null;
+    const userAvatar = userAuth?.userAvatar || null;
+
+    // Check if user with this permanent userId already exists in room (e.g. reconnecting on page reload)
+    let existingUser = null;
+    let oldSocketId = null;
+    if (userId) {
+      for (const [sId, u] of room.users.entries()) {
+        if (u.userId === userId) {
+          existingUser = u;
+          oldSocketId = sId;
+          break;
+        }
+      }
+    }
+
+    if (existingUser) {
+      if (oldSocketId !== socket.id) {
+        room.users.delete(oldSocketId);
+      }
+      existingUser.id = socket.id;
+      existingUser.name = userName || existingUser.name;
+      if (userEmail) existingUser.email = userEmail;
+      if (userAvatar) existingUser.avatar = userAvatar;
+      existingUser.disconnectedAt = null;
+
+      const wasHost = existingUser.isHost || room.hostUserId === userId || room.hostId === oldSocketId;
+      if (wasHost || isHost) {
+        existingUser.isHost = true;
+        room.hostId = socket.id;
+        room.hostUserId = userId;
+      }
+
+      room.users.set(socket.id, existingUser);
+
+      // Rebind team ownership to new socket
+      if (existingUser.teamId) {
+        const team = room.teams.find(t => t.id === existingUser.teamId);
+        if (team) {
+          team.ownerId = socket.id;
+          team.ownerName = existingUser.name;
+          team.ownerUserId = userId;
+        }
+      }
+
+      this.broadcastRoomState(roomId);
+      return room;
+    }
 
     room.users.set(socket.id, {
       id: socket.id,
+      userId,
+      email: userEmail,
+      avatar: userAvatar,
       name: userName || `Manager-${socket.id.slice(0, 4)}`,
       isHost,
-      teamId: null
+      teamId: null,
+      disconnectedAt: null
     });
+
+    if (isHost && userId) {
+      room.hostUserId = userId;
+    }
 
     this.broadcastRoomState(roomId);
     return room;
+  }
+
+  reconnectUser(socket, roomId, userId, userName = "", userAuth = {}) {
+    const room = this.rooms.get(roomId?.toUpperCase());
+    if (!room) {
+      throw new Error("Room not found or session has expired.");
+    }
+    return this.joinUserToRoom(socket, room.id, userName, false, { userId, ...userAuth });
   }
 
   selectTeam(socket, roomId, teamId) {
@@ -161,6 +230,7 @@ export class RoomManager {
     // Assign new team (replaces bot if it was a bot)
     targetTeam.ownerId = socket.id;
     targetTeam.ownerName = user.name;
+    targetTeam.ownerUserId = user.userId || null;
     targetTeam.isBot = false;
     user.teamId = teamId;
 
@@ -579,31 +649,77 @@ export class RoomManager {
   handleDisconnect(socket) {
     for (const [roomId, room] of this.rooms.entries()) {
       if (room.users.has(socket.id)) {
-        room.users.delete(socket.id);
+        const user = room.users.get(socket.id);
 
-        if (room.hostId === socket.id) {
-          const nextUser = room.users.values().next().value;
-          if (nextUser) {
-            room.hostId = nextUser.id;
-            nextUser.isHost = true;
-          }
-        }
+        if (user.userId) {
+          // Keep user profile & team intact for 5-minute reconnection grace period
+          user.disconnectedAt = Date.now();
+          console.log(`[User Temporarily Disconnected] ${user.name} (${user.userId}) in Room ${roomId}`);
 
-        // Clean up empty rooms after 15 minutes to save memory
-        if (room.users.size === 0) {
           setTimeout(() => {
             const currentRoom = this.rooms.get(roomId);
-            if (currentRoom && currentRoom.users.size === 0) {
-              if (currentRoom.timerInterval) clearInterval(currentRoom.timerInterval);
-              if (currentRoom.botTimeout) clearTimeout(currentRoom.botTimeout);
-              this.rooms.delete(roomId);
-              console.log(`[Cleaned Idle Room] ${roomId}`);
+            if (!currentRoom) return;
+            const u = currentRoom.users.get(socket.id);
+            if (u && u.disconnectedAt) {
+              currentRoom.users.delete(socket.id);
+              if (u.teamId) {
+                const team = currentRoom.teams.find(t => t.id === u.teamId);
+                if (team && team.ownerId === socket.id) {
+                  team.ownerId = null;
+                  team.ownerName = null;
+                  team.ownerUserId = null;
+                }
+              }
+              if (currentRoom.hostId === socket.id) {
+                const nextUser = currentRoom.users.values().next().value;
+                if (nextUser) {
+                  currentRoom.hostId = nextUser.id;
+                  nextUser.isHost = true;
+                }
+              }
+              this.broadcastRoomState(roomId);
             }
-          }, 900000);
-        }
+          }, 300000); // 5 min
 
-        this.broadcastRoomState(roomId);
-        break;
+          this.broadcastRoomState(roomId);
+          break;
+        } else {
+          // Anonymous user without userId
+          room.users.delete(socket.id);
+
+          if (user.teamId) {
+            const team = room.teams.find(t => t.id === user.teamId);
+            if (team && team.ownerId === socket.id) {
+              team.ownerId = null;
+              team.ownerName = null;
+              team.ownerUserId = null;
+            }
+          }
+
+          if (room.hostId === socket.id) {
+            const nextUser = room.users.values().next().value;
+            if (nextUser) {
+              room.hostId = nextUser.id;
+              nextUser.isHost = true;
+            }
+          }
+
+          // Clean up empty rooms after 15 minutes to save memory
+          if (room.users.size === 0) {
+            setTimeout(() => {
+              const currentRoom = this.rooms.get(roomId);
+              if (currentRoom && currentRoom.users.size === 0) {
+                if (currentRoom.timerInterval) clearInterval(currentRoom.timerInterval);
+                if (currentRoom.botTimeout) clearTimeout(currentRoom.botTimeout);
+                this.rooms.delete(roomId);
+                console.log(`[Cleaned Idle Room] ${roomId}`);
+              }
+            }, 900000);
+          }
+
+          this.broadcastRoomState(roomId);
+          break;
+        }
       }
     }
   }
