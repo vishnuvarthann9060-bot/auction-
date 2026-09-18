@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSocket } from "../context/SocketContext";
 import { formatCurrency, getRoleBadgeClass } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
+import TeamLogo from "./TeamLogo";
 import { PlayerPortrait } from "./PlayerPortrait";
 import { X, Shield, DollarSign, Users, Award, Globe, LayoutGrid, Radio } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -61,7 +62,7 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
           {/* Top Bar with Franchise Tabs */}
           <div className="p-4 sm:p-6 pb-3 border-b border-[#27272a] flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="text-3xl sm:text-4xl">{meta?.logoEmoji || "🏏"}</span>
+              <TeamLogo meta={meta} size="lg" />
               <div>
                 <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-white tracking-[-0.03em]">{currentTeam.name}</h3>
                 <p className="text-xs sm:text-sm text-[#9ca3af]">
@@ -92,7 +93,7 @@ export function SquadModal({ isOpen, onClose, initialTeamId }) {
                       : "bg-[#121212] text-[#9ca3af] hover:text-white border-[#27272a]"
                   }`}
                 >
-                  <span className="text-sm sm:text-base">{TEAMS_DATA[t.id]?.logoEmoji}</span>
+                  <TeamLogo teamId={t.id} size="xs" />
                   <span>{t.shortName}</span>
                   <span className="text-xs opacity-75">({t.squad.length})</span>
                 </button>

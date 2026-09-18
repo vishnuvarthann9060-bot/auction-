@@ -2,6 +2,7 @@ import React from "react";
 import { useSocket } from "../context/SocketContext";
 import { formatCurrency } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
+import TeamLogo from "./TeamLogo";
 import { Users, ChevronRight, Trophy } from "lucide-react";
 
 export function TeamsOverview({ onSelectTeamDetail }) {
@@ -47,8 +48,8 @@ export function TeamsOverview({ onSelectTeamDetail }) {
               />
 
               <div className="flex items-start justify-between pl-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-xl sm:text-2xl">{meta?.logoEmoji || "🏏"}</span>
+                <div className="flex items-center gap-2.5">
+                  <TeamLogo meta={meta} size="sm" />
                   <div>
                     <div className="text-xs sm:text-sm font-heading font-bold text-white flex items-center gap-1">
                       <span>{team.shortName}</span>

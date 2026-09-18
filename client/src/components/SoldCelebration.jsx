@@ -2,6 +2,7 @@ import React from "react";
 import { useSocket } from "../context/SocketContext";
 import { formatCurrency } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
+import TeamLogo from "./TeamLogo";
 import { PlayerPortrait } from "./PlayerPortrait";
 import { Gavel, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -49,8 +50,8 @@ export function SoldCelebration() {
 
               <div className="py-2">
                 <div className="text-xs text-[#9ca3af]">Bought by:</div>
-                <div className="flex items-center justify-center gap-2 mt-1">
-                  <span className="text-2xl">{meta?.logoEmoji || "🏏"}</span>
+                <div className="flex items-center justify-center gap-2.5 mt-1">
+                  <TeamLogo meta={meta} size="md" />
                   <span className={`text-xl font-heading font-bold ${meta?.textClass || 'text-white'}`}>
                     {winnerTeam?.name}
                   </span>

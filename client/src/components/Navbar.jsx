@@ -3,6 +3,7 @@ import { useSocket } from "../context/SocketContext";
 import { useAuth } from "../context/AuthContext";
 import { formatCurrency } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
+import TeamLogo from "./TeamLogo";
 import { Volume2, VolumeX, Copy, Check, Users, Shield, Trophy, Share2, Sparkles, UserCheck } from "lucide-react";
 
 export function Navbar({ onOpenSquads, onOpenTournament, onOpenGoogleSignIn, onOpenUserProfile }) {
@@ -87,7 +88,7 @@ export function Navbar({ onOpenSquads, onOpenTournament, onOpenGoogleSignIn, onO
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {myTeam ? (
             <div className={`flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border ${teamMeta?.borderClass || 'border-[#27272a]'} bg-[#121212] shadow-sm`}>
-              <span className="text-base sm:text-xl">{teamMeta?.logoEmoji || "🏏"}</span>
+              <TeamLogo meta={teamMeta} size="sm" />
               <div className="text-left">
                 <div className="flex items-center gap-1">
                   <span className={`text-xs sm:text-sm font-bold ${teamMeta?.textClass || 'text-white'}`}>

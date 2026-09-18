@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSocket } from "../context/SocketContext";
 import { runFullPlayoffs, evaluateTeamStrength } from "../utils/matchSimulator";
 import { TEAMS_DATA } from "../data/teams";
+import TeamLogo from "./TeamLogo";
 import confetti from "canvas-confetti";
 import { 
   Trophy, X, Play, RefreshCw, Award, CheckCircle2, 
@@ -151,8 +152,9 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                     <div className="text-xs uppercase font-extrabold tracking-[0.15em] gold-gradient-text">
                       Official IPL Champions
                     </div>
-                    <div className="text-3xl sm:text-5xl font-heading font-black text-white mt-1">
-                      {champion.logoEmoji} {champion.teamName}
+                    <div className="text-3xl sm:text-5xl font-heading font-black text-white mt-1 flex items-center justify-center gap-3">
+                      <TeamLogo teamId={champion.teamId} meta={champion} size="xl" />
+                      <span>{champion.teamName}</span>
                     </div>
                     <p className="text-xs sm:text-sm text-[#9ca3af] mt-2 max-w-md mx-auto">
                       {playoffs?.grandFinal?.margin} • Player of the Match: <strong className="text-white">{playoffs?.grandFinal?.motm?.name}</strong> ({playoffs?.grandFinal?.motm?.performance})
@@ -173,14 +175,14 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                       <div className="space-y-1.5 text-xs sm:text-sm">
                         <div className="flex justify-between items-center">
                           <span className="font-heading font-bold text-white flex items-center gap-1.5">
-                            <span>{playoffs.qualifier1.innings1.logoEmoji}</span>
+                            <TeamLogo teamId={playoffs.qualifier1.innings1.teamId} size="xs" />
                             <span>{playoffs.qualifier1.innings1.shortName}</span>
                           </span>
                           <span className="font-mono font-bold text-amber-300">{playoffs.qualifier1.innings1.score}/{playoffs.qualifier1.innings1.wickets} <span className="text-[#71717a] font-normal">({playoffs.qualifier1.innings1.overs})</span></span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="font-heading font-bold text-white flex items-center gap-1.5">
-                            <span>{playoffs.qualifier1.innings2.logoEmoji}</span>
+                            <TeamLogo teamId={playoffs.qualifier1.innings2.teamId} size="xs" />
                             <span>{playoffs.qualifier1.innings2.shortName}</span>
                           </span>
                           <span className="font-mono font-bold text-amber-300">{playoffs.qualifier1.innings2.score}/{playoffs.qualifier1.innings2.wickets} <span className="text-[#71717a] font-normal">({playoffs.qualifier1.innings2.overs})</span></span>
@@ -203,14 +205,14 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                       <div className="space-y-1.5 text-xs sm:text-sm">
                         <div className="flex justify-between items-center">
                           <span className="font-heading font-bold text-white flex items-center gap-1.5">
-                            <span>{playoffs.eliminator.innings1.logoEmoji}</span>
+                            <TeamLogo teamId={playoffs.eliminator.innings1.teamId} size="xs" />
                             <span>{playoffs.eliminator.innings1.shortName}</span>
                           </span>
                           <span className="font-mono font-bold text-amber-300">{playoffs.eliminator.innings1.score}/{playoffs.eliminator.innings1.wickets} <span className="text-[#71717a] font-normal">({playoffs.eliminator.innings1.overs})</span></span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="font-heading font-bold text-white flex items-center gap-1.5">
-                            <span>{playoffs.eliminator.innings2.logoEmoji}</span>
+                            <TeamLogo teamId={playoffs.eliminator.innings2.teamId} size="xs" />
                             <span>{playoffs.eliminator.innings2.shortName}</span>
                           </span>
                           <span className="font-mono font-bold text-amber-300">{playoffs.eliminator.innings2.score}/{playoffs.eliminator.innings2.wickets} <span className="text-[#71717a] font-normal">({playoffs.eliminator.innings2.overs})</span></span>
@@ -233,14 +235,14 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                       <div className="space-y-1.5 text-xs sm:text-sm">
                         <div className="flex justify-between items-center">
                           <span className="font-heading font-bold text-white flex items-center gap-1.5">
-                            <span>{playoffs.qualifier2.innings1.logoEmoji}</span>
+                            <TeamLogo teamId={playoffs.qualifier2.innings1.teamId} size="xs" />
                             <span>{playoffs.qualifier2.innings1.shortName}</span>
                           </span>
                           <span className="font-mono font-bold text-amber-300">{playoffs.qualifier2.innings1.score}/{playoffs.qualifier2.innings1.wickets} <span className="text-[#71717a] font-normal">({playoffs.qualifier2.innings1.overs})</span></span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="font-heading font-bold text-white flex items-center gap-1.5">
-                            <span>{playoffs.qualifier2.innings2.logoEmoji}</span>
+                            <TeamLogo teamId={playoffs.qualifier2.innings2.teamId} size="xs" />
                             <span>{playoffs.qualifier2.innings2.shortName}</span>
                           </span>
                           <span className="font-mono font-bold text-amber-300">{playoffs.qualifier2.innings2.score}/{playoffs.qualifier2.innings2.wickets} <span className="text-[#71717a] font-normal">({playoffs.qualifier2.innings2.overs})</span></span>
@@ -263,14 +265,14 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                       <div className="space-y-1.5 text-xs sm:text-sm">
                         <div className="flex justify-between items-center">
                           <span className="font-heading font-bold text-white flex items-center gap-1.5">
-                            <span>{playoffs.grandFinal.innings1.logoEmoji}</span>
+                            <TeamLogo teamId={playoffs.grandFinal.innings1.teamId} size="xs" />
                             <span>{playoffs.grandFinal.innings1.shortName}</span>
                           </span>
                           <span className="font-mono font-bold text-amber-300">{playoffs.grandFinal.innings1.score}/{playoffs.grandFinal.innings1.wickets} <span className="text-[#71717a] font-normal">({playoffs.grandFinal.innings1.overs})</span></span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="font-heading font-bold text-white flex items-center gap-1.5">
-                            <span>{playoffs.grandFinal.innings2.logoEmoji}</span>
+                            <TeamLogo teamId={playoffs.grandFinal.innings2.teamId} size="xs" />
                             <span>{playoffs.grandFinal.innings2.shortName}</span>
                           </span>
                           <span className="font-mono font-bold text-amber-300">{playoffs.grandFinal.innings2.score}/{playoffs.grandFinal.innings2.wickets} <span className="text-[#71717a] font-normal">({playoffs.grandFinal.innings2.overs})</span></span>
@@ -317,7 +319,7 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                               {idx === 0 ? "🥇 #1" : idx === 1 ? "🥈 #2" : idx === 2 ? "🥉 #3" : idx === 3 ? "⭐ #4" : `#${idx + 1}`}
                             </td>
                             <td className="py-3 px-3 font-heading font-bold text-white flex items-center gap-2">
-                              <span className="text-base sm:text-xl">{team.logoEmoji}</span>
+                              <TeamLogo teamId={team.teamId} size="sm" />
                               <span>{team.teamName}</span>
                               {isPlayoffs && (
                                 <span className="text-[9px] uppercase font-bold text-amber-400 bg-amber-500/15 px-1.5 py-0.5 rounded border border-amber-500/30">
@@ -363,7 +365,10 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
                       <div className="p-3 rounded-xl bg-[#0c0c0e] border border-[#27272a]/60 space-y-1">
                         <div className="flex justify-between font-bold">
-                          <span className="text-white">{match.innings1.logoEmoji} {match.innings1.teamName}</span>
+                          <span className="text-white flex items-center gap-1.5">
+                            <TeamLogo teamId={match.innings1.teamId} size="xs" />
+                            <span>{match.innings1.teamName}</span>
+                          </span>
                           <span className="text-amber-400 font-mono">{match.innings1.score}/{match.innings1.wickets} ({match.innings1.overs})</span>
                         </div>
                         <div className="text-[11px] text-[#9ca3af] flex justify-between pt-1">
@@ -374,7 +379,10 @@ export function TournamentSimulatorModal({ isOpen, onClose }) {
 
                       <div className="p-3 rounded-xl bg-[#0c0c0e] border border-[#27272a]/60 space-y-1">
                         <div className="flex justify-between font-bold">
-                          <span className="text-white">{match.innings2.logoEmoji} {match.innings2.teamName}</span>
+                          <span className="text-white flex items-center gap-1.5">
+                            <TeamLogo teamId={match.innings2.teamId} size="xs" />
+                            <span>{match.innings2.teamName}</span>
+                          </span>
                           <span className="text-amber-400 font-mono">{match.innings2.score}/{match.innings2.wickets} ({match.innings2.overs})</span>
                         </div>
                         <div className="text-[11px] text-[#9ca3af] flex justify-between pt-1">

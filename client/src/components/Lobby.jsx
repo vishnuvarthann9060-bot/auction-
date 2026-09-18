@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSocket } from "../context/SocketContext";
 import { useAuth } from "../context/AuthContext";
 import { TEAMS_DATA } from "../data/teams";
+import TeamLogo from "./TeamLogo";
 import { formatCurrency } from "../utils/formatters";
 import { 
   Users, Play, Settings, PlusCircle, Sparkles, Shield, 
@@ -595,7 +596,9 @@ export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfil
                 key={team.id}
                 className="p-3 sm:p-3.5 rounded-2xl bg-[#0a0a0a] border border-[#27272a] text-center flex flex-col items-center justify-between hover:border-[#3f3f46] transition"
               >
-                <div className="text-2xl sm:text-3xl mb-1 sm:mb-1.5">{team.logoEmoji}</div>
+                <div className="h-10 sm:h-12 flex items-center justify-center mb-1 sm:mb-1.5">
+                  <TeamLogo meta={team} size="lg" />
+                </div>
                 <div className="text-xs sm:text-sm font-heading font-bold text-white">{team.shortName}</div>
                 <div className="text-[10px] sm:text-xs text-[#71717a] font-medium mt-0.5">{team.trophies > 0 ? `${team.trophies} 🏆` : "IPL Team"}</div>
               </div>
@@ -803,8 +806,8 @@ export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfil
                 />
 
                 <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl sm:text-3xl">{meta?.logoEmoji || "🏏"}</span>
+                  <div className="flex items-center gap-2.5">
+                    <TeamLogo meta={meta} size="md" />
                     {meta?.trophies > 0 && (
                       <span className="text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
                         {meta.trophies} 🏆

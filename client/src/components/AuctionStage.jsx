@@ -2,6 +2,7 @@ import React from "react";
 import { useSocket } from "../context/SocketContext";
 import { formatCurrency, getRoleBadgeClass } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
+import TeamLogo from "./TeamLogo";
 import { BiddingControls } from "./BiddingControls";
 import { PlayerPortrait } from "./PlayerPortrait";
 import { 
@@ -358,7 +359,7 @@ export function AuctionStage() {
                 className={`p-3 sm:p-3.5 rounded-2xl border ${bidderMeta?.borderClass || 'border-[#27272a]'} bg-[#0a0a0a] flex items-center justify-between shadow-lg`}
               >
                 <div className="flex items-center gap-2.5 sm:gap-3.5">
-                  <div className="text-2xl sm:text-3xl">{bidderMeta?.logoEmoji || "🏏"}</div>
+                  <TeamLogo meta={bidderMeta} size="md" />
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xs sm:text-sm font-heading font-bold text-white">{highestBidderTeam.name}</span>

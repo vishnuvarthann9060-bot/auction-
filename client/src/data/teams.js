@@ -13,6 +13,7 @@ export const TEAMS_DATA = {
     textClass: "text-yellow-400",
     tagline: "Whistle Podu! 🦁",
     logoEmoji: "🦁",
+    logoUrl: "/logos/csk.png",
     trophies: 5,
     captain: "Ruturaj Gaikwad"
   },
@@ -30,6 +31,7 @@ export const TEAMS_DATA = {
     textClass: "text-blue-400",
     tagline: "Duniya Hila Denge! 🌪️",
     logoEmoji: "🌪️",
+    logoUrl: "/logos/mi.png",
     trophies: 5,
     captain: "Hardik Pandya"
   },
@@ -47,6 +49,7 @@ export const TEAMS_DATA = {
     textClass: "text-red-400",
     tagline: "Ee Sala Cup Namde! 👑",
     logoEmoji: "👑",
+    logoUrl: "/logos/rcb.png",
     trophies: 0,
     captain: "Virat Kohli / Faf"
   },
@@ -64,6 +67,7 @@ export const TEAMS_DATA = {
     textClass: "text-purple-400",
     tagline: "Korbo Lorbo Jeetbo! ⚔️",
     logoEmoji: "⚔️",
+    logoUrl: "/logos/kkr.png",
     trophies: 3,
     captain: "Rinku Singh / Venky"
   },
@@ -81,6 +85,7 @@ export const TEAMS_DATA = {
     textClass: "text-orange-400",
     tagline: "Orange Army! 🦅",
     logoEmoji: "🦅",
+    logoUrl: "/logos/srh.png",
     trophies: 2,
     captain: "Pat Cummins"
   },
@@ -98,6 +103,7 @@ export const TEAMS_DATA = {
     textClass: "text-pink-400",
     tagline: "Halla Bol! 🐘",
     logoEmoji: "🐘",
+    logoUrl: "/logos/rr.png",
     trophies: 1,
     captain: "Sanju Samson"
   },
@@ -115,6 +121,7 @@ export const TEAMS_DATA = {
     textClass: "text-sky-400",
     tagline: "Roar Macha! 🐯",
     logoEmoji: "🐯",
+    logoUrl: "/logos/dc.png",
     trophies: 0,
     captain: "Axar Patel / KL Rahul"
   },
@@ -132,6 +139,7 @@ export const TEAMS_DATA = {
     textClass: "text-teal-400",
     tagline: "Aava De! ⚡",
     logoEmoji: "⚡",
+    logoUrl: "/logos/gt.png",
     trophies: 1,
     captain: "Shubman Gill"
   },
@@ -149,6 +157,7 @@ export const TEAMS_DATA = {
     textClass: "text-cyan-400",
     tagline: "Gazab Andaz! 🏹",
     logoEmoji: "🏹",
+    logoUrl: "/logos/lsg.png",
     trophies: 0,
     captain: "Nicholas Pooran / Pant"
   },
@@ -166,6 +175,7 @@ export const TEAMS_DATA = {
     textClass: "text-rose-400",
     tagline: "Sadda Punjab! 🛡️",
     logoEmoji: "🛡️",
+    logoUrl: "/logos/pbks.png",
     trophies: 0,
     captain: "Shreyas Iyer"
   }

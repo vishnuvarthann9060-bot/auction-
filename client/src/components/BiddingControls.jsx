@@ -2,6 +2,7 @@ import React from "react";
 import { useSocket } from "../context/SocketContext";
 import { formatCurrency } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
+import TeamLogo from "./TeamLogo";
 import { SmartPurseAdvisor } from "./SmartPurseAdvisor";
 import { analyzeSquad } from "../utils/squadAdvisor";
 import { Gavel, AlertCircle, Shield, CheckCircle, Zap } from "lucide-react";
@@ -42,7 +43,7 @@ export function BiddingControls() {
       {/* Top Status Bar: My Franchise Health */}
       <div className="flex flex-wrap items-center justify-between gap-2.5 pb-3 sm:pb-3.5 border-b border-[#27272a]">
         <div className="flex items-center gap-2.5 sm:gap-3.5">
-          <div className="text-2xl sm:text-3xl">{teamMeta?.logoEmoji || "🏏"}</div>
+          <TeamLogo meta={teamMeta} size="md" />
           <div>
             <div className="flex items-center gap-2">
               <span className={`text-sm sm:text-base font-heading font-bold ${teamMeta?.textClass || 'text-white'}`}>

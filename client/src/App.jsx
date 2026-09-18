@@ -235,8 +235,13 @@ function AuctionApp() {
       <LiveChat />
 
       {/* Footer */}
-      <footer className="w-full py-6 sm:py-8 text-center text-xs sm:text-sm text-[#9ca3af] border-t border-[#27272a] relative z-10 bg-[#050505]">
-        100% Free Open Platform • IPL Mega Auction Live Arena • Built for Indian Cricket Fans
+      <footer className="w-full py-6 sm:py-8 px-4 text-center text-xs text-[#71717a] border-t border-[#27272a] relative z-10 bg-[#050505] space-y-1.5">
+        <p className="text-white/80 font-medium">
+          100% Free Open Platform • IPL Mega Auction Live Arena • Built for Cricket Fans
+        </p>
+        <p className="text-[11px] text-[#52525b] max-w-2xl mx-auto leading-relaxed">
+          IPL Auction Game is an independent, non-commercial fan simulation. Franchise names, logos, and emblems are registered trademarks of the BCCI and their respective teams, utilized under nominative fair use for descriptive identification.
+        </p>
       </footer>
 
     </div>
