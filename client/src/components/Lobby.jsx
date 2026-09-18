@@ -7,7 +7,7 @@ import { formatCurrency } from "../utils/formatters";
 import { 
   Users, Play, Settings, PlusCircle, Sparkles, Shield, 
   Clock, DollarSign, Globe, Award, ChevronRight, CheckCircle2,
-  Zap, Lock, Radio, Copy, Check, RefreshCw, UserCheck
+  Zap, Lock, Radio, Copy, Check, RefreshCw, UserCheck, ArrowLeft, Home
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -19,6 +19,7 @@ export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfil
     createRoom, 
     joinRoom, 
     quickMatch,
+    leaveRoom,
     selectTeam, 
     myTeam, 
     isHost, 
@@ -656,6 +657,15 @@ export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfil
       <div className="glass-panel p-6 sm:p-7 rounded-3xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-[#27272a]">
         <div>
           <div className="flex items-center gap-2.5 flex-wrap">
+            <button
+              onClick={leaveRoom}
+              title="Return to Home Lobby"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1e1e1e] hover:bg-[#27272a] text-[#9ca3af] hover:text-white border border-[#27272a] hover:border-[#6366f1]/50 text-xs font-semibold transition cursor-pointer group shadow-sm"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 text-[#818cf8] group-hover:-translate-x-0.5 transition-transform" />
+              <span>Home</span>
+            </button>
+
             <span className="px-3 py-1 rounded-full bg-[#6366f1]/15 border border-[#6366f1]/30 text-[#818cf8] text-xs sm:text-sm font-bold tracking-[0.05em]">
               ROOM CODE: {roomState.id}
             </span>
@@ -679,6 +689,16 @@ export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfil
 
         {/* Action Controls for Host & Players */}
         <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap w-full md:w-auto">
+          {/* Leave Room & Go to Home */}
+          <button
+            onClick={leaveRoom}
+            title="Leave room and return to Home page"
+            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#121212] hover:bg-rose-500/10 text-[#9ca3af] hover:text-rose-400 text-xs sm:text-sm font-semibold border border-[#27272a] hover:border-rose-500/30 transition cursor-pointer shadow-sm"
+          >
+            <Home className="w-4 h-4 text-[#818cf8]" />
+            <span>Leave Room</span>
+          </button>
+
           {/* 1-Click Share URL button */}
           <button
             onClick={copyShareLink}

@@ -293,6 +293,32 @@ export function SocketProvider({ children }) {
     });
   };
 
+  const leaveRoom = () => {
+    return new Promise((resolve) => {
+      const currentRoomId = roomState?.id || activeRoomId;
+      if (socket && currentRoomId) {
+        socket.emit("leave_room", { roomId: currentRoomId }, () => {
+          // Acknowledged by server
+        });
+      }
+
+      setRoomState(null);
+      setUrlRoomCode("");
+      if (setActiveRoomId) setActiveRoomId(null);
+      localStorage.removeItem("ipl_active_room_id");
+      localStorage.removeItem("ipl_selected_team_id");
+      window.history.pushState({}, "", window.location.pathname);
+
+      if (socket) {
+        socket.emit("get_public_rooms", (res) => {
+          if (res && res.rooms) setPublicRooms(res.rooms);
+        });
+      }
+
+      resolve();
+    });
+  };
+
   const selectTeam = (teamId) => {
     if (!socket || !roomState) return;
     localStorage.setItem("ipl_selected_team_id", teamId);
@@ -378,6 +404,7 @@ export function SocketProvider({ children }) {
         createRoom,
         joinRoom,
         quickMatch,
+        leaveRoom,
         selectTeam,
         toggleAIBots,
         sendChat,

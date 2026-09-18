@@ -4,10 +4,10 @@ import { useAuth } from "../context/AuthContext";
 import { formatCurrency } from "../utils/formatters";
 import { TEAMS_DATA } from "../data/teams";
 import TeamLogo from "./TeamLogo";
-import { Volume2, VolumeX, Copy, Check, Users, Shield, Trophy, Share2, Sparkles, UserCheck } from "lucide-react";
+import { Volume2, VolumeX, Copy, Check, Users, Shield, Trophy, Share2, Sparkles, UserCheck, Home } from "lucide-react";
 
 export function Navbar({ onOpenSquads, onOpenTournament, onOpenGoogleSignIn, onOpenUserProfile }) {
-  const { roomState, myTeam, isHost, soundMuted, toggleSound, connected } = useSocket();
+  const { roomState, myTeam, isHost, soundMuted, toggleSound, connected, leaveRoom } = useSocket();
   const { user, careerStats } = useAuth();
   const [copiedLink, setCopiedLink] = useState(false);
 
@@ -32,15 +32,19 @@ export function Navbar({ onOpenSquads, onOpenTournament, onOpenGoogleSignIn, onO
     <header className="w-full bg-[#050505]/95 backdrop-blur-md border-b border-[#27272a] px-3 sm:px-6 lg:px-8 py-3 sm:py-3.5 sticky top-0 z-40">
       <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between gap-2.5">
         
-        {/* Brand Logo & Free Badge */}
-        <div className="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
-          <div className="relative flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#6366f1] via-[#8b5cf6] to-[#a855f7] shadow-lg shadow-[#6366f1]/25">
+        {/* Brand Logo & Free Badge (Clickable to Home) */}
+        <button
+          onClick={leaveRoom}
+          title={roomState ? "Return to Home Page" : "IPL Mega Auction Home"}
+          className="flex items-center gap-2.5 sm:gap-3.5 shrink-0 text-left bg-transparent border-0 p-0 cursor-pointer group"
+        >
+          <div className="relative flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#6366f1] via-[#8b5cf6] to-[#a855f7] shadow-lg shadow-[#6366f1]/25 group-hover:scale-105 transition-transform">
             <span className="font-heading text-base sm:text-xl font-black text-white tracking-tight">IPL</span>
             <div className="absolute -top-1 -right-1 w-2.5 sm:w-3 h-2.5 sm:h-3 bg-[#10b981] rounded-full animate-ping" />
           </div>
           <div>
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="font-heading font-extrabold text-base sm:text-xl tracking-[-0.03em] text-white whitespace-nowrap">
+              <span className="font-heading font-extrabold text-base sm:text-xl tracking-[-0.03em] text-white whitespace-nowrap group-hover:text-[#a5b4fc] transition-colors">
                 MEGA AUCTION
               </span>
               <span className="hidden sm:inline-block text-[11px] sm:text-xs uppercase font-bold tracking-[0.1em] px-2.5 py-0.5 rounded-full bg-[#6366f1]/20 text-[#a5b4fc] border border-[#6366f1]/40">
@@ -49,11 +53,20 @@ export function Navbar({ onOpenSquads, onOpenTournament, onOpenGoogleSignIn, onO
             </div>
             <p className="text-xs text-[#9ca3af] font-normal hidden md:block">Live Cricket Auction Game</p>
           </div>
-        </div>
+        </button>
 
         {/* Room PIN & Quick Share */}
         {roomState && (
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            {/* Return to Home Lobby button */}
+            <button
+              onClick={leaveRoom}
+              title="Leave Room & Return to Home"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] hover:border-[#6366f1]/40 text-[#9ca3af] hover:text-white transition cursor-pointer text-xs sm:text-sm font-medium shadow-sm"
+            >
+              <Home className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#818cf8]" />
+              <span className="hidden sm:inline">Home</span>
+            </button>
             <button
               onClick={copyShareLink}
               title="Click to copy full invite link"

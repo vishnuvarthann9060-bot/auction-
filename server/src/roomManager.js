@@ -202,6 +202,54 @@ export class RoomManager {
     return this.joinUserToRoom(socket, room.id, userName, false, { userId, ...userAuth });
   }
 
+  leaveRoom(socket, roomId, callback) {
+    const room = this.rooms.get(roomId?.toUpperCase());
+    if (!room) {
+      if (callback) callback({ success: true });
+      return;
+    }
+
+    const user = room.users.get(socket.id);
+    if (user) {
+      // Release owned team
+      if (user.teamId) {
+        const team = room.teams.find(t => t.id === user.teamId);
+        if (team && (team.ownerId === socket.id || team.ownerUserId === user.userId)) {
+          team.ownerId = null;
+          team.ownerName = null;
+          team.ownerUserId = null;
+          team.isBot = false;
+        }
+      }
+
+      room.users.delete(socket.id);
+      socket.leave(room.id);
+      console.log(`[User Left Room] ${user.name} left ${room.id}`);
+
+      // Reassign host if host left
+      if (room.hostId === socket.id) {
+        const nextUser = room.users.values().next().value;
+        if (nextUser) {
+          room.hostId = nextUser.id;
+          nextUser.isHost = true;
+          room.hostUserId = nextUser.userId || null;
+        }
+      }
+
+      // If room is now empty and in LOBBY status, clean it up immediately
+      if (room.users.size === 0 && room.status === "LOBBY") {
+        this.rooms.delete(room.id);
+        console.log(`[Room Cleaned] Empty room ${room.id} deleted`);
+      } else {
+        this.broadcastRoomState(room.id);
+      }
+    } else {
+      socket.leave(roomId);
+    }
+
+    if (callback) callback({ success: true });
+  }
+
   selectTeam(socket, roomId, teamId) {
     const room = this.rooms.get(roomId);
     if (!room) return;

@@ -203,6 +203,16 @@ io.on("connection", (socket) => {
     }
   });
 
+  // Leave room and return to Home Lobby
+  socket.on("leave_room", ({ roomId }, callback) => {
+    try {
+      roomManager.leaveRoom(socket, roomId, callback);
+    } catch (err) {
+      console.error("Error leaving room:", err);
+      if (callback) callback({ success: false, error: err.message });
+    }
+  });
+
   // Team selection
   socket.on("select_team", ({ roomId, teamId }) => {
     roomManager.selectTeam(socket, roomId, teamId);
