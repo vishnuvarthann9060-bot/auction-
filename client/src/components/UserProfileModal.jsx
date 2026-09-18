@@ -8,7 +8,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function UserProfileModal({ isOpen, onClose, onResumeRoom }) {
-  const { user, careerStats, savedSquads, activeRoomId, logout } = useAuth();
+  const { user, careerStats, savedSquads, activeRoomId, setActiveRoomId, logout } = useAuth();
   const [expandedSquadId, setExpandedSquadId] = useState(null);
 
   if (!isOpen || !user) return null;
@@ -80,16 +80,29 @@ export function UserProfileModal({ isOpen, onClose, onResumeRoom }) {
                   </div>
                 </div>
 
-                <button
-                  onClick={() => {
-                    if (onResumeRoom) onResumeRoom(activeRoomId);
-                    onClose();
-                  }}
-                  className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-heading font-bold shadow-md shadow-amber-500/20 transition cursor-pointer flex items-center gap-1.5"
-                >
-                  <span>Resume Stage</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      if (setActiveRoomId) setActiveRoomId(null);
+                      localStorage.removeItem('ipl_active_room_id');
+                    }}
+                    title="Ignore active room"
+                    className="px-2.5 py-1.5 rounded-xl bg-[#1e1e1e] hover:bg-[#27272a] text-[#9ca3af] hover:text-white text-xs font-semibold border border-[#27272a] hover:border-[#3f3f46] transition cursor-pointer"
+                  >
+                    <span>Ignore</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      if (onResumeRoom) onResumeRoom(activeRoomId);
+                      onClose();
+                    }}
+                    className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-heading font-bold shadow-md shadow-amber-500/20 transition cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>Resume Stage</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
             )}
 

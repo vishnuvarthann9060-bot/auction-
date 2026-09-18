@@ -7,7 +7,7 @@ import { formatCurrency } from "../utils/formatters";
 import { 
   Users, Play, Settings, PlusCircle, Sparkles, Shield, 
   Clock, DollarSign, Globe, Award, ChevronRight, CheckCircle2,
-  Zap, Lock, Radio, Copy, Check, RefreshCw, UserCheck, ArrowLeft, Home
+  Zap, Lock, Radio, Copy, Check, RefreshCw, UserCheck, ArrowLeft, Home, X
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -27,7 +27,8 @@ export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfil
     userName: defaultUserName 
   } = useSocket();
 
-  const { user, activeRoomId } = useAuth();
+  const { user, activeRoomId, setActiveRoomId } = useAuth();
+  const [dismissedRoomId, setDismissedRoomId] = useState(null);
 
   // Mode: 'public_browser' | 'create' | 'join'
   const [activeTab, setActiveTab] = useState("public_browser");
@@ -36,6 +37,13 @@ export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfil
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
   const [copiedLink, setCopiedLink] = useState(false);
+
+  const handleIgnoreActiveRoom = (e) => {
+    e?.stopPropagation();
+    setDismissedRoomId(activeRoomId);
+    if (setActiveRoomId) setActiveRoomId(null);
+    localStorage.removeItem("ipl_active_room_id");
+  };
 
   // Sync nameInput if user signs in
   useEffect(() => {
@@ -299,27 +307,40 @@ export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfil
             </div>
 
             {/* Resume Active Auction Banner (If player refreshed or disconnected) */}
-            {activeRoomId && (!roomState || roomState.id !== activeRoomId) && (
+            {activeRoomId && activeRoomId !== dismissedRoomId && (!roomState || roomState.id !== activeRoomId) && (
               <div className="mb-4 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-yellow-500/10 to-amber-500/20 border border-amber-500/40 flex items-center justify-between gap-3 shadow-lg">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
-                  <div>
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping shrink-0" />
+                  <div className="min-w-0">
                     <div className="text-xs sm:text-sm font-bold text-amber-300">
                       Live Auction in Progress
                     </div>
-                    <div className="text-[11px] text-[#9ca3af]">
+                    <div className="text-[11px] text-[#9ca3af] truncate">
                       Your seat is waiting in room <span className="font-mono text-white font-bold">{activeRoomId}</span>
                     </div>
                   </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => joinRoom(activeRoomId, nameInput || defaultUserName)}
-                  className="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs sm:text-sm font-heading font-bold transition shadow-md cursor-pointer flex items-center gap-1.5 shrink-0"
-                >
-                  <span>Resume Stage</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={handleIgnoreActiveRoom}
+                    title="Ignore and dismiss this alert"
+                    className="px-2.5 sm:px-3 py-2 rounded-xl bg-[#1e1e1e] hover:bg-[#27272a] text-[#9ca3af] hover:text-white text-xs font-semibold border border-[#27272a] hover:border-[#3f3f46] transition cursor-pointer flex items-center gap-1 shadow-sm"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                    <span>Ignore</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => joinRoom(activeRoomId, nameInput || defaultUserName)}
+                    className="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs sm:text-sm font-heading font-bold transition shadow-md shadow-amber-500/20 cursor-pointer flex items-center gap-1.5"
+                  >
+                    <span>Resume Stage</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             )}
 
