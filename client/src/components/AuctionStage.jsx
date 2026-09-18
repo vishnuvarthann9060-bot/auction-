@@ -5,6 +5,7 @@ import { TEAMS_DATA } from "../data/teams";
 import TeamLogo from "./TeamLogo";
 import { FranchiseHUD, ActionBiddingDeck } from "./BiddingControls";
 import { PlayerPortrait } from "./PlayerPortrait";
+import { BroadcastTimer } from "./BroadcastTimer";
 import { 
   Gavel, Clock, Flame, 
   Globe, CheckCircle2, UserCheck, Zap, Crosshair 
@@ -222,47 +223,12 @@ export function AuctionStage() {
           >
             {/* Top Row: Timer Ring, Broadcast Voice Bubble & Gavel */}
             <div className="flex items-center justify-between gap-3">
-              {/* Circular Animated Countdown Meter */}
-              <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-                <div className="relative w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
-                  <svg className="w-12 h-12 sm:w-14 sm:h-14 transform -rotate-90">
-                    <circle
-                      cx="24"
-                      cy="24"
-                      r="20"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      className="text-[#1e1e1e]"
-                      fill="transparent"
-                    />
-                    <circle
-                      cx="24"
-                      cy="24"
-                      r="20"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      strokeDasharray={125.6}
-                      strokeDashoffset={125.6 - (125.6 * timerProgress) / 100}
-                      strokeLinecap="round"
-                      className={`transition-all duration-500 ${
-                        isUrgent ? "text-red-500" : "text-[#6366f1]"
-                      }`}
-                      fill="transparent"
-                    />
-                  </svg>
-                  <span className={`absolute font-heading font-extrabold text-lg sm:text-xl ${
-                    isUrgent ? "text-red-400" : "text-white"
-                  }`}>
-                    {timer}
-                  </span>
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase tracking-[0.08em] font-semibold text-[#9ca3af]">Timer</div>
-                  <div className={`text-xs font-bold ${isUrgent ? "text-red-400" : "text-[#f3f4f6]"}`}>
-                    {timer <= 2 ? "Final Call!" : timer <= 5 ? "Closing Soon" : "Time Left"}
-                  </div>
-                </div>
-              </div>
+              {/* Broadcast Chronometer & Telemetry Timer */}
+              <BroadcastTimer 
+                timer={timer} 
+                totalTimer={totalTimer} 
+                status={auction.status} 
+              />
 
               {/* Live Auctioneer Broadcast Voice Bubble (Fills Center Space) */}
               <div className="flex-1 min-w-0 px-2.5 sm:px-3 py-1.5 rounded-xl bg-[#09090b] border border-[#27272a] flex items-center gap-2">
