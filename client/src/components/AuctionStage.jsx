@@ -111,7 +111,10 @@ export function AuctionStage() {
             {player.set || "Marquee Set"}
           </span>
           <span className="font-medium text-xs sm:text-sm text-[#9ca3af]">
-            Player {roomState.currentPlayerIndex + 1} of {roomState.totalPlayersCount}
+            Player {roomState.currentPlayerIndex + 1} of {roomState.totalPlayersCount || 574}
+          </span>
+          <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#1e1e1e] border border-[#27272a] text-[#a1a1aa] font-semibold hidden sm:inline-block">
+            {roomState.totalPlayersCount === 182 ? "182 Sold Stars" : "574 BCCI Pool"}
           </span>
         </div>
 

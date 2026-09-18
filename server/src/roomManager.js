@@ -1,4 +1,4 @@
-import { DEFAULT_PLAYERS } from './data/players.js';
+import { DEFAULT_PLAYERS, PLAYER_POOLS } from './data/players.js';
 import { validateBid, getBidOptions } from './auctionEngine.js';
 
 export const INITIAL_TEAMS = [
@@ -33,6 +33,8 @@ export class RoomManager {
     const roomId = this.generateRoomCode();
     const isPublic = customRules.isPublic !== false; // default true for public matching
     const auctionMode = customRules.auctionMode || "MEGA"; // "MEGA" or "MINI"
+    const playerPoolMode = customRules.playerPoolMode || "FULL_574"; // "FULL_574" or "SOLD_182"
+    const selectedPool = PLAYER_POOLS[playerPoolMode] || DEFAULT_PLAYERS;
 
     const rules = {
       totalPurse: customRules.totalPurse || 1000000000, // 100 Cr default
@@ -40,7 +42,9 @@ export class RoomManager {
       maxSquadSize: customRules.maxSquadSize || 25,
       maxOverseas: customRules.maxOverseas || 8,
       timerSeconds: Math.max(5, Math.min(60, Number(customRules.timerSeconds) || 15)),
-      auctionMode
+      auctionMode,
+      playerPoolMode,
+      poolSize: selectedPool.length
     };
 
     const teams = INITIAL_TEAMS.map(team => ({
@@ -63,7 +67,7 @@ export class RoomManager {
       status: "LOBBY", // LOBBY, ACTIVE, PAUSED, ENDED
       users: new Map(),
       teams,
-      playersPool: [...DEFAULT_PLAYERS],
+      playersPool: [...selectedPool],
       currentPlayerIndex: 0,
       currentAuction: null,
       soldPlayers: [],
@@ -113,6 +117,8 @@ export class RoomManager {
           totalTeams: room.teams.length,
           totalPurse: room.rules.totalPurse,
           auctionMode: room.rules.auctionMode || "MEGA",
+          playerPoolMode: room.rules.playerPoolMode || "FULL_574",
+          totalPlayersCount: room.playersPool.length,
           aiBotsEnabled: room.aiBotsEnabled
         });
       }

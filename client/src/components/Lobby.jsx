@@ -55,6 +55,7 @@ export function Lobby({ onOpenGoogleSignIn, onOpenUserProfile }) {
   // Custom rules setup state
   const [isPublicRoom, setIsPublicRoom] = useState(true);
   const [auctionMode, setAuctionMode] = useState("MEGA"); // "MEGA" | "MINI"
+  const [playerPoolMode, setPlayerPoolMode] = useState("FULL_574"); // "FULL_574" | "SOLD_182"
   const [purseCr, setPurseCr] = useState(100);
   const [timerSec, setTimerSec] = useState(15);
   const [maxOverseas, setMaxOverseas] = useState(8);
@@ -97,6 +98,7 @@ export function Lobby({ onOpenGoogleSignIn, onOpenUserProfile }) {
       await createRoom(nameInput.trim(), {
         isPublic: isPublicRoom,
         auctionMode,
+        playerPoolMode,
         totalPurse: purseCr * 10000000,
         timerSeconds: timerSec,
         maxOverseas: maxOverseas,
@@ -495,14 +497,64 @@ export function Lobby({ onOpenGoogleSignIn, onOpenUserProfile }) {
               <div className="p-3.5 sm:p-4 rounded-2xl bg-[#121212] border border-[#27272a] flex items-center justify-between text-xs sm:text-sm">
                 <span className="font-heading font-bold text-white">Auction Type</span>
                 <div className="flex items-center gap-2">
+                  <span className="px-3.5 py-1.5 rounded-xl font-heading font-bold text-xs sm:text-sm bg-[#6366f1]/20 border border-[#6366f1]/40 text-[#818cf8]">
+                    TATA IPL Mega Auction
+                  </span>
+                </div>
+              </div>
+
+              {/* Real IPL Auction Player Pool Selection */}
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-[#121212] border border-[#27272a] space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-heading font-bold text-white text-xs sm:text-sm">Official Player Roster</span>
+                  <span className="text-[10px] sm:text-xs font-semibold px-2 py-0.5 rounded-full bg-[#6366f1]/15 text-[#818cf8] border border-[#6366f1]/30">
+                    Real IPL Auction Count
+                  </span>
+                </div>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <button
                     type="button"
-                    onClick={() => setAuctionMode("MEGA")}
-                    className={`px-3.5 py-2 rounded-xl font-heading font-bold text-xs sm:text-sm cursor-pointer ${
-                      auctionMode === "MEGA" ? "bg-[#6366f1] text-white" : "bg-[#1e1e1e] text-[#9ca3af]"
+                    onClick={() => setPlayerPoolMode("FULL_574")}
+                    className={`p-3.5 rounded-xl border text-left transition cursor-pointer flex flex-col justify-between ${
+                      playerPoolMode === "FULL_574"
+                        ? "bg-[#6366f1]/15 border-[#6366f1] shadow-lg shadow-[#6366f1]/10"
+                        : "bg-[#0a0a0a] border-[#27272a] hover:border-[#3f3f46]"
                     }`}
                   >
-                    Mega Auction (All Players)
+                    <div className="flex items-center justify-between">
+                      <span className="font-heading font-bold text-xs sm:text-sm text-white flex items-center gap-1.5">
+                        <span>★ 574 Players</span>
+                      </span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        Default
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#9ca3af] mt-1 leading-snug">
+                      Exact official BCCI shortlist that went under the hammer in Jeddah.
+                    </p>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPlayerPoolMode("SOLD_182")}
+                    className={`p-3.5 rounded-xl border text-left transition cursor-pointer flex flex-col justify-between ${
+                      playerPoolMode === "SOLD_182"
+                        ? "bg-[#6366f1]/15 border-[#6366f1] shadow-lg shadow-[#6366f1]/10"
+                        : "bg-[#0a0a0a] border-[#27272a] hover:border-[#3f3f46]"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-heading font-bold text-xs sm:text-sm text-white flex items-center gap-1.5">
+                        <span>⚡ 182 Players</span>
+                      </span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        Sold Only
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#9ca3af] mt-1 leading-snug">
+                      Exact 182 cricketers bought by the 10 franchises in the real auction.
+                    </p>
                   </button>
                 </div>
               </div>
