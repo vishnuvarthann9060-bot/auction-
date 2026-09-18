@@ -315,9 +315,11 @@ app.get("*", (req, res) => {
 // Self-ping to prevent Render sleep mode and keep-alive for Googlebot
 const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL || "https://ipl-auction-game-vvdr.onrender.com";
 setInterval(() => {
-  fetch(`${RENDER_EXTERNAL_URL}/api/health`)
-    .then(() => console.log("💓 Keep-alive heartbeat ping successful"))
-    .catch(() => {});
+  if (typeof fetch !== "undefined") {
+    fetch(`${RENDER_EXTERNAL_URL}/api/health`)
+      .then(() => console.log("💓 Keep-alive heartbeat ping successful"))
+      .catch(() => {});
+  }
 }, 10 * 60 * 1000);
 
 const PORT = process.env.PORT || 4000;
