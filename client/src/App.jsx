@@ -9,7 +9,6 @@ import { TeamsOverview } from "./components/TeamsOverview";
 import { HostControls } from "./components/HostControls";
 import { SquadModal } from "./components/SquadModal";
 import { SoldCelebration } from "./components/SoldCelebration";
-import { CustomPlayerModal } from "./components/CustomPlayerModal";
 import { TournamentSimulatorModal } from "./components/TournamentSimulatorModal";
 import { GoogleSignInModal } from "./components/GoogleSignInModal";
 import { UserProfileModal } from "./components/UserProfileModal";
@@ -24,7 +23,6 @@ function AuctionApp() {
 
   const [squadModalOpen, setSquadModalOpen] = useState(false);
   const [selectedSquadTeamId, setSelectedSquadTeamId] = useState("csk");
-  const [customPlayerModalOpen, setCustomPlayerModalOpen] = useState(false);
   const [tournamentModalOpen, setTournamentModalOpen] = useState(false);
   const [googleSignInModalOpen, setGoogleSignInModalOpen] = useState(false);
   const [userProfileModalOpen, setUserProfileModalOpen] = useState(false);
@@ -136,7 +134,6 @@ function AuctionApp() {
       <main className="flex-1 relative z-10 px-3 sm:px-6 lg:px-8 py-3 sm:py-6 max-w-[1600px] mx-auto w-full">
         {!roomState || roomState.status === "LOBBY" ? (
           <Lobby 
-            onOpenCustomPlayer={() => setCustomPlayerModalOpen(true)} 
             onOpenGoogleSignIn={() => setGoogleSignInModalOpen(true)}
             onOpenUserProfile={() => setUserProfileModalOpen(true)}
           />
@@ -192,7 +189,6 @@ function AuctionApp() {
           /* ACTIVE AUCTION ARENA */
           <div className="space-y-3 sm:space-y-4">
             <HostControls 
-              onOpenCustomPlayer={() => setCustomPlayerModalOpen(true)} 
               onOpenTournament={() => setTournamentModalOpen(true)}
             />
             <AuctionStage />
@@ -211,11 +207,6 @@ function AuctionApp() {
         isOpen={squadModalOpen}
         onClose={() => setSquadModalOpen(false)}
         initialTeamId={selectedSquadTeamId}
-      />
-
-      <CustomPlayerModal
-        isOpen={customPlayerModalOpen}
-        onClose={() => setCustomPlayerModalOpen(false)}
       />
 
       <GoogleSignInModal

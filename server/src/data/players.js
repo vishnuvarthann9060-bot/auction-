@@ -1,88 +1,76 @@
-export const DEFAULT_PLAYERS = [
-  // --- MARQUEE SET 1 ---
+﻿export const DEFAULT_PLAYERS = [
+  // ==========================================
+  // --- MARQUEE SET 1 (Official IPL M1) ---
+  // ==========================================
   {
     id: "p1",
+    name: "Rishabh Pant",
+    role: "Wicketkeeper",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000, // ₹2.0 Cr
+    set: "Marquee Set 1",
+    rating: 97
+  },
+  {
+    id: "p2",
+    name: "Shreyas Iyer",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Marquee Set 1",
+    rating: 96
+  },
+  {
+    id: "p3",
     name: "Virat Kohli",
     role: "Batter",
     country: "India",
     isOverseas: false,
-    basePrice: 20000000, // 2.0 Cr
+    basePrice: 20000000,
     set: "Marquee Set 1",
-    stats: { matches: 252, runs: 8004, avg: 38.7, sr: 131.9, hs: "113*" },
-    rating: 98,
-    image: null
+    rating: 99
   },
   {
-    id: "p2",
+    id: "p4",
     name: "Rohit Sharma",
     role: "Batter",
     country: "India",
     isOverseas: false,
     basePrice: 20000000,
     set: "Marquee Set 1",
-    stats: { matches: 257, runs: 6628, avg: 29.7, sr: 131.1, hs: "109*" },
-    rating: 96,
-    image: null
+    rating: 97
   },
   {
-    id: "p3",
+    id: "p5",
     name: "Jasprit Bumrah",
     role: "Bowler",
     country: "India",
     isOverseas: false,
     basePrice: 20000000,
     set: "Marquee Set 1",
-    stats: { matches: 133, wickets: 165, econ: 7.30, avg: 22.5, bb: "5/10" },
-    rating: 99,
-    image: null
+    rating: 99
   },
   {
-    id: "p4",
+    id: "p6",
     name: "Pat Cummins",
     role: "All-Rounder",
     country: "Australia",
     isOverseas: true,
     basePrice: 20000000,
     set: "Marquee Set 1",
-    stats: { matches: 58, wickets: 63, runs: 515, sr: 147.1, bb: "4/34" },
-    rating: 95,
-    image: null
+    rating: 96
   },
   {
-    id: "p5",
+    id: "p7",
     name: "Travis Head",
     role: "Batter",
     country: "Australia",
     isOverseas: true,
     basePrice: 20000000,
     set: "Marquee Set 1",
-    stats: { matches: 25, runs: 772, avg: 38.6, sr: 185.6, hs: "102" },
-    rating: 96,
-    image: null
-  },
-  {
-    id: "p6",
-    name: "Rishabh Pant",
-    role: "Wicketkeeper",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Marquee Set 1",
-    stats: { matches: 111, runs: 3284, avg: 35.3, sr: 148.9, catches: 75 },
-    rating: 95,
-    image: null
-  },
-  {
-    id: "p7",
-    name: "Heinrich Klaasen",
-    role: "Wicketkeeper",
-    country: "South Africa",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Marquee Set 1",
-    stats: { matches: 35, runs: 993, avg: 38.2, sr: 168.3, hs: "104*" },
-    rating: 96,
-    image: null
+    rating: 96
   },
   {
     id: "p8",
@@ -92,95 +80,81 @@ export const DEFAULT_PLAYERS = [
     isOverseas: true,
     basePrice: 20000000,
     set: "Marquee Set 1",
-    stats: { matches: 41, wickets: 51, econ: 8.52, avg: 24.1, bb: "4/15" },
-    rating: 94,
-    image: null
+    rating: 95
   },
 
-  // --- MARQUEE SET 2 ---
+  // ==========================================
+  // --- MARQUEE SET 2 (Official IPL M2) ---
+  // ==========================================
   {
     id: "p9",
+    name: "KL Rahul",
+    role: "Wicketkeeper",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Marquee Set 2",
+    rating: 96
+  },
+  {
+    id: "p10",
     name: "MS Dhoni",
     role: "Wicketkeeper",
     country: "India",
     isOverseas: false,
     basePrice: 20000000,
     set: "Marquee Set 2",
-    stats: { matches: 264, runs: 5243, avg: 39.1, sr: 137.5, dismissals: 190 },
-    rating: 97,
-    image: null
+    rating: 97
   },
   {
-    id: "p10",
+    id: "p11",
     name: "Hardik Pandya",
     role: "All-Rounder",
     country: "India",
     isOverseas: false,
     basePrice: 20000000,
     set: "Marquee Set 2",
-    stats: { matches: 137, runs: 2525, wickets: 64, sr: 145.9, bb: "3/17" },
-    rating: 94,
-    image: null
+    rating: 95
   },
   {
-    id: "p11",
+    id: "p12",
     name: "Suryakumar Yadav",
     role: "Batter",
     country: "India",
     isOverseas: false,
     basePrice: 20000000,
     set: "Marquee Set 2",
-    stats: { matches: 150, runs: 3594, avg: 32.1, sr: 145.3, hs: "103*" },
-    rating: 97,
-    image: null
-  },
-  {
-    id: "p12",
-    name: "Rashid Khan",
-    role: "Bowler",
-    country: "Afghanistan",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Marquee Set 2",
-    stats: { matches: 121, wickets: 149, econ: 6.82, avg: 21.8, bb: "4/24" },
-    rating: 98,
-    image: null
+    rating: 98
   },
   {
     id: "p13",
-    name: "Sunil Narine",
-    role: "All-Rounder",
-    country: "West Indies",
+    name: "Heinrich Klaasen",
+    role: "Wicketkeeper",
+    country: "South Africa",
     isOverseas: true,
     basePrice: 20000000,
     set: "Marquee Set 2",
-    stats: { matches: 177, wickets: 180, runs: 1534, sr: 165.8, bb: "5/19" },
-    rating: 96,
-    image: null
+    rating: 97
   },
   {
     id: "p14",
-    name: "Andre Russell",
-    role: "All-Rounder",
-    country: "West Indies",
+    name: "Jos Buttler",
+    role: "Wicketkeeper",
+    country: "England",
     isOverseas: true,
     basePrice: 20000000,
     set: "Marquee Set 2",
-    stats: { matches: 127, runs: 2484, wickets: 115, sr: 174.9, bb: "5/15" },
-    rating: 96,
-    image: null
+    rating: 97
   },
   {
     id: "p15",
-    name: "Shubman Gill",
-    role: "Batter",
+    name: "Arshdeep Singh",
+    role: "Bowler",
     country: "India",
     isOverseas: false,
     basePrice: 20000000,
     set: "Marquee Set 2",
-    stats: { matches: 103, runs: 3216, avg: 37.8, sr: 135.7, hs: "129" },
-    rating: 94,
-    image: null
+    rating: 95
   },
   {
     id: "p16",
@@ -190,792 +164,874 @@ export const DEFAULT_PLAYERS = [
     isOverseas: true,
     basePrice: 20000000,
     set: "Marquee Set 2",
-    stats: { matches: 80, wickets: 117, econ: 8.42, avg: 21.6, bb: "4/21" },
-    rating: 93,
-    image: null
+    rating: 95
   },
 
-  // --- BATSMEN SET 1 ---
+  // ==========================================
+  // --- MARQUEE SET 3 ---
+  // ==========================================
   {
     id: "p17",
-    name: "Sanju Samson",
-    role: "Wicketkeeper",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Batters 1",
-    stats: { matches: 167, runs: 4419, avg: 30.7, sr: 139.1, hs: "119" },
-    rating: 93,
-    image: null
-  },
-  {
-    id: "p18",
-    name: "Yashasvi Jaiswal",
-    role: "Batter",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Batters 1",
-    stats: { matches: 52, runs: 1607, avg: 32.8, sr: 150.6, hs: "124" },
-    rating: 94,
-    image: null
-  },
-  {
-    id: "p19",
-    name: "KL Rahul",
-    role: "Wicketkeeper",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Batters 1",
-    stats: { matches: 132, runs: 4683, avg: 45.5, sr: 134.6, hs: "132*" },
-    rating: 93,
-    image: null
-  },
-  {
-    id: "p20",
-    name: "Rinku Singh",
-    role: "Batter",
-    country: "India",
-    isOverseas: false,
-    basePrice: 15000000, // 1.5 Cr
-    set: "Batters 1",
-    stats: { matches: 45, runs: 893, avg: 30.8, sr: 143.3, hs: "67*" },
-    rating: 91,
-    image: null
-  },
-  {
-    id: "p21",
-    name: "Phil Salt",
-    role: "Wicketkeeper",
-    country: "England",
-    isOverseas: true,
-    basePrice: 15000000,
-    set: "Batters 1",
-    stats: { matches: 21, runs: 653, avg: 36.3, sr: 175.5, hs: "89*" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p22",
-    name: "Nicholas Pooran",
-    role: "Wicketkeeper",
-    country: "West Indies",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Batters 1",
-    stats: { matches: 76, runs: 1769, avg: 29.5, sr: 162.4, hs: "77" },
-    rating: 93,
-    image: null
-  },
-  {
-    id: "p23",
-    name: "Abhishek Sharma",
-    role: "All-Rounder",
-    country: "India",
-    isOverseas: false,
-    basePrice: 15000000,
-    set: "Batters 1",
-    stats: { matches: 63, runs: 1377, sr: 155.6, wickets: 9, hs: "75" },
-    rating: 90,
-    image: null
-  },
-  {
-    id: "p24",
-    name: "Ruturaj Gaikwad",
-    role: "Batter",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Batters 1",
-    stats: { matches: 66, runs: 2380, avg: 39.0, sr: 136.9, hs: "108*" },
-    rating: 93,
-    image: null
-  },
-
-  // --- FAST BOWLERS SET 1 ---
-  {
-    id: "p25",
     name: "Mohammed Shami",
     role: "Bowler",
     country: "India",
     isOverseas: false,
     basePrice: 20000000,
-    set: "Fast Bowlers 1",
-    stats: { matches: 110, wickets: 127, econ: 8.44, avg: 26.8, bb: "4/11" },
-    rating: 94,
-    image: null
+    set: "Marquee Set 3",
+    rating: 96
   },
   {
-    id: "p26",
-    name: "Arshdeep Singh",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Fast Bowlers 1",
-    stats: { matches: 65, wickets: 76, econ: 8.74, avg: 27.0, bb: "5/32" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p27",
-    name: "Trent Boult",
-    role: "Bowler",
-    country: "New Zealand",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Fast Bowlers 1",
-    stats: { matches: 104, wickets: 121, econ: 8.29, avg: 26.5, bb: "4/18" },
-    rating: 93,
-    image: null
-  },
-  {
-    id: "p28",
-    name: "Anrich Nortje",
-    role: "Bowler",
-    country: "South Africa",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Fast Bowlers 1",
-    stats: { matches: 46, wickets: 60, econ: 8.96, avg: 25.8, bb: "3/33" },
-    rating: 90,
-    image: null
-  },
-  {
-    id: "p29",
-    name: "Matheesha Pathirana",
-    role: "Bowler",
-    country: "Sri Lanka",
-    isOverseas: true,
-    basePrice: 15000000,
-    set: "Fast Bowlers 1",
-    stats: { matches: 20, wickets: 34, econ: 7.88, avg: 17.5, bb: "4/28" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p30",
-    name: "Harshal Patel",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Fast Bowlers 1",
-    stats: { matches: 105, wickets: 135, econ: 8.68, avg: 23.4, bb: "5/27" },
-    rating: 90,
-    image: null
-  },
-  {
-    id: "p31",
-    name: "Josh Hazlewood",
-    role: "Bowler",
-    country: "Australia",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Fast Bowlers 1",
-    stats: { matches: 27, wickets: 35, econ: 8.06, avg: 23.1, bb: "4/25" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p32",
-    name: "Mayank Yadav",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 10000000, // 1.0 Cr
-    set: "Fast Bowlers 1",
-    stats: { matches: 4, wickets: 7, econ: 6.99, avg: 12.1, speed: "156.7 kmh" },
-    rating: 89,
-    image: null
-  },
-
-  // --- ALL-ROUNDERS SET 1 ---
-  {
-    id: "p33",
-    name: "Ravindra Jadeja",
-    role: "All-Rounder",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "All-Rounders 1",
-    stats: { matches: 240, runs: 2959, wickets: 160, econ: 7.62, catches: 105 },
-    rating: 95,
-    image: null
-  },
-  {
-    id: "p34",
-    name: "Glenn Maxwell",
-    role: "All-Rounder",
-    country: "Australia",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "All-Rounders 1",
-    stats: { matches: 134, runs: 2771, wickets: 37, sr: 156.7, hs: "95" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p35",
-    name: "Axar Patel",
-    role: "All-Rounder",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "All-Rounders 1",
-    stats: { matches: 150, runs: 1653, wickets: 123, econ: 7.24, bb: "4/21" },
-    rating: 93,
-    image: null
-  },
-  {
-    id: "p36",
-    name: "Sam Curran",
-    role: "All-Rounder",
-    country: "England",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "All-Rounders 1",
-    stats: { matches: 59, runs: 883, wickets: 58, sr: 142.6, bb: "4/11" },
-    rating: 91,
-    image: null
-  },
-  {
-    id: "p37",
-    name: "Marcus Stoinis",
-    role: "All-Rounder",
-    country: "Australia",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "All-Rounders 1",
-    stats: { matches: 96, runs: 1866, wickets: 43, sr: 142.1, hs: "124*" },
-    rating: 91,
-    image: null
-  },
-  {
-    id: "p38",
-    name: "Liam Livingstone",
-    role: "All-Rounder",
-    country: "England",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "All-Rounders 1",
-    stats: { matches: 39, runs: 939, wickets: 11, sr: 162.5, hs: "94" },
-    rating: 90,
-    image: null
-  },
-  {
-    id: "p39",
-    name: "Shivam Dube",
-    role: "All-Rounder",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "All-Rounders 1",
-    stats: { matches: 65, runs: 1502, avg: 29.5, sr: 158.4, hs: "95*" },
-    rating: 91,
-    image: null
-  },
-  {
-    id: "p40",
-    name: "Cameron Green",
-    role: "All-Rounder",
-    country: "Australia",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "All-Rounders 1",
-    stats: { matches: 29, runs: 707, wickets: 16, sr: 153.7, hs: "100*" },
-    rating: 92,
-    image: null
-  },
-
-  // --- SPINNERS SET 1 ---
-  {
-    id: "p41",
-    name: "Yuzvendra Chahal",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Spinners 1",
-    stats: { matches: 160, wickets: 205, econ: 7.84, avg: 22.4, bb: "5/40" },
-    rating: 94,
-    image: null
-  },
-  {
-    id: "p42",
-    name: "Kuldeep Yadav",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Spinners 1",
-    stats: { matches: 84, wickets: 87, econ: 8.08, avg: 26.3, bb: "4/14" },
-    rating: 94,
-    image: null
-  },
-  {
-    id: "p43",
-    name: "Varun Chakaravarthy",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 15000000,
-    set: "Spinners 1",
-    stats: { matches: 71, wickets: 83, econ: 7.56, avg: 25.1, bb: "5/20" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p44",
-    name: "Ravi Bishnoi",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 15000000,
-    set: "Spinners 1",
-    stats: { matches: 66, wickets: 63, econ: 7.85, avg: 28.5, bb: "3/24" },
-    rating: 90,
-    image: null
-  },
-  {
-    id: "p45",
-    name: "Wanindu Hasaranga",
-    role: "Bowler",
-    country: "Sri Lanka",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Spinners 1",
-    stats: { matches: 26, wickets: 35, econ: 8.13, avg: 21.4, bb: "5/18" },
-    rating: 91,
-    image: null
-  },
-  {
-    id: "p46",
-    name: "Maheesh Theekshana",
-    role: "Bowler",
-    country: "Sri Lanka",
-    isOverseas: true,
-    basePrice: 15000000,
-    set: "Spinners 1",
-    stats: { matches: 27, wickets: 25, econ: 7.66, avg: 31.9, bb: "4/33" },
-    rating: 89,
-    image: null
-  },
-  {
-    id: "p47",
-    name: "Noor Ahmad",
-    role: "Bowler",
-    country: "Afghanistan",
-    isOverseas: true,
-    basePrice: 10000000,
-    set: "Spinners 1",
-    stats: { matches: 23, wickets: 24, econ: 8.04, avg: 27.6, bb: "3/37" },
-    rating: 89,
-    image: null
-  },
-  {
-    id: "p48",
-    name: "Rahul Chahar",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 10000000,
-    set: "Spinners 1",
-    stats: { matches: 79, wickets: 75, econ: 7.65, avg: 28.1, bb: "4/27" },
-    rating: 88,
-    image: null
-  },
-
-  // --- BATSMEN SET 2 ---
-  {
-    id: "p49",
-    name: "Faf du Plessis",
-    role: "Batter",
-    country: "South Africa",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Batters 2",
-    stats: { matches: 145, runs: 4571, avg: 35.9, sr: 136.4, hs: "96" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p50",
-    name: "David Warner",
-    role: "Batter",
-    country: "Australia",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Batters 2",
-    stats: { matches: 184, runs: 6565, avg: 40.5, sr: 139.8, hs: "126" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p51",
-    name: "Sai Sudharsan",
-    role: "Batter",
-    country: "India",
-    isOverseas: false,
-    basePrice: 10000000,
-    set: "Batters 2",
-    stats: { matches: 25, runs: 1034, avg: 47.0, sr: 139.2, hs: "103" },
-    rating: 91,
-    image: null
-  },
-  {
-    id: "p52",
-    name: "Shreyas Iyer",
-    role: "Batter",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Batters 2",
-    stats: { matches: 115, runs: 3127, avg: 32.2, sr: 127.5, hs: "96" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p53",
-    name: "Tilak Varma",
-    role: "Batter",
-    country: "India",
-    isOverseas: false,
-    basePrice: 15000000,
-    set: "Batters 2",
-    stats: { matches: 38, runs: 1156, avg: 39.8, sr: 146.3, hs: "84*" },
-    rating: 92,
-    image: null
-  },
-  {
-    id: "p54",
-    name: "Rajat Patidar",
-    role: "Batter",
-    country: "India",
-    isOverseas: false,
-    basePrice: 10000000,
-    set: "Batters 2",
-    stats: { matches: 27, runs: 799, avg: 34.7, sr: 158.8, hs: "112*" },
-    rating: 90,
-    image: null
-  },
-  {
-    id: "p55",
-    name: "Jake Fraser-McGurk",
-    role: "Batter",
-    country: "Australia",
-    isOverseas: true,
-    basePrice: 15000000,
-    set: "Batters 2",
-    stats: { matches: 9, runs: 330, avg: 36.7, sr: 234.0, hs: "84" },
-    rating: 93,
-    image: null
-  },
-  {
-    id: "p56",
-    name: "Nitish Kumar Reddy",
-    role: "All-Rounder",
-    country: "India",
-    isOverseas: false,
-    basePrice: 10000000,
-    set: "Batters 2",
-    stats: { matches: 15, runs: 303, wickets: 3, sr: 142.9, hs: "76*" },
-    rating: 89,
-    image: null
-  },
-
-  // --- FAST BOWLERS SET 2 ---
-  {
-    id: "p57",
+    id: "p18",
     name: "Mohammed Siraj",
     role: "Bowler",
     country: "India",
     isOverseas: false,
     basePrice: 20000000,
-    set: "Fast Bowlers 2",
-    stats: { matches: 93, wickets: 93, econ: 8.65, avg: 30.3, bb: "4/21" },
-    rating: 91,
-    image: null
+    set: "Marquee Set 3",
+    rating: 94
   },
   {
-    id: "p58",
-    name: "Bhuvneshwar Kumar",
+    id: "p19",
+    name: "Yuzvendra Chahal",
     role: "Bowler",
     country: "India",
     isOverseas: false,
     basePrice: 20000000,
-    set: "Fast Bowlers 2",
-    stats: { matches: 176, wickets: 181, econ: 7.56, avg: 27.2, bb: "5/19" },
-    rating: 90,
-    image: null
+    set: "Marquee Set 3",
+    rating: 96
   },
   {
-    id: "p59",
-    name: "Avesh Khan",
+    id: "p20",
+    name: "Rashid Khan",
     role: "Bowler",
+    country: "Afghanistan",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Marquee Set 3",
+    rating: 98
+  },
+  {
+    id: "p21",
+    name: "Shubman Gill",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Marquee Set 3",
+    rating: 96
+  },
+  {
+    id: "p22",
+    name: "Ravindra Jadeja",
+    role: "All-Rounder",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Marquee Set 3",
+    rating: 96
+  },
+  {
+    id: "p23",
+    name: "Ruturaj Gaikwad",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Marquee Set 3",
+    rating: 95
+  },
+  {
+    id: "p24",
+    name: "Sanju Samson",
+    role: "Wicketkeeper",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Marquee Set 3",
+    rating: 95
+  },
+
+  // ==========================================
+  // --- CAPPED BATTERS (Set BA1 & BA2) ---
+  // ==========================================
+  {
+    id: "p25",
+    name: "Nicholas Pooran",
+    role: "Batter",
+    country: "West Indies",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped Batters",
+    rating: 96
+  },
+  {
+    id: "p26",
+    name: "Rinku Singh",
+    role: "Batter",
     country: "India",
     isOverseas: false,
     basePrice: 15000000,
-    set: "Fast Bowlers 2",
-    stats: { matches: 63, wickets: 75, econ: 8.84, avg: 26.5, bb: "4/24" },
-    rating: 89,
-    image: null
+    set: "Capped Batters",
+    rating: 94
   },
   {
-    id: "p60",
-    name: "Lockie Ferguson",
-    role: "Bowler",
+    id: "p27",
+    name: "Yashasvi Jaiswal",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Capped Batters",
+    rating: 96
+  },
+  {
+    id: "p28",
+    name: "David Miller",
+    role: "Batter",
+    country: "South Africa",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Capped Batters",
+    rating: 93
+  },
+  {
+    id: "p29",
+    name: "Venkatesh Iyer",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Capped Batters",
+    rating: 93
+  },
+  {
+    id: "p30",
+    name: "Faf du Plessis",
+    role: "Batter",
+    country: "South Africa",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped Batters",
+    rating: 93
+  },
+  {
+    id: "p31",
+    name: "Tilak Varma",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 15000000,
+    set: "Capped Batters",
+    rating: 92
+  },
+  {
+    id: "p32",
+    name: "Tristan Stubbs",
+    role: "Batter",
+    country: "South Africa",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Capped Batters",
+    rating: 92
+  },
+  {
+    id: "p33",
+    name: "Sai Sudharsan",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Capped Batters",
+    rating: 91
+  },
+  {
+    id: "p34",
+    name: "Devon Conway",
+    role: "Batter",
+    country: "New Zealand",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped Batters",
+    rating: 93
+  },
+  {
+    id: "p35",
+    name: "Shimron Hetmyer",
+    role: "Batter",
+    country: "West Indies",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Capped Batters",
+    rating: 92
+  },
+  {
+    id: "p36",
+    name: "Abhishek Sharma",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 15000000,
+    set: "Capped Batters",
+    rating: 94
+  },
+
+  // ==========================================
+  // --- CAPPED ALL-ROUNDERS (Set AL1 & AL2) ---
+  // ==========================================
+  {
+    id: "p37",
+    name: "Andre Russell",
+    role: "All-Rounder",
+    country: "West Indies",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped All-Rounders",
+    rating: 97
+  },
+  {
+    id: "p38",
+    name: "Sunil Narine",
+    role: "All-Rounder",
+    country: "West Indies",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped All-Rounders",
+    rating: 97
+  },
+  {
+    id: "p39",
+    name: "Glenn Maxwell",
+    role: "All-Rounder",
+    country: "Australia",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped All-Rounders",
+    rating: 94
+  },
+  {
+    id: "p40",
+    name: "Marcus Stoinis",
+    role: "All-Rounder",
+    country: "Australia",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped All-Rounders",
+    rating: 93
+  },
+  {
+    id: "p41",
+    name: "Liam Livingstone",
+    role: "All-Rounder",
+    country: "England",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped All-Rounders",
+    rating: 93
+  },
+  {
+    id: "p42",
+    name: "Axar Patel",
+    role: "All-Rounder",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Capped All-Rounders",
+    rating: 94
+  },
+  {
+    id: "p43",
+    name: "Mitchell Marsh",
+    role: "All-Rounder",
+    country: "Australia",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped All-Rounders",
+    rating: 93
+  },
+  {
+    id: "p44",
+    name: "Marco Jansen",
+    role: "All-Rounder",
+    country: "South Africa",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Capped All-Rounders",
+    rating: 92
+  },
+  {
+    id: "p45",
+    name: "Rachin Ravindra",
+    role: "All-Rounder",
     country: "New Zealand",
     isOverseas: true,
     basePrice: 15000000,
-    set: "Fast Bowlers 2",
-    stats: { matches: 45, wickets: 46, econ: 8.85, avg: 31.7, bb: "4/28" },
-    rating: 89,
-    image: null
+    set: "Capped All-Rounders",
+    rating: 92
   },
   {
-    id: "p61",
-    name: "Deepak Chahar",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 15000000,
-    set: "Fast Bowlers 2",
-    stats: { matches: 81, wickets: 77, econ: 7.98, avg: 28.9, bb: "4/13" },
-    rating: 89,
-    image: null
-  },
-  {
-    id: "p62",
-    name: "Gerald Coetzee",
-    role: "Bowler",
-    country: "South Africa",
-    isOverseas: true,
-    basePrice: 15000000,
-    set: "Fast Bowlers 2",
-    stats: { matches: 10, wickets: 13, econ: 10.17, avg: 26.2, bb: "4/34" },
-    rating: 88,
-    image: null
-  },
-  {
-    id: "p63",
-    name: "Tushar Deshpande",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 10000000,
-    set: "Fast Bowlers 2",
-    stats: { matches: 36, wickets: 42, econ: 9.62, avg: 28.5, bb: "4/27" },
-    rating: 87,
-    image: null
-  },
-  {
-    id: "p64",
-    name: "Sandeep Sharma",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 10000000,
-    set: "Fast Bowlers 2",
-    stats: { matches: 127, wickets: 137, econ: 7.92, avg: 27.5, bb: "5/18" },
-    rating: 89,
-    image: null
-  },
-
-  // --- WICKETKEEPERS & ALL-ROUNDERS SET 2 ---
-  {
-    id: "p65",
-    name: "Ishan Kishan",
-    role: "Wicketkeeper",
-    country: "India",
-    isOverseas: false,
-    basePrice: 20000000,
-    set: "Keepers 2",
-    stats: { matches: 105, runs: 2644, avg: 28.4, sr: 135.8, hs: "99" },
-    rating: 91,
-    image: null
-  },
-  {
-    id: "p66",
-    name: "Jitesh Sharma",
-    role: "Wicketkeeper",
-    country: "India",
-    isOverseas: false,
-    basePrice: 10000000,
-    set: "Keepers 2",
-    stats: { matches: 40, runs: 730, avg: 22.8, sr: 151.1, hs: "49*" },
-    rating: 88,
-    image: null
-  },
-  {
-    id: "p67",
-    name: "Jonny Bairstow",
-    role: "Wicketkeeper",
-    country: "England",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Keepers 2",
-    stats: { matches: 50, runs: 1589, avg: 34.5, sr: 144.3, hs: "114" },
-    rating: 91,
-    image: null
-  },
-  {
-    id: "p68",
-    name: "Quinton de Kock",
-    role: "Wicketkeeper",
-    country: "South Africa",
-    isOverseas: true,
-    basePrice: 20000000,
-    set: "Keepers 2",
-    stats: { matches: 107, runs: 3157, avg: 31.3, sr: 134.2, hs: "140*" },
-    rating: 91,
-    image: null
-  },
-  {
-    id: "p69",
-    name: "Moeen Ali",
+    id: "p46",
+    name: "Will Jacks",
     role: "All-Rounder",
     country: "England",
     isOverseas: true,
     basePrice: 15000000,
-    set: "All-Rounders 2",
-    stats: { matches: 67, runs: 1162, wickets: 35, sr: 141.9, econ: 7.15 },
-    rating: 89,
-    image: null
+    set: "Capped All-Rounders",
+    rating: 91
   },
   {
-    id: "p70",
-    name: "Washington Sundar",
-    role: "All-Rounder",
-    country: "India",
-    isOverseas: false,
-    basePrice: 15000000,
-    set: "All-Rounders 2",
-    stats: { matches: 60, wickets: 37, runs: 378, econ: 7.54, sr: 116.3 },
-    rating: 88,
-    image: null
-  },
-  {
-    id: "p71",
-    name: "Tim David",
-    role: "Batter",
-    country: "Australia",
-    isOverseas: true,
-    basePrice: 15000000,
-    set: "Batters 2",
-    stats: { matches: 38, runs: 659, avg: 31.4, sr: 170.3, hs: "46" },
-    rating: 90,
-    image: null
-  },
-  {
-    id: "p72",
+    id: "p47",
     name: "Krunal Pandya",
     role: "All-Rounder",
     country: "India",
     isOverseas: false,
     basePrice: 15000000,
-    set: "All-Rounders 2",
-    stats: { matches: 127, runs: 1647, wickets: 76, sr: 133.5, econ: 7.37 },
-    rating: 88,
-    image: null
+    set: "Capped All-Rounders",
+    rating: 90
   },
-
-  // --- EMERGING & UNCAPPED STARS ---
   {
-    id: "p73",
-    name: "Shashank Singh",
-    role: "Batter",
+    id: "p48",
+    name: "Nitish Kumar Reddy",
+    role: "All-Rounder",
     country: "India",
     isOverseas: false,
-    basePrice: 5000000, // 50 Lakhs
-    set: "Emerging Talents",
-    stats: { matches: 24, runs: 423, avg: 38.5, sr: 161.5, hs: "68*" },
-    rating: 88,
-    image: null
+    basePrice: 15000000,
+    set: "Capped All-Rounders",
+    rating: 92
+  },
+  {
+    id: "p49",
+    name: "Rahul Tewatia",
+    role: "All-Rounder",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Capped All-Rounders",
+    rating: 90
+  },
+  {
+    id: "p50",
+    name: "Tim David",
+    role: "All-Rounder",
+    country: "Australia",
+    isOverseas: true,
+    basePrice: 10000000,
+    set: "Capped All-Rounders",
+    rating: 91
+  },
+
+  // ==========================================
+  // --- CAPPED WICKETKEEPERS (Set WK1) ---
+  // ==========================================
+  {
+    id: "p51",
+    name: "Phil Salt",
+    role: "Wicketkeeper",
+    country: "England",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped Wicketkeepers",
+    rating: 95
+  },
+  {
+    id: "p52",
+    name: "Quinton de Kock",
+    role: "Wicketkeeper",
+    country: "South Africa",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped Wicketkeepers",
+    rating: 94
+  },
+  {
+    id: "p53",
+    name: "Ishan Kishan",
+    role: "Wicketkeeper",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Capped Wicketkeepers",
+    rating: 93
+  },
+  {
+    id: "p54",
+    name: "Jitesh Sharma",
+    role: "Wicketkeeper",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Capped Wicketkeepers",
+    rating: 91
+  },
+  {
+    id: "p55",
+    name: "Dhruv Jurel",
+    role: "Wicketkeeper",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Capped Wicketkeepers",
+    rating: 91
+  },
+  {
+    id: "p56",
+    name: "Rahmanullah Gurbaz",
+    role: "Wicketkeeper",
+    country: "Afghanistan",
+    isOverseas: true,
+    basePrice: 10000000,
+    set: "Capped Wicketkeepers",
+    rating: 90
+  },
+
+  // ==========================================
+  // --- CAPPED FAST BOWLERS (Set FA1 & FA2) ---
+  // ==========================================
+  {
+    id: "p57",
+    name: "Trent Boult",
+    role: "Bowler",
+    country: "New Zealand",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped Fast Bowlers",
+    rating: 96
+  },
+  {
+    id: "p58",
+    name: "Jofra Archer",
+    role: "Bowler",
+    country: "England",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped Fast Bowlers",
+    rating: 95
+  },
+  {
+    id: "p59",
+    name: "Josh Hazlewood",
+    role: "Bowler",
+    country: "Australia",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped Fast Bowlers",
+    rating: 95
+  },
+  {
+    id: "p60",
+    name: "Bhuvneshwar Kumar",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Capped Fast Bowlers",
+    rating: 94
+  },
+  {
+    id: "p61",
+    name: "Anrich Nortje",
+    role: "Bowler",
+    country: "South Africa",
+    isOverseas: true,
+    basePrice: 20000000,
+    set: "Capped Fast Bowlers",
+    rating: 93
+  },
+  {
+    id: "p62",
+    name: "Harshal Patel",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Capped Fast Bowlers",
+    rating: 93
+  },
+  {
+    id: "p63",
+    name: "Deepak Chahar",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 15000000,
+    set: "Capped Fast Bowlers",
+    rating: 92
+  },
+  {
+    id: "p64",
+    name: "Khaleel Ahmed",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 15000000,
+    set: "Capped Fast Bowlers",
+    rating: 92
+  },
+  {
+    id: "p65",
+    name: "T Natarajan",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 15000000,
+    set: "Capped Fast Bowlers",
+    rating: 92
+  },
+  {
+    id: "p66",
+    name: "Prasidh Krishna",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 15000000,
+    set: "Capped Fast Bowlers",
+    rating: 91
+  },
+  {
+    id: "p67",
+    name: "Avesh Khan",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 15000000,
+    set: "Capped Fast Bowlers",
+    rating: 91
+  },
+  {
+    id: "p68",
+    name: "Lockie Ferguson",
+    role: "Bowler",
+    country: "New Zealand",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Capped Fast Bowlers",
+    rating: 91
+  },
+  {
+    id: "p69",
+    name: "Mukesh Kumar",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 15000000,
+    set: "Capped Fast Bowlers",
+    rating: 91
+  },
+  {
+    id: "p70",
+    name: "Sandeep Sharma",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Capped Fast Bowlers",
+    rating: 90
+  },
+
+  // ==========================================
+  // --- CAPPED SPINNERS (Set SP1) ---
+  // ==========================================
+  {
+    id: "p71",
+    name: "Kuldeep Yadav",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Capped Spinners",
+    rating: 96
+  },
+  {
+    id: "p72",
+    name: "Varun Chakaravarthy",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Capped Spinners",
+    rating: 95
+  },
+  {
+    id: "p73",
+    name: "Ravichandran Ashwin",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 20000000,
+    set: "Capped Spinners",
+    rating: 94
   },
   {
     id: "p74",
-    name: "Ashutosh Sharma",
-    role: "Batter",
+    name: "Ravi Bishnoi",
+    role: "Bowler",
     country: "India",
     isOverseas: false,
-    basePrice: 5000000,
-    set: "Emerging Talents",
-    stats: { matches: 11, runs: 189, avg: 27.0, sr: 167.3, hs: "61" },
-    rating: 87,
-    image: null
+    basePrice: 15000000,
+    set: "Capped Spinners",
+    rating: 93
   },
   {
     id: "p75",
+    name: "Noor Ahmad",
+    role: "Bowler",
+    country: "Afghanistan",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Capped Spinners",
+    rating: 93
+  },
+  {
+    id: "p76",
+    name: "Wanindu Hasaranga",
+    role: "Bowler",
+    country: "Sri Lanka",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Capped Spinners",
+    rating: 93
+  },
+  {
+    id: "p77",
+    name: "Maheesh Theekshana",
+    role: "Bowler",
+    country: "Sri Lanka",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Capped Spinners",
+    rating: 92
+  },
+  {
+    id: "p78",
+    name: "Rahul Chahar",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Capped Spinners",
+    rating: 90
+  },
+
+  // ==========================================
+  // --- EMERGING & UNCAPPED INDIAN STARS ---
+  // ==========================================
+  {
+    id: "p79",
+    name: "Riyan Parag",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 15000000,
+    set: "Emerging Talents",
+    rating: 93
+  },
+  {
+    id: "p80",
     name: "Harshit Rana",
     role: "Bowler",
     country: "India",
     isOverseas: false,
-    basePrice: 5000000,
+    basePrice: 10000000,
     set: "Emerging Talents",
-    stats: { matches: 21, wickets: 25, econ: 9.05, avg: 23.4, bb: "3/24" },
-    rating: 89,
-    image: null
+    rating: 92
   },
   {
-    id: "p76",
+    id: "p81",
+    name: "Mayank Yadav",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Emerging Talents",
+    rating: 93
+  },
+  {
+    id: "p82",
+    name: "Shashank Singh",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Emerging Talents",
+    rating: 91
+  },
+  {
+    id: "p83",
+    name: "Prabhsimran Singh",
+    role: "Wicketkeeper",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Emerging Talents",
+    rating: 90
+  },
+  {
+    id: "p84",
+    name: "Ashutosh Sharma",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 7500000,
+    set: "Emerging Talents",
+    rating: 90
+  },
+  {
+    id: "p85",
+    name: "Ramandeep Singh",
+    role: "All-Rounder",
+    country: "India",
+    isOverseas: false,
+    basePrice: 10000000,
+    set: "Emerging Talents",
+    rating: 90
+  },
+  {
+    id: "p86",
     name: "Abishek Porel",
     role: "Wicketkeeper",
     country: "India",
     isOverseas: false,
     basePrice: 5000000,
     set: "Emerging Talents",
-    stats: { matches: 18, runs: 360, avg: 30.0, sr: 153.2, hs: "65" },
-    rating: 86,
-    image: null
+    rating: 89
   },
   {
-    id: "p77",
-    name: "Suyash Sharma",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 3000000, // 30 Lakhs
-    set: "Emerging Talents",
-    stats: { matches: 13, wickets: 12, econ: 8.52, avg: 31.0, bb: "3/30" },
-    rating: 85,
-    image: null
-  },
-  {
-    id: "p78",
-    name: "Vaibhav Arora",
-    role: "Bowler",
-    country: "India",
-    isOverseas: false,
-    basePrice: 3000000,
-    set: "Emerging Talents",
-    stats: { matches: 15, wickets: 17, econ: 9.20, avg: 26.2, bb: "3/27" },
-    rating: 85,
-    image: null
-  },
-  {
-    id: "p79",
-    name: "Angkrish Raghuvanshi",
+    id: "p87",
+    name: "Ayush Badoni",
     role: "Batter",
     country: "India",
     isOverseas: false,
-    basePrice: 3000000,
+    basePrice: 5000000,
     set: "Emerging Talents",
-    stats: { matches: 10, runs: 163, avg: 23.3, sr: 155.2, hs: "54" },
-    rating: 86,
-    image: null
+    rating: 89
   },
   {
-    id: "p80",
+    id: "p88",
+    name: "Mohsin Khan",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 5000000,
+    set: "Emerging Talents",
+    rating: 89
+  },
+  {
+    id: "p89",
     name: "Shahrukh Khan",
-    role: "Batter",
+    role: "All-Rounder",
     country: "India",
     isOverseas: false,
     basePrice: 10000000,
     set: "Emerging Talents",
-    stats: { matches: 40, runs: 553, avg: 21.3, sr: 145.4, hs: "58" },
-    rating: 87,
-    image: null
+    rating: 89
+  },
+  {
+    id: "p90",
+    name: "Vaibhav Arora",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 5000000,
+    set: "Emerging Talents",
+    rating: 88
+  },
+  {
+    id: "p91",
+    name: "Angkrish Raghuvanshi",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 5000000,
+    set: "Emerging Talents",
+    rating: 88
+  },
+  {
+    id: "p92",
+    name: "Suyash Sharma",
+    role: "Bowler",
+    country: "India",
+    isOverseas: false,
+    basePrice: 5000000,
+    set: "Emerging Talents",
+    rating: 87
+  },
+  {
+    id: "p93",
+    name: "Naman Dhir",
+    role: "All-Rounder",
+    country: "India",
+    isOverseas: false,
+    basePrice: 5000000,
+    set: "Emerging Talents",
+    rating: 88
+  },
+  {
+    id: "p94",
+    name: "Nehal Wadhera",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 5000000,
+    set: "Emerging Talents",
+    rating: 88
+  },
+  {
+    id: "p95",
+    name: "Sameer Rizvi",
+    role: "Batter",
+    country: "India",
+    isOverseas: false,
+    basePrice: 5000000,
+    set: "Emerging Talents",
+    rating: 87
+  },
+  {
+    id: "p96",
+    name: "Kumar Kushagra",
+    role: "Wicketkeeper",
+    country: "India",
+    isOverseas: false,
+    basePrice: 5000000,
+    set: "Emerging Talents",
+    rating: 86
+  },
+  {
+    id: "p97",
+    name: "Spencer Johnson",
+    role: "Bowler",
+    country: "Australia",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Overseas Fast Unit",
+    rating: 90
+  },
+  {
+    id: "p98",
+    name: "Gerald Coetzee",
+    role: "Bowler",
+    country: "South Africa",
+    isOverseas: true,
+    basePrice: 15000000,
+    set: "Overseas Fast Unit",
+    rating: 91
+  },
+  {
+    id: "p99",
+    name: "Nandre Burger",
+    role: "Bowler",
+    country: "South Africa",
+    isOverseas: true,
+    basePrice: 7500000,
+    set: "Overseas Fast Unit",
+    rating: 89
+  },
+  {
+    id: "p100",
+    name: "Azmatullah Omarzai",
+    role: "All-Rounder",
+    country: "Afghanistan",
+    isOverseas: true,
+    basePrice: 7500000,
+    set: "Overseas All-Rounders",
+    rating: 89
   }
 ];

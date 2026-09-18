@@ -5,7 +5,7 @@ import {
   ShieldAlert, PlusCircle, Sparkles, Trophy 
 } from "lucide-react";
 
-export function HostControls({ onOpenCustomPlayer, onOpenTournament }) {
+export function HostControls({ onOpenTournament }) {
   const { 
     isHost, 
     roomState, 
@@ -23,34 +23,31 @@ export function HostControls({ onOpenCustomPlayer, onOpenTournament }) {
 
   return (
     <div className="glass-panel px-3 py-2 sm:px-4 sm:py-3 rounded-2xl border border-[#27272a] flex flex-wrap items-center justify-between gap-2 sm:gap-3 shadow-lg bg-[#121212]">
-      <div className="flex items-center gap-1.5 sm:gap-2 text-xs font-semibold text-[#818cf8]">
-        <ShieldAlert className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#818cf8]" />
-        <span className="uppercase tracking-[0.08em] font-heading text-[11px] sm:text-xs">Host Controls:</span>
+      <div className="flex items-center gap-2">
+        <span className="text-xs uppercase font-heading font-bold tracking-[0.1em] text-[#818cf8] flex items-center gap-1.5">
+          <ShieldAlert className="w-3.5 h-3.5" /> HOST CONTROLS:
+        </span>
       </div>
 
-      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+      <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
         {/* Pause / Resume */}
         <button
           onClick={hostTogglePause}
-          className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition cursor-pointer border ${
+          className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition cursor-pointer ${
             isPaused
-              ? "bg-[#6366f1] hover:bg-[#4f46e5] text-white border-[#6366f1]"
-              : "bg-[#1e1e1e] hover:bg-[#27272a] text-[#f3f4f6] border-[#27272a]"
+              ? "bg-[#6366f1] text-white hover:bg-[#4f46e5]"
+              : "bg-[#1e1e1e] hover:bg-[#27272a] text-[#f3f4f6] border border-[#27272a]"
           }`}
         >
           {isPaused ? <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-white" /> : <Pause className="w-3 h-3 sm:w-3.5 sm:h-3.5" />}
           <span>{isPaused ? "Resume" : "Pause"}</span>
         </button>
 
-        {/* Force Sold */}
+        {/* Force Sell */}
         <button
           onClick={hostForceSell}
           disabled={!hasBids}
-          className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold transition cursor-pointer ${
-            hasBids
-              ? "bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm"
-              : "bg-[#0a0a0a] text-[#71717a] border border-[#27272a] cursor-not-allowed"
-          }`}
+          className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold bg-[#1e1e1e] hover:bg-[#27272a] text-emerald-400 border border-[#27272a] disabled:opacity-40 disabled:cursor-not-allowed transition cursor-pointer"
         >
           <Gavel className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
           <span>Sell Now</span>
@@ -72,15 +69,6 @@ export function HostControls({ onOpenCustomPlayer, onOpenTournament }) {
         >
           <FastForward className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
           <span>Next Player</span>
-        </button>
-
-        {/* Add Player */}
-        <button
-          onClick={onOpenCustomPlayer}
-          className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold bg-[#6366f1]/15 hover:bg-[#6366f1]/25 text-[#818cf8] border border-[#6366f1]/30 transition cursor-pointer"
-        >
-          <PlusCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-          <span>Add Player</span>
         </button>
 
         {/* Simulate IPL Tournament */}

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfile }) {
+export function Lobby({ onOpenGoogleSignIn, onOpenUserProfile }) {
   const { 
     roomState, 
     publicRooms,
@@ -738,23 +738,13 @@ export function Lobby({ onOpenCustomPlayer, onOpenGoogleSignIn, onOpenUserProfil
           </button>
 
           {isHost && (
-            <>
-              <button
-                onClick={onOpenCustomPlayer}
-                className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#121212] hover:bg-[#1e1e1e] border border-[#27272a] text-xs sm:text-sm font-semibold text-[#f3f4f6] transition cursor-pointer"
-              >
-                <PlusCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#818cf8]" />
-                <span>Add Player</span>
-              </button>
-
-              <button
-                onClick={startAuction}
-                className="flex items-center justify-center gap-2 px-6 sm:px-7 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-bold text-xs sm:text-sm uppercase tracking-wide shadow-lg shadow-[#6366f1]/25 transition transform active:scale-95 cursor-pointer"
-              >
-                <Play className="w-4 h-4 fill-white" />
-                <span>Start Auction</span>
-              </button>
-            </>
+            <button
+              onClick={startAuction}
+              className="flex items-center justify-center gap-2 px-6 sm:px-7 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-bold text-xs sm:text-sm uppercase tracking-wide shadow-lg shadow-[#6366f1]/25 transition transform active:scale-95 cursor-pointer"
+            >
+              <Play className="w-4 h-4 fill-white" />
+              <span>Start Auction</span>
+            </button>
           )}
 
           {!isHost && (

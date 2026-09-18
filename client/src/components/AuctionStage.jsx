@@ -6,8 +6,8 @@ import TeamLogo from "./TeamLogo";
 import { BiddingControls } from "./BiddingControls";
 import { PlayerPortrait } from "./PlayerPortrait";
 import { 
-  Gavel, Clock, Flame, Shield, ArrowUpRight, 
-  Award, Globe, CheckCircle2, UserCheck, Zap, Crosshair 
+  Gavel, Clock, Flame, 
+  Globe, CheckCircle2, UserCheck, Zap, Crosshair 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -46,21 +46,35 @@ export function AuctionStage() {
   const isSniperActive = recentBids.length > 0 && timer <= 3 && timer > 0;
 
   // Reusable Live Bid Activity Ticker
-  const renderBidTicker = () => (
-    <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-[#27272a] flex flex-col bg-[#121212]">
-      <div className="flex items-center justify-between mb-2.5">
-        <span className="text-xs font-bold uppercase tracking-[0.08em] text-[#9ca3af] flex items-center gap-1.5">
-          <Flame className="w-4 h-4 text-amber-500" /> Recent Bids
-        </span>
-        <span className="text-xs text-[#71717a] font-medium">
-          {auction.bidHistory?.length || 0} Bids Placed
-        </span>
-      </div>
+  const renderBidTicker = () => {
+    if (!auction.bidHistory || auction.bidHistory.length === 0) {
+      return (
+        <div className="p-3.5 rounded-2xl border border-[#27272a] bg-[#121212]/80 flex items-center justify-between text-xs text-[#9ca3af]">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <span className="font-medium text-[#e4e4e7]">Live Auction In Progress</span>
+          </div>
+          <span className="text-[#71717a] text-[11px]">
+            Bids will stream here in real-time
+          </span>
+        </div>
+      );
+    }
 
-      <div className="space-y-2 overflow-y-auto max-h-40 pr-1">
-        <AnimatePresence initial={false}>
-          {auction.bidHistory && auction.bidHistory.length > 0 ? (
-            auction.bidHistory.map((b, i) => (
+    return (
+      <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-[#27272a] flex flex-col bg-[#121212]">
+        <div className="flex items-center justify-between mb-2.5">
+          <span className="text-xs font-bold uppercase tracking-[0.08em] text-[#9ca3af] flex items-center gap-1.5">
+            <Flame className="w-4 h-4 text-amber-500" /> Recent Bids
+          </span>
+          <span className="text-xs text-[#71717a] font-medium">
+            {auction.bidHistory.length} Bids Placed
+          </span>
+        </div>
+
+        <div className="space-y-2 overflow-y-auto max-h-40 pr-1">
+          <AnimatePresence initial={false}>
+            {auction.bidHistory.map((b, i) => (
               <motion.div
                 key={`${b.timestamp}-${i}`}
                 initial={{ opacity: 0, x: -10 }}
@@ -80,16 +94,12 @@ export function AuctionStage() {
                   {formatCurrency(b.amount)}
                 </div>
               </motion.div>
-            ))
-          ) : (
-            <div className="text-center py-4 text-xs sm:text-sm text-[#71717a]">
-              No bids placed yet.
-            </div>
-          )}
-        </AnimatePresence>
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="w-full space-y-4 sm:space-y-5">
@@ -170,85 +180,26 @@ export function AuctionStage() {
             <div className="p-4 sm:p-6 flex flex-row items-center sm:items-end gap-4 sm:gap-6 relative">
               <PlayerPortrait player={player} size="lg" />
 
-              <div className="space-y-2 text-left flex-1 min-w-0">
-                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white tracking-[-0.03em] truncate">
+              <div className="space-y-2.5 text-left flex-1 min-w-0">
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white tracking-[-0.03em] truncate drop-shadow-md">
                   {player.name}
                 </h2>
-                <div className="flex flex-wrap items-center gap-2">
-                  <div className="text-xs sm:text-sm text-[#9ca3af] font-medium">Base Price:</div>
-                  <div className="text-sm sm:text-base font-heading font-bold text-amber-400 px-3 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30">
-                    {formatCurrency(player.basePrice)}
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.1)]">
+                    <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-amber-300/80">Base Price</span>
+                    <span className="text-sm sm:text-base font-heading font-bold text-amber-400">
+                      {formatCurrency(player.basePrice)}
+                    </span>
+                  </div>
+                  <div className="text-xs text-[#71717a] font-medium hidden sm:inline-block">
+                    {player.role} • {player.country}
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Player Cricket Career Stats Grid */}
-            <div className="p-4 sm:p-5 bg-[#0a0a0a]/70 border-t border-[#27272a] mt-auto">
-              <div className="text-xs font-bold uppercase tracking-[0.08em] text-[#9ca3af] mb-2.5">
-                Career Stats
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-                <div className="glass-card p-2.5 rounded-2xl text-center border border-[#27272a]">
-                  <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase font-semibold">Matches</div>
-                  <div className="text-base sm:text-lg font-heading font-bold text-white">{player.stats?.matches || "-"}</div>
-                </div>
-
-                {player.stats?.runs !== undefined && (
-                  <div className="glass-card p-2.5 rounded-2xl text-center border border-[#27272a]">
-                    <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase font-semibold">Runs / Avg</div>
-                    <div className="text-base sm:text-lg font-heading font-bold text-white">
-                      {player.stats.runs} <span className="text-xs font-normal text-[#9ca3af]">({player.stats.avg})</span>
-                    </div>
-                  </div>
-                )}
-
-                {player.stats?.sr !== undefined && (
-                  <div className="glass-card p-2.5 rounded-2xl text-center border border-[#27272a]">
-                    <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase font-semibold">Strike Rate</div>
-                    <div className="text-base sm:text-lg font-heading font-bold text-amber-400">{player.stats.sr}</div>
-                  </div>
-                )}
-
-                {player.stats?.wickets !== undefined && (
-                  <div className="glass-card p-2.5 rounded-2xl text-center border border-[#27272a]">
-                    <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase font-semibold">Wickets</div>
-                    <div className="text-base sm:text-lg font-heading font-bold text-emerald-400">{player.stats.wickets}</div>
-                  </div>
-                )}
-
-                {player.stats?.econ !== undefined && (
-                  <div className="glass-card p-2.5 rounded-2xl text-center border border-[#27272a]">
-                    <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase font-semibold">Economy</div>
-                    <div className="text-base sm:text-lg font-heading font-bold text-emerald-300">{player.stats.econ}</div>
-                  </div>
-                )}
-
-                {player.stats?.dismissals !== undefined && (
-                  <div className="glass-card p-2.5 rounded-2xl text-center border border-[#27272a]">
-                    <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase font-semibold">Dismissals</div>
-                    <div className="text-base sm:text-lg font-heading font-bold text-cyan-300">{player.stats.dismissals}</div>
-                  </div>
-                )}
-
-                {player.stats?.hs !== undefined && (
-                  <div className="glass-card p-2.5 rounded-2xl text-center border border-[#27272a]">
-                    <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase font-semibold">High Score</div>
-                    <div className="text-base sm:text-lg font-heading font-bold text-white">{player.stats.hs}</div>
-                  </div>
-                )}
-
-                {player.stats?.bb !== undefined && (
-                  <div className="glass-card p-2.5 rounded-2xl text-center border border-[#27272a]">
-                    <div className="text-[10px] sm:text-xs text-[#9ca3af] uppercase font-semibold">Best Bowling</div>
-                    <div className="text-base sm:text-lg font-heading font-bold text-white">{player.stats.bb}</div>
-                  </div>
-                )}
               </div>
             </div>
           </motion.div>
 
-          {/* Desktop/Laptop: Live Bid Ticker sits directly under the player card to balance column heights */}
+          {/* Desktop/Laptop: Live Bid Ticker or Minimal Awaiting Banner */}
           <div className="hidden lg:block">
             {renderBidTicker()}
           </div>
@@ -317,17 +268,18 @@ export function AuctionStage() {
             </div>
 
             {/* Live Auctioneer Broadcast Voice Bubble */}
-            <div className="my-3 sm:my-4 p-3 sm:p-4 rounded-2xl bg-[#050505] border border-[#27272a] flex items-center gap-2.5">
-              <div className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
-              <p className="text-xs sm:text-sm text-[#9ca3af] leading-relaxed">
-                <span className="text-[#818cf8] font-bold">Auctioneer: </span>
+            <div className="my-3 sm:my-4 px-3.5 py-2.5 rounded-2xl bg-[#09090b] border border-[#27272a] flex items-center gap-2.5">
+              <span className="px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 font-bold text-[10px] tracking-wider uppercase flex items-center gap-1 shrink-0">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> LIVE
+              </span>
+              <p className="text-xs sm:text-sm text-[#d1d5db] truncate leading-normal">
                 {currentBid === 0
-                  ? `Starting price is ${formatCurrency(player.basePrice)}. Who wants to bid?`
+                  ? `Starting price is ${formatCurrency(player.basePrice)}. Ready for bids!`
                   : auction.status === "GOING_TWICE"
-                  ? `Going twice at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name}! Any more bids?`
+                  ? `Going twice at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name || "bidder"}!`
                   : auction.status === "GOING_ONCE"
-                  ? `Going once at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name}!`
-                  : `Current bid is ${formatCurrency(currentBid)} by ${highestBidderTeam?.name}! Anyone want to bid higher?`}
+                  ? `Going once at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name || "bidder"}!`
+                  : `Current bid is ${formatCurrency(currentBid)} by ${highestBidderTeam?.name || "bidder"}`}
               </p>
             </div>
 
@@ -340,13 +292,13 @@ export function AuctionStage() {
                 key={currentBid}
                 initial={{ scale: 1.15, opacity: 0.8 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="text-4xl sm:text-6xl font-teko font-bold text-amber-400 tracking-wide"
+                className="text-4xl sm:text-6xl font-teko font-bold text-amber-400 tracking-wide drop-shadow-sm"
               >
                 {currentBid > 0 ? formatCurrency(currentBid) : "No Bids Yet"}
               </motion.div>
               {currentBid === 0 && (
                 <div className="text-xs text-[#71717a] mt-1">
-                  Waiting for first bid at {formatCurrency(player.basePrice)}
+                  Waiting for opening bid at {formatCurrency(player.basePrice)}
                 </div>
               )}
             </div>
@@ -380,8 +332,8 @@ export function AuctionStage() {
                 </div>
               </motion.div>
             ) : (
-              <div className="p-3 rounded-2xl border border-dashed border-[#27272a] text-center text-xs text-[#71717a]">
-                Click a bid button below to make the first bid!
+              <div className="p-3 rounded-2xl border border-dashed border-[#27272a] text-center text-xs text-[#71717a] bg-[#0a0a0a]/50">
+                Click a bid button below to place the opening bid!
               </div>
             )}
           </div>
