@@ -222,7 +222,7 @@ export function AuctionStage() {
             className="glass-panel p-3.5 sm:p-4 rounded-3xl border relative overflow-hidden flex flex-col gap-2.5 sm:gap-3 transition-all duration-500 bg-[#121212] shadow-xl"
           >
             {/* Top Row: Timer Ring, Broadcast Voice Bubble & Gavel */}
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center justify-between gap-2 sm:gap-3">
               {/* Broadcast Chronometer & Telemetry Timer */}
               <BroadcastTimer 
                 timer={timer} 
@@ -230,8 +230,8 @@ export function AuctionStage() {
                 status={auction.status} 
               />
 
-              {/* Live Auctioneer Broadcast Voice Bubble (Fills Center Space) */}
-              <div className="flex-1 min-w-0 px-2.5 sm:px-3 py-1.5 rounded-xl bg-[#09090b] border border-[#27272a] flex items-center gap-2">
+              {/* Desktop Live Auctioneer Broadcast Voice Bubble */}
+              <div className="hidden sm:flex flex-1 min-w-0 px-2.5 sm:px-3 py-1.5 rounded-xl bg-[#09090b] border border-[#27272a] items-center gap-2">
                 <span className="px-1.5 py-0.5 rounded-full bg-red-500/20 text-red-400 font-bold text-[9px] tracking-wider uppercase flex items-center gap-1 shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> LIVE
                 </span>
@@ -247,30 +247,46 @@ export function AuctionStage() {
               </div>
 
               {/* Wooden Gavel Drop Icon */}
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20 flex items-center justify-center text-[#818cf8] shadow-inner shrink-0">
-                <Gavel className="w-5 h-5 transform -rotate-45" />
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20 flex items-center justify-center text-[#818cf8] shadow-inner shrink-0">
+                <Gavel className="w-4 h-4 sm:w-5 sm:h-5 transform -rotate-45" />
               </div>
             </div>
 
-            {/* Current Bid & Leading Bidder Row (Side by side, zero waste) */}
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-center p-2 sm:p-2.5 rounded-2xl bg-[#09090b]/90 border border-[#27272a]">
+            {/* Mobile-Only Live Broadcast Banner (Clean full-width without crowding timer) */}
+            <div className="sm:hidden px-2.5 py-1 rounded-xl bg-[#09090b] border border-[#27272a] flex items-center gap-2">
+              <span className="px-1.5 py-0.2 rounded-full bg-red-500/20 text-red-400 font-bold text-[9px] tracking-wider uppercase flex items-center gap-1 shrink-0">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> LIVE
+              </span>
+              <p className="text-[11px] text-[#d1d5db] truncate leading-tight">
+                {currentBid === 0
+                  ? `Starting at ${formatCurrency(player.basePrice)}. Ready for bids!`
+                  : auction.status === "GOING_TWICE"
+                  ? `Going twice at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name || "bidder"}!`
+                  : auction.status === "GOING_ONCE"
+                  ? `Going once at ${formatCurrency(currentBid)} to ${highestBidderTeam?.name || "bidder"}!`
+                  : `Current bid: ${formatCurrency(currentBid)} by ${highestBidderTeam?.name || "bidder"}`}
+              </p>
+            </div>
+
+            {/* Current Bid & Leading Bidder Row (Side by side on mobile & desktop, zero waste) */}
+            <div className="grid grid-cols-2 sm:grid-cols-12 gap-2 sm:gap-2.5 items-center p-2 sm:p-2.5 rounded-2xl bg-[#09090b]/90 border border-[#27272a]">
               {/* Current Bid Display */}
-              <div className="sm:col-span-6 flex flex-col justify-center text-center sm:text-left sm:pl-2">
-                <div className="text-[10px] uppercase tracking-[0.1em] font-semibold text-[#9ca3af]">
+              <div className="sm:col-span-6 flex flex-col justify-center text-left pl-1 sm:pl-2">
+                <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.1em] font-semibold text-[#9ca3af]">
                   Highest Bid
                 </div>
                 <motion.div 
                   key={currentBid}
                   initial={{ scale: 1.08, opacity: 0.8 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className="text-3xl sm:text-4xl font-teko font-bold text-amber-400 tracking-wide leading-none"
+                  className="text-2xl sm:text-4xl font-teko font-bold text-amber-400 tracking-wide leading-none truncate my-0.5"
                 >
-                  {currentBid > 0 ? formatCurrency(currentBid) : "No Bids Yet"}
+                  {currentBid > 0 ? formatCurrency(currentBid) : "No Bids"}
                 </motion.div>
-                <div className="text-[11px] text-[#71717a] font-medium truncate mt-0.5">
+                <div className="text-[10px] sm:text-[11px] text-[#71717a] font-medium truncate">
                   {currentBid === 0 
-                    ? `Base price: ${formatCurrency(player.basePrice)}` 
-                    : `Opened at ${formatCurrency(player.basePrice)}`}
+                    ? `Base: ${formatCurrency(player.basePrice)}` 
+                    : `Base: ${formatCurrency(player.basePrice)}`}
                 </div>
               </div>
 
@@ -280,29 +296,28 @@ export function AuctionStage() {
                   <motion.div 
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`p-2 rounded-xl border ${bidderMeta?.borderClass || 'border-[#27272a]'} bg-[#121212] flex items-center justify-between shadow-md`}
+                    className={`p-1.5 sm:p-2 rounded-xl border ${bidderMeta?.borderClass || 'border-[#27272a]'} bg-[#121212] flex items-center justify-between shadow-md`}
                   >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <TeamLogo meta={bidderMeta} size="sm" />
+                    <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                      <TeamLogo meta={bidderMeta} size="xs" />
                       <div className="min-w-0">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-heading font-bold text-white truncate">{highestBidderTeam.name}</span>
-                          <span className="text-[9px] font-bold px-1 rounded bg-amber-500/20 text-amber-400 shrink-0">
-                            {highestBidderTeam.shortName}
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs font-heading font-bold text-white truncate">{highestBidderTeam.shortName}</span>
+                          <span className="text-[8px] font-bold px-1 rounded bg-amber-500/20 text-amber-400 hidden xs:inline">
+                            LEAD
                           </span>
                         </div>
-                        <div className="text-[10px] text-[#9ca3af] truncate flex items-center gap-1 mt-0.5">
-                          <UserCheck className="w-3 h-3 text-emerald-400 shrink-0" />
-                          <span>{auction.highestBidderName}</span>
+                        <div className="text-[9px] sm:text-[10px] text-[#9ca3af] truncate">
+                          {auction.highestBidderName}
                         </div>
                       </div>
                     </div>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/30 shrink-0 ml-1">
+                    <span className="inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold text-emerald-400 bg-emerald-500/15 px-1.5 py-0.5 rounded-md border border-emerald-500/30 shrink-0 ml-1">
                       <CheckCircle2 className="w-3 h-3" /> Leading
                     </span>
                   </motion.div>
                 ) : (
-                  <div className="p-2.5 rounded-xl border border-dashed border-[#27272a] text-center text-xs text-[#71717a] bg-[#121212]/50">
+                  <div className="p-2 sm:p-2.5 rounded-xl border border-dashed border-[#27272a] text-center text-[10px] sm:text-xs text-[#71717a] bg-[#121212]/50">
                     ⚡ Place opening bid to lead!
                   </div>
                 )}

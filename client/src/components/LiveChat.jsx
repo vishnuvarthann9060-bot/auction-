@@ -61,10 +61,10 @@ export function LiveChat() {
       </div>
 
       {/* Floating Chat Launcher Button & Reaction Bar */}
-      <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2">
+      <div className="fixed bottom-3 right-3 sm:bottom-4 sm:right-4 z-40 flex flex-col items-end gap-2">
         
-        {/* Quick Reaction Bar */}
-        <div className="flex items-center gap-1.5 p-1.5 rounded-full bg-[#121212]/90 border border-[#27272a] shadow-2xl backdrop-blur-md">
+        {/* Quick Reaction Bar (Hidden on mobile to keep controls clear, available on tablet/desktop) */}
+        <div className="hidden sm:flex items-center gap-1.5 p-1.5 rounded-full bg-[#121212]/90 border border-[#27272a] shadow-2xl backdrop-blur-md">
           {QUICK_REACTIONS.map((emoji) => (
             <button
               key={emoji}
@@ -80,21 +80,21 @@ export function LiveChat() {
         {/* Chat Toggle Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-semibold text-xs shadow-xl shadow-[#6366f1]/25 transition cursor-pointer"
+          className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] text-white font-heading font-semibold text-xs shadow-xl shadow-[#6366f1]/25 transition cursor-pointer"
         >
-          <MessageSquare className="w-4 h-4 fill-white" />
+          <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" />
           <span>Chat ({chats.length})</span>
           {isOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
         </button>
 
-        {/* Collapsible Chat Box */}
+        {/* Collapsible Chat Box (Bottom sheet on mobile, floating card on desktop) */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              className="w-80 sm:w-96 h-96 glass-panel rounded-3xl border border-[#27272a] shadow-2xl flex flex-col overflow-hidden bg-[#121212]/95"
+              className="fixed inset-x-2 bottom-2 sm:static sm:inset-auto w-auto sm:w-96 h-[65vh] sm:h-96 glass-panel rounded-2xl sm:rounded-3xl border border-[#27272a] shadow-2xl flex flex-col overflow-hidden bg-[#121212]/98 z-50"
             >
               {/* Chat Header */}
               <div className="p-3.5 border-b border-[#27272a] flex items-center justify-between">

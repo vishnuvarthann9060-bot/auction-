@@ -131,7 +131,7 @@ function AuctionApp() {
       </div>
 
       {/* Main Content Area */}
-      <main className="flex-1 relative z-10 px-3 sm:px-6 lg:px-8 py-3 sm:py-6 max-w-[1600px] mx-auto w-full">
+      <main className="flex-1 relative z-10 px-2 sm:px-6 lg:px-8 py-2 sm:py-6 max-w-[1600px] mx-auto w-full">
         {!roomState || roomState.status === "LOBBY" ? (
           <Lobby 
             onOpenGoogleSignIn={() => setGoogleSignInModalOpen(true)}

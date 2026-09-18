@@ -350,18 +350,18 @@ export function Lobby({ onOpenGoogleSignIn, onOpenUserProfile }) {
             <div className="flex bg-[#0a0a0a] p-1 sm:p-1.5 rounded-2xl border border-[#27272a] mb-4 sm:mb-5 gap-1">
               <button
                 onClick={() => setActiveTab("public_browser")}
-                className={`flex-1 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-heading font-bold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                className={`flex-1 py-2 sm:py-3 rounded-xl text-xs sm:text-sm font-heading font-bold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1 ${
                   activeTab === "public_browser"
                     ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/25"
                     : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
                 }`}
               >
-                <Radio className="w-4 h-4 shrink-0 hidden xs:inline" />
-                <span>Open Rooms ({publicRooms.length})</span>
+                <Radio className="w-3.5 h-3.5 shrink-0 hidden xs:inline" />
+                <span><span className="hidden sm:inline">Open </span>Rooms ({publicRooms.length})</span>
               </button>
               <button
                 onClick={() => setActiveTab("create")}
-                className={`flex-1 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-heading font-bold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                className={`flex-1 py-2 sm:py-3 rounded-xl text-xs sm:text-sm font-heading font-bold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1 ${
                   activeTab === "create"
                     ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/25"
                     : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
@@ -371,13 +371,13 @@ export function Lobby({ onOpenGoogleSignIn, onOpenUserProfile }) {
               </button>
               <button
                 onClick={() => setActiveTab("join")}
-                className={`flex-1 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-heading font-bold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                className={`flex-1 py-2 sm:py-3 rounded-xl text-xs sm:text-sm font-heading font-bold tracking-[-0.01em] transition cursor-pointer flex items-center justify-center gap-1 ${
                   activeTab === "join"
                     ? "bg-[#6366f1] text-white shadow-lg shadow-[#6366f1]/25"
                     : "text-[#9ca3af] hover:text-white hover:bg-[#1e1e1e]"
                 }`}
               >
-                <span>🔑 Enter Code</span>
+                <span>🔑 <span className="hidden sm:inline">Enter </span>Code</span>
               </button>
             </div>
 
@@ -862,7 +862,7 @@ export function Lobby({ onOpenGoogleSignIn, onOpenUserProfile }) {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3.5">
           {roomState.teams.map((team) => {
             const meta = TEAMS_DATA[team.id];
             const isSelectedByMe = myTeam?.id === team.id;
@@ -875,7 +875,7 @@ export function Lobby({ onOpenGoogleSignIn, onOpenUserProfile }) {
                 onClick={() => {
                   if (!isClaimedByHuman) selectTeam(team.id);
                 }}
-                className={`p-3.5 sm:p-4 rounded-2xl border transition relative overflow-hidden cursor-pointer flex flex-col justify-between ${
+                className={`p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border transition relative overflow-hidden cursor-pointer flex flex-col justify-between ${
                   isSelectedByMe
                     ? `border-2 ${meta?.borderClass || 'border-[#6366f1]'} bg-[#121212] shadow-lg shadow-[#6366f1]/15`
                     : isClaimedByHuman
@@ -889,47 +889,47 @@ export function Lobby({ onOpenGoogleSignIn, onOpenUserProfile }) {
                 />
 
                 <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <TeamLogo meta={meta} size="md" />
+                  <div className="flex items-center gap-1.5 sm:gap-2.5">
+                    <TeamLogo meta={meta} size="sm" />
                     {meta?.trophies > 0 && (
-                      <span className="text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                      <span className="text-[9px] sm:text-xs font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
                         {meta.trophies} 🏆
                       </span>
                     )}
                   </div>
                   {isSelectedByMe && (
-                    <span className="flex items-center gap-1 text-[11px] sm:text-xs font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> Selected
+                    <span className="flex items-center gap-1 text-[10px] sm:text-xs font-bold text-emerald-400 bg-emerald-500/15 px-1.5 sm:px-2 py-0.5 rounded-full border border-emerald-500/30">
+                      <CheckCircle2 className="w-3 h-3" /> Selected
                     </span>
                   )}
                   {isClaimedByHuman && (
-                    <span className="text-[10px] sm:text-xs text-[#9ca3af] bg-[#1e1e1e] px-2 py-0.5 rounded-full border border-[#27272a] font-medium">
+                    <span className="text-[9px] sm:text-xs text-[#9ca3af] bg-[#1e1e1e] px-1.5 py-0.5 rounded-full border border-[#27272a] font-medium">
                       Taken
                     </span>
                   )}
                   {!team.ownerId && !isSelectedByMe && (
-                    <span className="text-[10px] sm:text-xs text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 font-medium">
+                    <span className="text-[9px] sm:text-xs text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
                       Available
                     </span>
                   )}
                 </div>
 
-                <div className="mt-3">
+                <div className="mt-2 sm:mt-3">
                   <div className="flex items-center justify-between text-xs sm:text-sm font-bold text-[#9ca3af]">
                     <span>{team.shortName}</span>
                     {meta?.captain && (
-                      <span className="text-[10px] sm:text-xs text-[#71717a] font-normal truncate max-w-[80px]">Cap: {meta.captain}</span>
+                      <span className="text-[9px] sm:text-xs text-[#71717a] font-normal truncate max-w-[70px]">Cap: {meta.captain}</span>
                     )}
                   </div>
-                  <div className="text-sm sm:text-base font-heading font-bold text-white tracking-[-0.02em] leading-snug truncate">
+                  <div className="text-xs sm:text-base font-heading font-bold text-white tracking-[-0.02em] leading-snug truncate">
                     {team.name}
                   </div>
-                  <div className="text-[11px] sm:text-xs text-[#71717a] italic mt-0.5 truncate">{meta?.tagline}</div>
+                  <div className="text-[10px] sm:text-xs text-[#71717a] italic mt-0.5 truncate hidden xs:block">{meta?.tagline}</div>
                 </div>
 
-                <div className="mt-3 pt-2 border-t border-[#27272a] flex items-center justify-between text-xs sm:text-sm">
+                <div className="mt-2 sm:mt-3 pt-1.5 sm:pt-2 border-t border-[#27272a] flex items-center justify-between text-[11px] sm:text-sm">
                   <span className="text-[#9ca3af]">Owner:</span>
-                  <span className="font-semibold text-white truncate max-w-[90px] sm:max-w-[130px]">
+                  <span className="font-semibold text-white truncate max-w-[75px] sm:max-w-[130px]">
                     {team.ownerName || "Available"}
                   </span>
                 </div>
